@@ -1,0 +1,119 @@
+{
+  "regiones": [
+    {
+      "nombre": "Pacífico Norte",
+      "descripcion": "Sabor tradicional costarricense",
+      "destinos": [
+        {
+          "nombre": "Liberia",
+          "restaurantes": ["Mercado Municipal de Liberia"],
+          "historia": "La gastronomía de Liberia está fuertemente influenciada por el maíz y las tradiciones campesinas.",
+          "experiencias": ["Recorrido gastronómico en el mercado"],
+          "media": {
+            "imagenes": [
+              "assets/images/liberia1.jpg",
+              "assets/images/liberia2.jpg"
+            ],
+            "audio": "assets/audio/liberia.mp3",
+            "video": "assets/video/liberia.mp4"
+          }
+        },
+        {
+          "nombre": "Nicoya",
+          "restaurantes": ["La Tortillería Nicoya"],
+          "historia": "Nicoya conserva una de las tradiciones culinarias más antiguas del país.",
+          "experiencias": ["Degustación de comida tradicional"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        }
+      ]
+    },
+    {
+      "nombre": "Caribe",
+      "descripcion": "Sabores afrocaribeños",
+      "destinos": [
+        {
+          "nombre": "Puerto Viejo",
+          "restaurantes": ["Tamara Restaurant"],
+          "historia": "La cocina caribeña refleja la herencia afrodescendiente.",
+          "experiencias": ["Tour gastronómico caribeño"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        },
+        {
+          "nombre": "Cahuita",
+          "restaurantes": ["Delritta Patty"],
+          "historia": "Cahuita destaca por su comida callejera afrocaribeña.",
+          "experiencias": ["Recorrido gastronómico local"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        }
+      ]
+    },
+    {
+      "nombre": "Valle Central",
+      "descripcion": "Tradición urbana",
+      "destinos": [
+        {
+          "nombre": "Heredia",
+          "restaurantes": ["Britt Coffee Tour"],
+          "historia": "Heredia es reconocida por su tradición cafetalera.",
+          "experiencias": ["Tour del café"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        },
+        {
+          "nombre": "Cartago",
+          "restaurantes": ["Restaurante Mi Tierra"],
+          "historia": "Cartago mantiene una cocina tradicional ligada a la cultura colonial.",
+          "experiencias": ["Comida típica costarricense"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        }
+      ]
+    },
+    {
+      "nombre": "Pacífico Central y Sur",
+      "descripcion": "Sabores del mar",
+      "destinos": [
+        {
+          "nombre": "Manuel Antonio",
+          "restaurantes": ["El Avión"],
+          "historia": "La gastronomía se centra en productos del mar.",
+          "experiencias": ["Cena con vista al mar"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        },
+        {
+          "nombre": "Uvita",
+          "restaurantes": ["Club Marino Ballena"],
+          "historia": "Uvita destaca por su gastronomía costera y turismo natural.",
+          "experiencias": ["Experiencia culinaria frente al océano"],
+          "media": {
+            "imagenes": [],
+            "audio": "",
+            "video": ""
+          }
+        }
+      ]
+    }
+  ]
+}
