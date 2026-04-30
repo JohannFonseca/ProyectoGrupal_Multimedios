@@ -30,10 +30,10 @@ class AppHeader extends HTMLElement {
           <div class="dropdown">
             <a id="regionsBtn">Regiones</a>
             <div class="dropdown-menu ${this.showRegions ? "show" : ""}">
-              <div>Pacífico Norte</div>
-              <div>Caribe</div>
-              <div>Valle Central</div>
-              <div>Pacífico Central/Sur</div>
+              <div data-region="pacifico-norte">Pacífico Norte</div>
+              <div data-region="caribe">Caribe</div>
+              <div data-region="valle-central">Valle Central</div>
+              <div data-region="pacifico-central">Pacífico Central/Sur</div>
             </div>
           </div>
 
@@ -47,7 +47,7 @@ class AppHeader extends HTMLElement {
   }
 
   addEvents() {
-    
+
     const menuBtn = this.shadowRoot.getElementById("menuBtn");
     const nav = this.shadowRoot.getElementById("nav");
     const regionsBtn = this.shadowRoot.getElementById("regionsBtn");
@@ -86,7 +86,7 @@ class AppHeader extends HTMLElement {
 
         this.dispatchEvent(
           new CustomEvent("region-selected", {
-            detail: { region: regionName },
+            detail: { region: e.target.dataset.region },
             bubbles: true,
             composed: true,
           }),
@@ -94,6 +94,13 @@ class AppHeader extends HTMLElement {
 
         this.showRegions = false;
         this.updateDropdown();
+        this.isOpen = false;
+
+        const nav = this.shadowRoot.getElementById("nav");
+        const menuBtn = this.shadowRoot.getElementById("menuBtn");
+
+        nav.classList.remove("open");
+        menuBtn.classList.remove("open");
       });
     });
   }
