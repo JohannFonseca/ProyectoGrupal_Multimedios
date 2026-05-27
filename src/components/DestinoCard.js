@@ -49,19 +49,16 @@ class DestinoCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>${css}</style>
 
-      <article
-        class="card"
-        role="button"
-        tabindex="0"
-        aria-label="Ver detalles de ${nombre}"
-      >
-        <!-- Texto a la izquierda (como el wireframe) -->
+      <article class="card" role="button" tabindex="0"
+               aria-label="Ver detalles de ${nombre}">
+
+        <!-- Texto a la izquierda -->
         <div class="card-body">
           <h3 class="card-nombre ${cls}">${nombre}</h3>
           <p class="card-historia">${historia}</p>
         </div>
 
-        <!-- Imagen a la derecha con etiquetas debajo (como el wireframe) -->
+        <!-- Imagen a la derecha con etiquetas debajo -->
         <div class="card-media">
           ${mediaHTML}
           <div class="card-meta">
@@ -69,6 +66,7 @@ class DestinoCard extends HTMLElement {
             <span class="meta-region ${cls}">${region}</span>
           </div>
         </div>
+
       </article>
     `;
 
@@ -85,7 +83,6 @@ class DestinoCard extends HTMLElement {
     };
 
     card.addEventListener("click", disparar);
-
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
