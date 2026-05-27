@@ -1,4 +1,5 @@
 import "./components/AppHeader.js";
+import "./components/DestinoList.js";
 
 document.addEventListener("region-selected", (e) => {
     console.log("Evento recibido:", e.detail.region);

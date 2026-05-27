@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  font-family: var(--font-main), Arial, sans-serif;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+.region-about {
+  margin: 28px 0 8px;
+}
+
+.about-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 6px 0;
+}
+
+.about-texto {
+  font-size: 0.85rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 120px;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111;
+  margin: 24px 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #111;
+  font-family: var(--font-main), Arial, sans-serif;
+}
+
+.region-block {
+  margin-bottom: 36px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: var(--red);
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
