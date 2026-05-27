@@ -101,3 +101,4 @@ function highlightRegion(regionKey) {
 document.addEventListener("region-selected", (e) => {
     highlightRegion(e.detail.region);
 });
+

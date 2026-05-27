@@ -1,4 +1,5 @@
 import "./DestinoCard.js";
+import "./DestinoDetalle.js";
 
 class DestinoList extends HTMLElement {
   constructor() {
@@ -15,6 +16,11 @@ class DestinoList extends HTMLElement {
     document.addEventListener("region-selected", (e) => {
       this._regionActiva = e.detail.region;
       this._pintarDestinos();
+    });
+
+    this.shadowRoot.addEventListener("destino-selected", (e) => {
+      e.stopPropagation();
+      this._pintarDetalle(e.detail.id);
     });
   }
 
@@ -99,11 +105,31 @@ class DestinoList extends HTMLElement {
 
     const label = document.createElement("div");
     label.className = "carrusel-titulo";
-    label.textContent = "Carrucel de imagenes";
+    label.textContent = "Carrusel de imagenes";
 
     wrapper.appendChild(area);
     wrapper.appendChild(label);
     return wrapper;
+  }
+
+  _pintarDetalle(destinoId) {
+    const bloque = this.shadowRoot.querySelector(".region-block");
+    const titulo = bloque?.querySelector(".section-title");
+    const contenido = bloque?.querySelector(".contenido-region");
+
+    if (!bloque || !titulo || !contenido) return;
+
+    titulo.remove();
+    contenido.innerHTML = "";
+
+    const detalle = document.createElement("destino-detalle");
+    detalle.setAttribute("destino-id", destinoId);
+
+    contenido.appendChild(detalle);
+    bloque.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }
 
   _pintarDestinos() {
@@ -142,19 +168,22 @@ class DestinoList extends HTMLElement {
       titulo.textContent = "Destinos a conocer";
       bloque.appendChild(titulo);
 
-      
+      const contenido = document.createElement("div");
+      contenido.className = "contenido-region";
+
       region.destinos.forEach((destino) => {
         const card = document.createElement("destino-card");
-        card.setAttribute(
-          "destino-id",
-          destino.nombre.toLowerCase().replace(/\s+/g, "-")
-        );
-        card.setAttribute("nombre",   destino.nombre);
-        card.setAttribute("region",   region.nombre);
+
+        card.setAttribute("destino-id", destino.nombre);
+        card.setAttribute("nombre", destino.nombre);
+        card.setAttribute("region", region.nombre);
         card.setAttribute("historia", destino.historia);
-        card.setAttribute("imagen",   destino.media?.imagenes?.[0] ?? "");
-        bloque.appendChild(card);
+        card.setAttribute("imagen", destino.media?.imagenes?.[0] ?? "");
+
+        contenido.appendChild(card);
       });
+
+      bloque.appendChild(contenido);
 
       contenedor.appendChild(bloque);
     });
