@@ -108,7 +108,7 @@ class MapaRegiones extends HTMLElement {
         }
         if (this.#currentRegion === "caribe") {
             console.log("¡Región Caribe seleccionada! Aplicando efectos especiales...");
-            selectedElement.style.translate = '0px 20px';
+            selectedElement.style.translate = '-30px 20px';
             selectedElement.style.scale = '1.16';
             selectedElement.style.filter = 'drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.4))';
         }
