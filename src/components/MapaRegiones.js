@@ -38,7 +38,6 @@ class MapaRegiones extends HTMLElement {
                     transition: translate 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
                                 scale 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
                                 filter 0.8s ease;
-                    transform-origin: center;
                     isolation: isolate; 
                 }
             `;
