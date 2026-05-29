@@ -1,18 +1,87 @@
+import appHeaderStyles from '/css/app-header.css' with { type: 'css' };
+
+const SELECTORS = {
+  NAV: '#nav',
+  MENU_BTN: '#menuBtn',
+  REGIONS_BTN: '#regionsBtn',
+  DROPDOWN_MENU: '.dropdown-menu',
+  REGION_ITEM: '[data-region]',
+};
+
+const CLASSES = {
+  OPEN: 'open',
+  SHOW: 'show',
+};
+
+const EVENTS = {
+  REGION_SELECTED: 'region-selected',
+};
+
 class AppHeader extends HTMLElement {
+  #state = {
+    isOpen: false,
+    showRegions: false,
+  };
+
+  #elements = {};
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-
-    this.isOpen = false;
-    this.showRegions = false;
   }
 
-  async connectedCallback() {
-    const css = await fetch("./css/app-header.css").then((r) => r.text());
+  connectedCallback() {
+    this.shadowRoot.adoptedStyleSheets = [appHeaderStyles];
+    this.render();
+    this.#cacheElements();
+    this.#bindEvents();
+  }
 
-    this.shadowRoot.innerHTML = `
-      <style>${css}</style>
+  get isOpen() {
+    return this.#state.isOpen;
+  }
 
+  set isOpen(value) {
+    if (this.#state.isOpen === value) return;
+    this.#state.isOpen = value;
+    this.#updateMenuUI();
+  }
+
+  get showRegions() {
+    return this.#state.showRegions;
+  }
+
+  set showRegions(value) {
+    if (this.#state.showRegions === value) return;
+    this.#state.showRegions = value;
+    this.#updateDropdownUI();
+  }
+
+  #updateMenuUI() {
+    const { nav, menuBtn } = this.#elements;
+    if (!nav || !menuBtn) return;
+
+    nav.classList.toggle(CLASSES.OPEN, this.#state.isOpen);
+    menuBtn.classList.toggle(CLASSES.OPEN, this.#state.isOpen);
+
+    if (!this.#state.isOpen) {
+      this.showRegions = false;
+    }
+  }
+
+  #updateDropdownUI() {
+    const { dropdownMenu } = this.#elements;
+    if (!dropdownMenu) return;
+
+    dropdownMenu.classList.toggle(CLASSES.SHOW, this.#state.showRegions);
+  }
+
+  render() {
+    this.shadowRoot.setHTMLUnsafe(this.#getTemplate());
+  }
+
+  #getTemplate() {
+    return `
       <header>
         <div class="logo">
           <img src="./assets/images/LogoRutaDelSabor.png" alt="logo ruta del sabor" />
@@ -26,88 +95,70 @@ class AppHeader extends HTMLElement {
 
         <nav id="nav">
           <a>Inicio</a>
-
           <div class="dropdown">
             <a id="regionsBtn">Regiones</a>
-            <div class="dropdown-menu ${this.showRegions ? "show" : ""}">
+            <div class="dropdown-menu">
               <div data-region="pacifico-norte">Pacífico Norte</div>
               <div data-region="caribe">Caribe</div>
               <div data-region="valle-central">Valle Central</div>
               <div data-region="pacifico-central">Pacífico Central/Sur</div>
             </div>
           </div>
-
           <a>Sobre Nosotros</a>
           <a>Contacto</a>
         </nav>
       </header>
     `;
-
-    this.addEvents();
   }
 
-  addEvents() {
+  #cacheElements() {
+    this.#elements = {
+      nav: this.shadowRoot.querySelector(SELECTORS.NAV),
+      menuBtn: this.shadowRoot.querySelector(SELECTORS.MENU_BTN),
+      regionsBtn: this.shadowRoot.querySelector(SELECTORS.REGIONS_BTN),
+      dropdownMenu: this.shadowRoot.querySelector(SELECTORS.DROPDOWN_MENU),
+      regionItems: this.shadowRoot.querySelectorAll(SELECTORS.REGION_ITEM),
+    };
+  }
 
-    const menuBtn = this.shadowRoot.getElementById("menuBtn");
-    const nav = this.shadowRoot.getElementById("nav");
-    const regionsBtn = this.shadowRoot.getElementById("regionsBtn");
-    const regionItems = this.shadowRoot.querySelectorAll(".dropdown-menu div");
+  #bindEvents() {
+    const { menuBtn, regionsBtn, regionItems } = this.#elements;
 
-
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      this.isOpen = !this.isOpen;
-
-      nav.classList.toggle("open", this.isOpen);
-      menuBtn.classList.toggle("open", this.isOpen);
-
-      if (!this.isOpen) {
-        this.showRegions = false;
-        this.updateDropdown();
-      }
-    });
-
-
-    regionsBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-
-      this.showRegions = !this.showRegions;
-      this.updateDropdown();
-    });
-
-
-    regionItems.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        e.stopPropagation();
-
-        const regionName = e.target.textContent.trim();
-
-
-        this.dispatchEvent(
-          new CustomEvent("region-selected", {
-            detail: { region: e.target.dataset.region },
-            bubbles: true,
-            composed: true,
-          }),
-        );
-
-        this.showRegions = false;
-        this.updateDropdown();
-        this.isOpen = false;
-
-        const nav = this.shadowRoot.getElementById("nav");
-        const menuBtn = this.shadowRoot.getElementById("menuBtn");
-
-        nav.classList.remove("open");
-        menuBtn.classList.remove("open");
-      });
+    menuBtn.addEventListener("click", (e) => this.#handleMenuToggle(e));
+    regionsBtn.addEventListener("click", (e) => this.#handleDropdownToggle(e));
+    regionItems.forEach(item => {
+      item.addEventListener("click", (e) => this.#handleRegionSelect(e));
     });
   }
-  updateDropdown() {
-    const menu = this.shadowRoot.querySelector(".dropdown-menu");
-    if (!menu) return;
-    menu.classList.toggle("show", this.showRegions);
+
+  #handleMenuToggle(e) {
+    e.stopPropagation();
+    this.isOpen = !this.isOpen;
+  }
+
+  #handleDropdownToggle(e) {
+    e.stopPropagation();
+    this.showRegions = !this.showRegions;
+  }
+
+  #handleRegionSelect(e) {
+    e.stopPropagation();
+
+    const region = e.target.dataset.region;
+    this.#dispatchRegionSelected(region);
+
+    this.showRegions = false;
+    this.isOpen = false;
+  }
+
+  #dispatchRegionSelected(region) {
+    this.dispatchEvent(
+      new CustomEvent(EVENTS.REGION_SELECTED, {
+        detail: { region },
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 }
 
