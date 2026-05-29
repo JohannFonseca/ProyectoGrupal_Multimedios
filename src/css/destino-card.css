@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  font-family: var(--font-main), Arial, sans-serif;
+}
+
+/* ── Tarjeta ── */
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 28px 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.card:hover {
+  background: rgba(111, 78, 55, 0.04);
+}
+
+/* ── Columna izquierda: texto ── */
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-nombre {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  font-family: var(--font-main), Arial, sans-serif;
+}
+
+.card-nombre.pacifico-norte { color: var(--red); }
+.card-nombre.caribe         { color: var(--green); }
+.card-nombre.valle-central  { color: var(--blue); }
+.card-nombre.pacifico-sur   { color: var(--dark-beige); }
+
+.card-historia {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Columna derecha: imagen ── */
+.card-media {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-img {
+  width: 320px;
+  height: 210px;
+  object-fit: cover;
+  border: 1px solid #bbb;
+  display: block;
+}
+
+/* Placeholder tipo wireframe */
+.card-placeholder {
+  width: 320px;
+  height: 210px;
+  border: 1px solid #bbb;
+  background: #e8dfd4;
+  overflow: hidden;
+}
+
+.card-placeholder svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Etiquetas debajo de la imagen */
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+  padding-top: 6px;
+}
+
+.meta-destino {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.meta-region {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.meta-region.pacifico-norte { color: var(--red); }
+.meta-region.caribe         { color: var(--green); }
+.meta-region.valle-central  { color: var(--blue); }
+.meta-region.pacifico-sur   { color: var(--dark-beige); }
+
+/* ── Responsivo ── */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card-media {
+    width: 100%;
+  }
+
+  .card-img,
+  .card-placeholder {
+    width: 100%;
+    height: 220px;
+  }
+
+  .card-meta {
+    width: 100%;
+  }
+}

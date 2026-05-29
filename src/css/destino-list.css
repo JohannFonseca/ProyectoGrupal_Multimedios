@@ -1,0 +1,128 @@
+:host {
+  display: block;
+  width: min(92vw, 1200px);
+  margin: 0 auto;
+  padding-bottom: 60px;
+  font-family: var(--font-main), Arial, sans-serif;
+}
+
+.region-block {
+  margin-bottom: 48px;
+}
+
+.carrusel-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+  background: #e8dfd4;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.carrusel-titulo {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #777;
+  padding: 6px 0;
+  border-top: 1px solid #ccc;
+  background: #f5efe3;
+}
+
+.carrusel-imagen {
+  width: 100%;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #e8dfd4;
+  overflow: hidden;
+}
+
+.carrusel-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carrusel-imagen svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #bbb;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: #333;
+}
+
+.carrusel-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.carrusel-btn.prev { left: 12px; }
+.carrusel-btn.next { right: 12px; }
+
+.about-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 20px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 16px 0;
+}
+
+.about-label {
+  flex: 0 0 120px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.about-texto {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 4px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #111;
+  font-family: var(--font-main), Arial, sans-serif;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: var(--red);
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
