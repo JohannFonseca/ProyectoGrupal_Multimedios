@@ -1,4 +1,7 @@
-import appHeaderStyles from '/css/app-header.css' with { type: 'css' };
+const sheet = new CSSStyleSheet();
+await fetch(new URL('../css/app-header.css', import.meta.url))
+  .then(r => r.text())
+  .then(css => sheet.replaceSync(css));
 
 const SELECTORS = {
   NAV: '#nav',
@@ -31,7 +34,7 @@ class AppHeader extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot.adoptedStyleSheets = [appHeaderStyles];
+    this.shadowRoot.adoptedStyleSheets = [sheet];
     this.render();
     this.#cacheElements();
     this.#bindEvents();
