@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+}
+
+.map-container svg {
+  width: min(94vw, 600px);
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .map-container svg {
+    width: min(94vw, 550px);
+  }
+}
+
+@media (max-width: 768px) {
+  .map-container svg {
+    width: min(94vw, 250px);
+  }
+}
