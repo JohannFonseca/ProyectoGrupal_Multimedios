@@ -1,0 +1,118 @@
+class SobreNosotros extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+
+  async connectedCallback() {
+    await this._render();
+  }
+
+  async _render() {
+    try {
+      const css = await fetch("./css/sobre-nosotros.css").then((r) => r.text());
+
+      this.shadowRoot.innerHTML = `
+        <style>${css}</style>
+        <section class="intro-section">
+          <h2 class="section-title">Sobre Nosotros</h2>
+          <p class="intro-text">
+            Somos un grupo de estudiantes de la Universidad de Costa Rica, cursando la materia de <strong>Multimedios</strong> en el primer semestre de nuestro cuarto año. Este proyecto, titulado <strong>La Ruta del Sabor</strong>, tiene como objetivo explorar la gastronomía local, los destinos más representativos y la riqueza cultural de las distintas regiones de Costa Rica a través de una experiencia interactiva y moderna.
+          </p>
+        </section>
+
+        <section class="grid-container">
+          <!-- Dariel Benavides Tapia -->
+          <article class="card">
+            <div class="avatar dariel">DB</div>
+            <h3 class="member-name">Dariel Benavides Tapia</h3>
+            <span class="member-role">Desarrollo Frontend & Integración SVG</span>
+            <p class="member-desc">
+              Encargado de estructurar la integración del mapa interactivo SVG de Costa Rica y optimizar las transiciones visuales y de zoom entre las diferentes regiones seleccionadas.
+            </p>
+            <div class="social-links">
+              <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Dariel">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Eddy Josué González Quirós -->
+          <article class="card">
+            <div class="avatar eddy">EG</div>
+            <h3 class="member-name">Eddy Josué González Quirós</h3>
+            <span class="member-role">Interactividad & Animaciones</span>
+            <p class="member-desc">
+              Responsable de la lógica de comunicación entre componentes, transiciones dinámicas de vistas e interactividad en tiempo real de los elementos de navegación.
+            </p>
+            <div class="social-links">
+              <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Eddy">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Sofia Salazar Mata -->
+          <article class="card">
+            <div class="avatar sofia">SS</div>
+            <h3 class="member-name">Sofia Salazar Mata</h3>
+            <span class="member-role">Diseño UI/UX & Estilos</span>
+            <p class="member-desc">
+              Creadora de la propuesta estética del sitio, paleta de colores, tipografías y adaptación premium responsive para asegurar una experiencia visual e intuitiva óptima.
+            </p>
+            <div class="social-links">
+              <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Sofia">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- José Daniel Solís Cordoncillo -->
+          <article class="card">
+            <div class="avatar jose">JS</div>
+            <h3 class="member-name">José Daniel Solís Cordoncillo</h3>
+            <span class="member-role">Lógica de Datos & Destinos</span>
+            <p class="member-desc">
+              Responsable de la carga asíncrona de destinos y la lógica para filtrar e inyectar detalles multimedia (imágenes, video y audio) de manera dinámica.
+            </p>
+            <div class="social-links">
+              <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de José Daniel">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Johann Fonseca Espinoza -->
+          <article class="card">
+            <div class="avatar johan">JF</div>
+            <h3 class="member-name">Johann Fonseca Espinoza</h3>
+            <span class="member-role">Componentes & Estructura de Datos</span>
+            <p class="member-desc">
+              Diseñó el esquema de datos JSON, y desarrolló los Web Components reutilizables principales y el ruteo local de la aplicación.
+            </p>
+            <div class="social-links">
+              <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Johan">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </section>
+      `;
+    } catch (err) {
+      console.error("Error cargando estilos de SobreNosotros:", err);
+      this.shadowRoot.innerHTML = `<p>Error al cargar la sección de Sobre Nosotros</p>`;
+    }
+  }
+}
+
+customElements.define("sobre-nosotros", SobreNosotros);

@@ -86,7 +86,7 @@ class AppHeader extends HTMLElement {
   #getTemplate() {
     return `
       <header>
-        <div class="logo">
+        <div class="logo" id="logoBtn" style="cursor: pointer;">
           <img src="./assets/images/LogoRutaDelSabor.png" alt="logo ruta del sabor" />
         </div>
 
@@ -97,7 +97,7 @@ class AppHeader extends HTMLElement {
         </div>
 
         <nav id="nav">
-          <a>Inicio</a>
+          <a id="btnInicio">Inicio</a>
           <div class="dropdown">
             <a id="regionsBtn">Regiones</a>
             <div class="dropdown-menu">
@@ -107,8 +107,8 @@ class AppHeader extends HTMLElement {
               <div data-region="pacifico-central">Pacífico Central/Sur</div>
             </div>
           </div>
-          <a>Sobre Nosotros</a>
-          <a>Contacto</a>
+          <a id="btnSobreNosotros">Sobre Nosotros</a>
+          <a id="btnContacto">Contacto</a>
         </nav>
       </header>
     `;
@@ -121,17 +121,37 @@ class AppHeader extends HTMLElement {
       regionsBtn: this.shadowRoot.querySelector(SELECTORS.REGIONS_BTN),
       dropdownMenu: this.shadowRoot.querySelector(SELECTORS.DROPDOWN_MENU),
       regionItems: this.shadowRoot.querySelectorAll(SELECTORS.REGION_ITEM),
+      logoBtn: this.shadowRoot.querySelector("#logoBtn"),
+      btnInicio: this.shadowRoot.querySelector("#btnInicio"),
+      btnSobreNosotros: this.shadowRoot.querySelector("#btnSobreNosotros"),
+      btnContacto: this.shadowRoot.querySelector("#btnContacto"),
     };
   }
 
   #bindEvents() {
-    const { menuBtn, regionsBtn, regionItems } = this.#elements;
+    const { menuBtn, regionsBtn, regionItems, logoBtn, btnInicio, btnSobreNosotros, btnContacto } = this.#elements;
 
     menuBtn.addEventListener("click", (e) => this.#handleMenuToggle(e));
     regionsBtn.addEventListener("click", (e) => this.#handleDropdownToggle(e));
     regionItems.forEach(item => {
       item.addEventListener("click", (e) => this.#handleRegionSelect(e));
     });
+
+    const dispatchNav = (page) => {
+      this.dispatchEvent(
+        new CustomEvent("navigate", {
+          detail: { page },
+          bubbles: true,
+          composed: true,
+        })
+      );
+      this.isOpen = false;
+    };
+
+    if (logoBtn) logoBtn.addEventListener("click", () => dispatchNav("inicio"));
+    if (btnInicio) btnInicio.addEventListener("click", () => dispatchNav("inicio"));
+    if (btnSobreNosotros) btnSobreNosotros.addEventListener("click", () => dispatchNav("sobre-nosotros"));
+    if (btnContacto) btnContacto.addEventListener("click", () => dispatchNav("contacto"));
   }
 
   #handleMenuToggle(e) {
@@ -148,6 +168,15 @@ class AppHeader extends HTMLElement {
     e.stopPropagation();
 
     const region = e.target.dataset.region;
+
+    this.dispatchEvent(
+      new CustomEvent("navigate", {
+        detail: { page: "inicio" },
+        bubbles: true,
+        composed: true,
+      })
+    );
+
     this.#dispatchRegionSelected(region);
 
     this.showRegions = false;

@@ -134,4 +134,4 @@ No es posible ejecutar correctamente el proyecto abriendo el archivo `index.html
 - Eddy Josué González Quirós
 - Sofia Salazar Mata
 - José Daniel Solís Cordoncillo
-- Johan Fonseca Espinoza
+- Johann Fonseca Espinoza
