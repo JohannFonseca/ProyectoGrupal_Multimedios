@@ -1,23 +1,23 @@
 const sheet = new CSSStyleSheet();
-await fetch(new URL('../css/app-header.css', import.meta.url))
-  .then(r => r.text())
-  .then(css => sheet.replaceSync(css));
+await fetch(new URL("../css/app-header.css", import.meta.url))
+  .then((r) => r.text())
+  .then((css) => sheet.replaceSync(css));
 
 const SELECTORS = {
-  NAV: '#nav',
-  MENU_BTN: '#menuBtn',
-  REGIONS_BTN: '#regionsBtn',
-  DROPDOWN_MENU: '.dropdown-menu',
-  REGION_ITEM: '[data-region]',
+  NAV: "#nav",
+  MENU_BTN: "#menuBtn",
+  REGIONS_BTN: "#regionsBtn",
+  DROPDOWN_MENU: ".dropdown-menu",
+  REGION_ITEM: "[data-region]",
 };
 
 const CLASSES = {
-  OPEN: 'open',
-  SHOW: 'show',
+  OPEN: "open",
+  SHOW: "show",
 };
 
 const EVENTS = {
-  REGION_SELECTED: 'region-selected',
+  REGION_SELECTED: "region-selected",
 };
 
 class AppHeader extends HTMLElement {
@@ -133,8 +133,14 @@ class AppHeader extends HTMLElement {
 
     menuBtn.addEventListener("click", (e) => this.#handleMenuToggle(e));
     regionsBtn.addEventListener("click", (e) => this.#handleDropdownToggle(e));
-    regionItems.forEach(item => {
+    regionItems.forEach((item) => {
       item.addEventListener("click", (e) => this.#handleRegionSelect(e));
+      item.addEventListener("pointerenter", (e) =>
+        this.#handleRegionHover(e, true),
+      );
+      item.addEventListener("pointerleave", (e) =>
+        this.#handleRegionHover(e, false),
+      );
     });
 
     const dispatchNav = (page) => {
@@ -183,13 +189,25 @@ class AppHeader extends HTMLElement {
     this.isOpen = false;
   }
 
+  #handleRegionHover(e, enter) {
+    e.stopPropagation();
+    const region = enter ? e.target.dataset.region : null;
+    this.dispatchEvent(
+      new CustomEvent("region-hover", {
+        detail: { region },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  }
+
   #dispatchRegionSelected(region) {
     this.dispatchEvent(
       new CustomEvent(EVENTS.REGION_SELECTED, {
         detail: { region },
         bubbles: true,
         composed: true,
-      })
+      }),
     );
   }
 }
