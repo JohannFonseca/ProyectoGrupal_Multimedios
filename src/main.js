@@ -1,6 +1,7 @@
 import "./components/AppHeader.js";
 import "./components/DestinoList.js";
 import "./components/SobreNosotros.js";
+import "./components/Contacto.js";
 import { initRegionController } from "./modules/regionController.js";
 
 initRegionController();
@@ -14,28 +15,41 @@ document.addEventListener("navigate", (e) => {
   const destinos = document.querySelector("destino-list");
   const detalleContenedor = document.getElementById("contenedor-destino-detalle");
   let sobreNosotros = document.querySelector("sobre-nosotros");
+  let contactoSeccion = document.querySelector("contacto-seccion");
 
-  // Crear dinámicamente el componente sobre-nosotros si no existe en el DOM
+  // Crear dinámicamente los componentes si no existen en el DOM
   if (!sobreNosotros) {
     sobreNosotros = document.createElement("sobre-nosotros");
     sobreNosotros.style.display = "none";
     document.body.appendChild(sobreNosotros);
+  }
+  if (!contactoSeccion) {
+    contactoSeccion = document.createElement("contacto-seccion");
+    contactoSeccion.style.display = "none";
+    document.body.appendChild(contactoSeccion);
   }
 
   if (page === "sobre-nosotros") {
     if (mapa) mapa.style.display = "none";
     if (destinos) destinos.style.display = "none";
     if (detalleContenedor) detalleContenedor.style.display = "none";
+    if (contactoSeccion) contactoSeccion.style.display = "none";
     sobreNosotros.style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else if (page === "inicio") {
     if (mapa) mapa.style.display = "block";
     if (destinos) destinos.style.display = "block";
     if (detalleContenedor) detalleContenedor.style.display = "block";
-    sobreNosotros.style.display = "none";
+    if (sobreNosotros) sobreNosotros.style.display = "none";
+    if (contactoSeccion) contactoSeccion.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else if (page === "contacto") {
-    alert("Contacto:\nPróximamente disponible. Para más información, contactar a los autores en el apartado 'Sobre Nosotros'.");
+    if (mapa) mapa.style.display = "none";
+    if (destinos) destinos.style.display = "none";
+    if (detalleContenedor) detalleContenedor.style.display = "none";
+    if (sobreNosotros) sobreNosotros.style.display = "none";
+    contactoSeccion.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 });
 
