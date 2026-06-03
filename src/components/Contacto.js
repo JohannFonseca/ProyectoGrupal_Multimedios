@@ -148,12 +148,23 @@ class ContactoSeccion extends HTMLElement {
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
 
-        <galeria-imagenes
-          imagenes='${imagenesJSON}'
-          auto
-          intervalo="4500"
-          style="--gi-aspect: 16 / 4">
-        </galeria-imagenes>
+        <div class="hero-carousel">
+          <galeria-imagenes
+            imagenes='${imagenesJSON}'
+            auto
+            intervalo="4500"
+            style="--gi-aspect: 16 / 4">
+          </galeria-imagenes>
+
+          <div class="hero-overlay">
+            <img
+              class="hero-logo"
+              src="./assets/images/LogoRutaDelSabor.png"
+              alt="Logo Ruta del Sabor"
+            />
+            <h1 class="hero-title">Contacto</h1>
+          </div>
+        </div>
 
         <section class="intro-section">
           <h2 class="section-title">Contacto y Directorio</h2>

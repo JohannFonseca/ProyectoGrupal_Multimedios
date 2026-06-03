@@ -3,3 +3,68 @@ body {
   font-family: var(--font-main), Arial, sans-serif;
   background: var(--beige);
 }
+
+/* ─── Carrusel de inicio: lámina de bienvenida ─── */
+#hero-inicio {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  padding: 16px;
+  /* Lámina translúcida con tinte café para el look rústico */
+  background: linear-gradient(
+    180deg,
+    rgba(111, 78, 55, 0.45) 0%,
+    rgba(43, 30, 20, 0.55) 100%
+  );
+  /* Deja pasar los clics al carrusel (flechas, puntos, imagen) */
+  pointer-events: none;
+}
+
+.hero-logo {
+  width: clamp(90px, 11vw, 150px);
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+  animation: heroFloat 3.2s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+.hero-title {
+  margin: 0;
+  color: #fff8e7;
+  font-family: var(--font-main), serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+  animation: heroFadeUp 1s ease both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
