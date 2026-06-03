@@ -72,7 +72,6 @@ class ContactoSeccion extends HTMLElement {
 
   async connectedCallback() {
     await this._render();
-    this._bindEvents();
   }
 
   async _todasLasImagenes() {
@@ -159,12 +158,12 @@ class ContactoSeccion extends HTMLElement {
         <section class="intro-section">
           <h2 class="section-title">Contacto y Directorio</h2>
           <p class="intro-text">
-            ¿Tienes alguna consulta o deseas contactar directamente a los destinos gastronómicos de la <strong>Ruta del Sabor</strong>? Aquí tienes el directorio telefónico y ubicaciones oficiales de cada destino, además de nuestro formulario de contacto general.
+            ¿Tienes alguna consulta o deseas contactar directamente a los destinos gastronómicos de la <strong>Ruta del Sabor</strong>? Aquí tienes el directorio telefónico y ubicaciones oficiales de cada destino.
           </p>
         </section>
 
         <div class="contact-layout">
-          <!-- Columna Izquierda: Directorio -->
+          <!-- Directorio -->
           <section class="directory-container">
             <h3 class="directory-title">
               <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -177,76 +176,12 @@ class ContactoSeccion extends HTMLElement {
               ${directorioHTML}
             </div>
           </section>
-
-          <!-- Columna Derecha: Formulario -->
-          <section class="form-container">
-            <h3 class="form-title">Escríbenos</h3>
-            
-            <form id="contactForm">
-              <div class="form-group">
-                <label class="form-label" for="nombre">Nombre Completo</label>
-                <input class="form-control" type="text" id="nombre" placeholder="Tu nombre..." required />
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="email">Correo Electrónico</label>
-                <input class="form-control" type="email" id="email" placeholder="correo@ejemplo.com" required />
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="asunto">Asunto</label>
-                <select class="form-control" id="asunto" required>
-                  <option value="" disabled selected>Seleccione un motivo...</option>
-                  <option value="consulta">Consulta General</option>
-                  <option value="sugerencia">Sugerir un Destino</option>
-                  <option value="bug">Reportar un problema en la Web</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="mensaje">Mensaje</label>
-                <textarea class="form-control" id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
-              </div>
-
-              <button class="btn-submit" type="submit" id="btnSubmit">Enviar Mensaje</button>
-            </form>
-
-            <div class="success-message" id="successBox">
-              <div class="success-icon">✓</div>
-              <p class="success-text">¡Mensaje Enviado!</p>
-              <p class="success-subtext">
-                Gracias por contactarnos. Nuestro equipo (o el restaurante de interés) responderá a tu solicitud a la brevedad.
-              </p>
-            </div>
-          </section>
         </div>
       `;
     } catch (err) {
       console.error("Error al renderizar sección de Contacto:", err);
       this.shadowRoot.innerHTML = `<p>Error al cargar la sección de contacto</p>`;
     }
-  }
-
-  _bindEvents() {
-    const form = this.shadowRoot.getElementById("contactForm");
-    const successBox = this.shadowRoot.getElementById("successBox");
-    const btnSubmit = this.shadowRoot.getElementById("btnSubmit");
-
-    if (!form || !successBox || !btnSubmit) return;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      // Efecto interactivo de carga simulada
-      btnSubmit.disabled = true;
-      btnSubmit.textContent = "Enviando...";
-
-      setTimeout(() => {
-        form.style.display = "none";
-        successBox.style.display = "flex";
-      }, 1200);
-    });
   }
 }
 
