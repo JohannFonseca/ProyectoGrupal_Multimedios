@@ -75,8 +75,12 @@
   background: rgba(255, 255, 255, 0.95);
 }
 
-.carrusel-btn.prev { left: 12px; }
-.carrusel-btn.next { right: 12px; }
+.carrusel-btn.prev {
+  left: 12px;
+}
+.carrusel-btn.next {
+  right: 12px;
+}
 
 .about-row {
   display: flex;

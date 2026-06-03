@@ -1,11 +1,12 @@
 import "./DestinoCard.js";
 import "./DestinoDetalle.js";
+import "./GaleriaImagenes.js";
 
 class DestinoList extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this._datos        = null;
+    this._datos = null;
     this._regionActiva = null;
   }
 
@@ -26,7 +27,6 @@ class DestinoList extends HTMLElement {
 
   async _renderEstructura() {
     const css = await fetch("./css/destino-list.css").then((r) => r.text());
-
     this.shadowRoot.innerHTML = `
       <style>${css}</style>
       <div id="contenedor"></div>
@@ -36,80 +36,22 @@ class DestinoList extends HTMLElement {
   async _cargarDatos() {
     try {
       const respuesta = await fetch("./data/destinos.json");
-      this._datos     = await respuesta.json();
+      this._datos = await respuesta.json();
     } catch (err) {
       const c = this.shadowRoot.querySelector("#contenedor");
-      c.innerHTML = `<p class="error">Error al cargar los destinos.</p>`;
-      console.error("DestinoList: error →", err);
+      if (c) c.innerHTML = `<p class="error">Error al cargar los destinos.</p>`;
+      console.error("DestinoList:", err);
     }
   }
 
   _slugANombre(slug) {
     const mapa = {
-      "pacifico-norte":   "Pacífico Norte",
-      "caribe":           "Caribe",
-      "valle-central":    "Valle Central",
+      "pacifico-norte": "Pacífico Norte",
+      caribe: "Caribe",
+      "valle-central": "Valle Central",
       "pacifico-central": "Pacífico Central y Sur",
     };
     return mapa[slug] ?? null;
-  }
-
-  _crearCarrusel(imagenes, nombreRegion) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "carrusel-wrapper";
-
-    const area = document.createElement("div");
-    area.className = "carrusel-imagen";
-
-    if (imagenes && imagenes.length > 0) {
-      let indice = 0;
-
-      const img = document.createElement("img");
-      img.src = imagenes[0];
-      img.alt = `Imagen de ${nombreRegion}`;
-      area.appendChild(img);
-
-      if (imagenes.length > 1) {
-        const btnPrev = document.createElement("button");
-        btnPrev.className = "carrusel-btn prev";
-        btnPrev.setAttribute("aria-label", "Imagen anterior");
-        btnPrev.textContent = "‹";
-
-        const btnNext = document.createElement("button");
-        btnNext.className = "carrusel-btn next";
-        btnNext.setAttribute("aria-label", "Imagen siguiente");
-        btnNext.textContent = "›";
-
-        btnPrev.addEventListener("click", () => {
-          indice = (indice - 1 + imagenes.length) % imagenes.length;
-          img.src = imagenes[indice];
-        });
-
-        btnNext.addEventListener("click", () => {
-          indice = (indice + 1) % imagenes.length;
-          img.src = imagenes[indice];
-        });
-
-        area.appendChild(btnPrev);
-        area.appendChild(btnNext);
-      }
-    } else {
-      area.innerHTML = `
-        <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="1200" height="320" fill="#e8dfd4"/>
-          <line x1="0" y1="0" x2="1200" y2="320" stroke="#aaa" stroke-width="1.5"/>
-          <line x1="1200" y1="0" x2="0" y2="320" stroke="#aaa" stroke-width="1.5"/>
-        </svg>
-      `;
-    }
-
-    const label = document.createElement("div");
-    label.className = "carrusel-titulo";
-    label.textContent = "Carrusel de imagenes";
-
-    wrapper.appendChild(area);
-    wrapper.appendChild(label);
-    return wrapper;
   }
 
   _pintarDetalle(destinoId) {
@@ -117,19 +59,16 @@ class DestinoList extends HTMLElement {
     const titulo = bloque?.querySelector(".section-title");
     const contenido = bloque?.querySelector(".contenido-region");
 
-    if (!bloque || !titulo || !contenido) return;
+    if (!bloque || !contenido) return;
 
-    titulo.remove();
+    if (titulo) titulo.remove();
     contenido.innerHTML = "";
 
     const detalle = document.createElement("destino-detalle");
     detalle.setAttribute("destino-id", destinoId);
-
     contenido.appendChild(detalle);
-    bloque.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+
+    bloque.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   _pintarDestinos() {
@@ -139,11 +78,10 @@ class DestinoList extends HTMLElement {
     contenedor.innerHTML = "";
 
     const nombreActivo = this._slugANombre(this._regionActiva);
-
     if (!nombreActivo) return;
 
     const regiones = this._datos.regiones.filter(
-      (r) => r.nombre === nombreActivo
+      (r) => r.nombre === nombreActivo,
     );
 
     regiones.forEach((region) => {
@@ -151,14 +89,18 @@ class DestinoList extends HTMLElement {
       bloque.className = "region-block";
 
       const todasImagenes = region.destinos.flatMap(
-        (d) => d.media?.imagenes ?? []
+        (d) => d.media?.imagenes ?? [],
       );
-      bloque.appendChild(this._crearCarrusel(todasImagenes, region.nombre));
+      const carrusel = document.createElement("galeria-imagenes");
+      carrusel.setAttribute("imagenes", JSON.stringify(todasImagenes));
+      carrusel.setAttribute("auto", "");
+      carrusel.setAttribute("intervalo", "4000");
+      bloque.appendChild(carrusel);
 
       const aboutRow = document.createElement("div");
       aboutRow.className = "about-row";
       aboutRow.innerHTML = `
-        <p class="about-label">About</p>
+        <p class="about-label">Acerca de</p>
         <p class="about-texto">${region.descripcion}</p>
       `;
       bloque.appendChild(aboutRow);
@@ -173,18 +115,15 @@ class DestinoList extends HTMLElement {
 
       region.destinos.forEach((destino) => {
         const card = document.createElement("destino-card");
-
         card.setAttribute("destino-id", destino.nombre);
         card.setAttribute("nombre", destino.nombre);
         card.setAttribute("region", region.nombre);
         card.setAttribute("historia", destino.historia);
         card.setAttribute("imagen", destino.media?.imagenes?.[0] ?? "");
-
         contenido.appendChild(card);
       });
 
       bloque.appendChild(contenido);
-
       contenedor.appendChild(bloque);
     });
   }

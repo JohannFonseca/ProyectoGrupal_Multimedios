@@ -1,15 +1,15 @@
 :host {
   display: block;
-  width: min(92vw, 1200px);
-  margin: 0 auto;
-  padding: 40px 0 80px;
+  width: 100%;
+  padding: 0 0 80px;
   font-family: var(--font-main), Arial, sans-serif;
   color: #222;
 }
 
 .intro-section {
+  max-width: min(92vw, 1200px);
+  margin: 40px auto 50px;
   text-align: center;
-  margin-bottom: 50px;
 }
 
 .section-title {
@@ -44,6 +44,8 @@
 }
 
 .grid-container {
+  max-width: min(92vw, 1200px);
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;

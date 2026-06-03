@@ -18,9 +18,9 @@ class DestinoCard extends HTMLElement {
 
   _claseRegion(region) {
     const mapa = {
-      "Pacífico Norte":         "pacifico-norte",
-      "Caribe":                 "caribe",
-      "Valle Central":          "valle-central",
+      "Pacífico Norte": "pacifico-norte",
+      Caribe: "caribe",
+      "Valle Central": "valle-central",
       "Pacífico Central y Sur": "pacifico-sur",
     };
     return mapa[region] ?? "valle-central";
@@ -29,12 +29,12 @@ class DestinoCard extends HTMLElement {
   async _render() {
     const css = await fetch("./css/destino-card.css").then((r) => r.text());
 
-    const id       = this.getAttribute("destino-id") ?? "";
-    const nombre   = this.getAttribute("nombre")     ?? "Destino";
-    const imagen   = this.getAttribute("imagen")     ?? "";
-    const region   = this.getAttribute("region")     ?? "Región";
-    const historia = this.getAttribute("historia")   ?? "";
-    const cls      = this._claseRegion(region);
+    const id = this.getAttribute("destino-id") ?? "";
+    const nombre = this.getAttribute("nombre") ?? "Destino";
+    const imagen = this.getAttribute("imagen") ?? "";
+    const region = this.getAttribute("region") ?? "Región";
+    const historia = this.getAttribute("historia") ?? "";
+    const cls = this._claseRegion(region);
 
     const mediaHTML = imagen
       ? `<img class="card-img" src="${imagen}" alt="Imagen de ${nombre}" loading="lazy" />`
@@ -78,7 +78,7 @@ class DestinoCard extends HTMLElement {
           detail: { id },
           bubbles: true,
           composed: true,
-        })
+        }),
       );
     };
 

@@ -2,115 +2,273 @@
   "regiones": [
     {
       "nombre": "Pacífico Norte",
-      "descripcion": "Sabor tradicional costarricense",
+      "descripcion": "La región del Pacífico Norte, también conocida como Guanacaste, es la cuna de las tradiciones costarricenses. Sus sabores están fuertemente influenciados por el maíz, los frijoles y la ganadería, con recetas que se transmiten de generación en generación desde la época precolombina chorotega.",
       "destinos": [
         {
           "nombre": "Liberia",
           "restaurantes": ["Mercado Municipal de Liberia"],
-          "historia": "La gastronomía de Liberia está fuertemente influenciada por el maíz y las tradiciones campesinas.",
-          "experiencias": ["Recorrido gastronómico en el mercado"],
+          "historia": "El Mercado Municipal de Liberia es el corazón gastronómico de la Ciudad Blanca. Fundado en los años 60, en sus pasillos conviven puestos de comida típica, fruterías y artesanías que reflejan la identidad guanacasteca. Aquí podrás degustar el casado guanacasteco, el gallo pinto con natilla fresca y el maíz en todas sus formas: tortillas, tamales y torrejas. Ha sido por décadas el punto de encuentro de lugareños y visitantes que buscan autenticidad en cada bocado.",
+          "experiencias": [
+            "Recorrido gastronómico entre puestos locales",
+            "Degustación de tortillas de maíz recién hechas al comal",
+            "Prueba del casado guanacasteco con proteína del día",
+            "Compra de artesanías y productos regionales",
+            "Degustación de chorreadas y biscochos",
+            "Tour fotográfico por el mercado histórico",
+            "Degustación de frescos naturales de nance, cas y tamarindo"
+          ],
           "media": {
             "imagenes": [
-              "assets/images/liberia1.jpg",
-              "assets/images/liberia2.jpg"
+              "./assets/images/1MercadoLiberia/img1libe.webp",
+              "./assets/images/1MercadoLiberia/img2libe.webp",
+              "./assets/images/1MercadoLiberia/img3libe.webp",
+              "./assets/images/1MercadoLiberia/img4libe.webp",
+              "./assets/images/1MercadoLiberia/img5libe.webp",
+              "./assets/images/1MercadoLiberia/img6libe.webp",
+              "./assets/images/1MercadoLiberia/img7libe.webp",
+              "./assets/images/1MercadoLiberia/img8libe.webp",
+              "./assets/images/1MercadoLiberia/img9libe.webp",
+              "./assets/images/1MercadoLiberia/img10libe.webp",
+              "./assets/images/1MercadoLiberia/img11libe.webp"
             ],
-            "audio": "assets/audio/liberia.mp3",
-            "video": "assets/video/liberia.mp4"
+            "audio": "./assets/audios/audioLberia.m4a",
+            "video": "https://drive.google.com/file/d/1RtFP2ZxlbB6ifsnHOMsv6EgyVCCOlqXY/view?usp=sharing",
+            "video_vertical": false
           }
         },
         {
           "nombre": "Nicoya",
           "restaurantes": ["La Tortillería Nicoya"],
-          "historia": "Nicoya conserva una de las tradiciones culinarias más antiguas del país.",
-          "experiencias": ["Degustación de comida tradicional"],
+          "historia": "La Tortillería Nicoya es un referente de la gastronomía de la Zona Azul (Blue Zone) de Nicoya, una de las cinco regiones del mundo donde las personas viven más de 100 años. Su secreto radica en la dieta tradicional ancestral: tortillas de nixtamal, frijoles negros con cuero, arroz con leche de coco y chicheme de maíz. Las técnicas de preparación del maíz utilizadas aquí datan de la época precolombina chorotega, patrimonio cultural vivo que este lugar preserva con orgullo.",
+          "experiencias": [
+            "Elaboración artesanal de tortillas de nixtamal desde cero",
+            "Degustación de la dieta completa de la Zona Azul",
+            "Taller de cocina tradicional chorotega con doñas locales",
+            "Tour por cultivos locales de maíz, yuca y frijoles",
+            "Visita a la iglesia colonial de Nicoya (100 metros)",
+            "Cata de chicheme, horchata y bebidas ancestrales",
+            "Recorrido por el casco histórico de Nicoya"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/2LaTortilleria/img1tortilleria.webp",
+              "./assets/images/2LaTortilleria/img2tortilleria.webp",
+              "./assets/images/2LaTortilleria/img3tortilleria.webp",
+              "./assets/images/2LaTortilleria/img4tortilleria.webp",
+              "./assets/images/2LaTortilleria/img5tortilleria.webp",
+              "./assets/images/2LaTortilleria/img6tortilleria.webp",
+              "./assets/images/2LaTortilleria/img7tortilleria.webp",
+              "./assets/images/2LaTortilleria/img8tortilleria.webp",
+              "./assets/images/2LaTortilleria/img9tortilleria.webp",
+              "./assets/images/2LaTortilleria/img10tortilleria.webp"
+            ],
+            "audio": "./assets/audios/audioNicoya.m4a",
+            "video": "https://drive.google.com/file/d/1ZG0EZxr7DQ_qMcXnDW3LKAH_BLLJEU_J/view?usp=sharing",
+            "video_vertical": false
           }
         }
       ]
     },
     {
       "nombre": "Caribe",
-      "descripcion": "Sabores afrocaribeños",
+      "descripcion": "La región del Caribe costarricense es un mosaico de culturas que se traduce en una cocina única y vibrante. Influenciada por tradiciones afrocaribeñas, indígenas bribri y creoles jamaicanos, su gastronomía es una explosión de especias, cocos, mariscos y recetas que cuentan historias de migración, resistencia y mestizaje.",
       "destinos": [
         {
           "nombre": "Puerto Viejo",
           "restaurantes": ["Tamara Restaurant"],
-          "historia": "La cocina caribeña refleja la herencia afrodescendiente.",
-          "experiencias": ["Tour gastronómico caribeño"],
+          "historia": "Tamara Restaurant es una institución en Puerto Viejo de Talamanca. Fundado hace más de 30 años, este restaurante frente a la playa es el mejor embajador de la cocina afrocaribeña costarricense. Su menú incluye el famoso 'rice and beans' cocinado en leche de coco, el rondón —guiso de mariscos con ñame y yuca—, patacones con natilla, jerk chicken al estilo jamaicano y el inconfundible pan bon artesanal. La propietaria aprendió las recetas directamente de su abuela jamaicana.",
+          "experiencias": [
+            "Degustación auténtica de rice and beans con leche de coco",
+            "Tour gastronómico por los sabores afrocaribeños del sur",
+            "Clases de cocina de rondón y jerk chicken marinado",
+            "Visita al mercado local de especias caribeñas",
+            "Tarde de snorkel en Punta Uva seguida de cena en Tamara",
+            "Cata de pan bon y postres afrocaribeños artesanales",
+            "Paseo nocturno por Puerto Viejo y música reggae en vivo"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/3TamaraRestaurant/img1tamara.webp",
+              "./assets/images/3TamaraRestaurant/img2tamara.webp",
+              "./assets/images/3TamaraRestaurant/img3tamara.webp",
+              "./assets/images/3TamaraRestaurant/img4tamara.webp",
+              "./assets/images/3TamaraRestaurant/img5tamara.webp",
+              "./assets/images/3TamaraRestaurant/img6tamara.webp",
+              "./assets/images/3TamaraRestaurant/img7tamara.webp",
+              "./assets/images/3TamaraRestaurant/img8tamara.webp",
+              "./assets/images/3TamaraRestaurant/img9tamara.webp",
+              "./assets/images/3TamaraRestaurant/img10tamara.webp"
+            ],
+            "audio": "./assets/audios/audioPuertoViejo.m4a",
+            "video": "https://drive.google.com/file/d/1rFyLEIyhjzzpvo0KBe1baH6PUC060-G_/view?usp=sharing",
+            "video_vertical": false
           }
         },
         {
           "nombre": "Cahuita",
           "restaurantes": ["Delritta Patty"],
-          "historia": "Cahuita destaca por su comida callejera afrocaribeña.",
-          "experiencias": ["Recorrido gastronómico local"],
+          "historia": "Delritta Patty es sinónimo de la comida callejera más auténtica del Caribe Sur costarricense. Ubicada al costado del Parque Nacional de Cahuita, esta emblemática soda lleva más de 40 años sirviendo sus famosas patties jamaicanas —empanadas hojaldradas rellenas de carne especiada—, cassava bread y panqueques de plátano maduro. La receta original se ha transmitido de madre a hija y sigue siendo elaborada exactamente igual que en sus inicios.",
+          "experiencias": [
+            "Degustación de patties jamaicanas artesanales recién horneadas",
+            "Senderismo en el Parque Nacional de Cahuita entre el bosque y el mar",
+            "Observación de tortugas marinas en temporada de desove (julio-octubre)",
+            "Tour de snorkel en el arrecife de coral más largo de Costa Rica",
+            "Compra de cassava bread y productos artesanales locales",
+            "Paseo en bicicleta por el pueblo de Cahuita y sus murales",
+            "Visita al Centro Cultural afrocaribeño de Cahuita"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/4DelritaPatty/img1cahuita.webp",
+              "./assets/images/4DelritaPatty/img2cahuita.webp",
+              "./assets/images/4DelritaPatty/img3cahuita.webp",
+              "./assets/images/4DelritaPatty/img4cahuita.webp",
+              "./assets/images/4DelritaPatty/img5cahuita.webp",
+              "./assets/images/4DelritaPatty/img6cahuita.webp",
+              "./assets/images/4DelritaPatty/img7cahuita.webp",
+              "./assets/images/4DelritaPatty/img8cahuita.webp",
+              "./assets/images/4DelritaPatty/img9cahuita.webp",
+              "./assets/images/4DelritaPatty/img10cahuita.webp"
+            ],
+            "audio": "./assets/audios/audioCahuita.m4a",
+            "video": "https://drive.google.com/file/d/1rFyLEIyhjzzpvo0KBe1baH6PUC060-G_/view?usp=sharing",
+            "video_vertical": false
           }
         }
       ]
     },
     {
       "nombre": "Valle Central",
-      "descripcion": "Tradición urbana",
+      "descripcion": "El Valle Central concentra la mayor parte de la población costarricense y es el epicentro de la vida cultural del país. Su gastronomía refleja la fusión entre la herencia colonial española y las tradiciones campesinas, con el café como protagonista indiscutible y productos frescos de la meseta central que abastecen la mesa nacional.",
       "destinos": [
         {
           "nombre": "Heredia",
           "restaurantes": ["Britt Coffee Tour"],
-          "historia": "Heredia es reconocida por su tradición cafetalera.",
-          "experiencias": ["Tour del café"],
+          "historia": "El Britt Coffee Tour en Barva de Heredia es la experiencia cafetalera más completa de Costa Rica. Situado en las faldas del Volcán Barva a 1.200 metros sobre el nivel del mar, este tour lleva al visitante desde la planta hasta la taza. Aprenderás a identificar los distintos varietales —Caturra, Catuaí, Villa Sarchí y el exótico Geisha—, verás el proceso de tostado artesanal y degustarás cafés premium que se exportan a más de 40 países. Café Britt fue pionero en convertir la experiencia cafetalera en un destino turístico.",
+          "experiencias": [
+            "Tour completo del ciclo del café: siembra, cosecha, beneficio y taza",
+            "Cata guiada de 5 variedades premium de café costarricense",
+            "Visita a las plantas de café en las laderas del Volcán Barva",
+            "Taller de barismo y métodos de preparación (V60, chemex, espresso)",
+            "Compra de café de especialidad directamente en origen",
+            "Recorrido por las instalaciones de tostado artesanal con maestro tostador",
+            "Maridaje de café con chocolates y bocadillos artesanales"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/5BrittCoffeeTour/img1britt.webp",
+              "./assets/images/5BrittCoffeeTour/img2britt.webp",
+              "./assets/images/5BrittCoffeeTour/img3britt.webp",
+              "./assets/images/5BrittCoffeeTour/img4britt.webp",
+              "./assets/images/5BrittCoffeeTour/img5britt.webp",
+              "./assets/images/5BrittCoffeeTour/img6britt.webp",
+              "./assets/images/5BrittCoffeeTour/img7britt.webp",
+              "./assets/images/5BrittCoffeeTour/img8britt.webp",
+              "./assets/images/5BrittCoffeeTour/img9britt.webp",
+              "./assets/images/5BrittCoffeeTour/img10britt.webp"
+            ],
+            "audio": "./assets/audios/audioHeredia.m4a",
+            "video": "https://drive.google.com/file/d/1juIipPQRvu17ByA4Kf-UxHa7YjDR8z1_/view?usp=sharing",
+            "video_vertical": false
           }
         },
         {
           "nombre": "Cartago",
           "restaurantes": ["Restaurante Mi Tierra"],
-          "historia": "Cartago mantiene una cocina tradicional ligada a la cultura colonial.",
-          "experiencias": ["Comida típica costarricense"],
+          "historia": "Restaurante Mi Tierra, ubicado junto a las Ruinas de Santiago Apóstol en Cartago —primera capital colonial de Costa Rica—, es un viaje a la cocina costarricense del siglo XVI. Fundado en 1978, este restaurante mantiene recetas irrepetibles: el picadillo de arracache con cerdo, el olla de carne con papa, chayote y plátano, los tamales de elote y el arroz con leche con canela. Cada plato cuenta la historia de una ciudad que ha sido el alma espiritual y cultural de Costa Rica por más de 400 años.",
+          "experiencias": [
+            "Degustación del olla de carne tradicional costarricense",
+            "Visita a las Ruinas de la Iglesia de Santiago Apóstol (a metros)",
+            "Peregrinación al Santuario de La Negrita — Basílica de los Ángeles",
+            "Recorrido por el Mercado Central de Cartago y su feria de productores",
+            "Taller de elaboración de tamales costarricenses (temporada navideña)",
+            "Cata de picadillos típicos: arracache, vainica y chayote",
+            "Tour histórico por el centro colonial de Cartago"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/6MiTierra/img1mitierra.webp",
+              "./assets/images/6MiTierra/img2mitierra.webp",
+              "./assets/images/6MiTierra/img3mitierra.webp",
+              "./assets/images/6MiTierra/img4mitierra.webp",
+              "./assets/images/6MiTierra/img5mitierra.webp",
+              "./assets/images/6MiTierra/img6mitierra.webp",
+              "./assets/images/6MiTierra/img7mitierra.webp",
+              "./assets/images/6MiTierra/img8mitierra.webp",
+              "./assets/images/6MiTierra/img9mitierra.webp",
+              "./assets/images/6MiTierra/img10mitierra.webp"
+            ],
+            "audio": "./assets/audios/audioCartago.m4a",
+            "video": "https://drive.google.com/file/d/1yflLMknhajZb0WqSTG2MKVcNfBERyHp9/view?usp=sharing",
+            "video_vertical": false
           }
         }
       ]
     },
     {
       "nombre": "Pacífico Central y Sur",
-      "descripcion": "Sabores del mar",
+      "descripcion": "El Pacífico Central y Sur es el paraíso de los amantes de los mariscos y la cocina costera. Con el océano Pacífico como despensa principal, esta región ofrece pesca artesanal, ballenas jorobadas, biodiversidad marina excepcional y una gastronomía que celebra la frescura del mar con técnicas que van del ceviche tradicional a la alta cocina.",
       "destinos": [
         {
           "nombre": "Manuel Antonio",
           "restaurantes": ["El Avión"],
-          "historia": "La gastronomía se centra en productos del mar.",
-          "experiencias": ["Cena con vista al mar"],
+          "historia": "El Avión en Manuel Antonio es uno de los restaurantes más icónicos de toda Costa Rica. Su nombre y emblema provienen de un avión Fairchild C-123 de la Guardia Nacional de Nicaragua, confiscado durante las operaciones de los años 80 y reconvertido en barra de tragos y símbolo del lugar. La carta celebra los mariscos frescos del Pacífico: el ceviche de pargo con limón mandarino, los langostinos al ajillo con mantequilla de hierbas y el pescado del día a la plancha son los favoritos, todos con vista privilegiada al Parque Nacional Manuel Antonio.",
+          "experiencias": [
+            "Cena al atardecer con vista al Parque Nacional Manuel Antonio",
+            "Degustación de mariscos frescos traídos diariamente del Pacífico",
+            "Tour por el avión Fairchild C-123 restaurado convertido en barra",
+            "Senderismo en el Parque Nacional Manuel Antonio (4 senderos)",
+            "Avistamiento de monos cariblancos, perezosos y mapaches",
+            "Kayak de mar y snorkel en las aguas del parque nacional",
+            "Visita a Playa Biesanz y sus pozas naturales"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/7ElAvion/imgelavion1.webp",
+              "./assets/images/7ElAvion/imgelavion2.webp",
+              "./assets/images/7ElAvion/imgelavion3.webp",
+              "./assets/images/7ElAvion/imgelavion4.webp",
+              "./assets/images/7ElAvion/imgelavion5.webp",
+              "./assets/images/7ElAvion/imgelavion6.webp",
+              "./assets/images/7ElAvion/imgelavion7.webp",
+              "./assets/images/7ElAvion/imgelavion8.webp",
+              "./assets/images/7ElAvion/imgelavion9.webp",
+              "./assets/images/7ElAvion/imgelavion10.webp"
+            ],
+            "audio": "./assets/audios/audioPuntarenas.m4a",
+            "video": "https://drive.google.com/file/d/1AcL_vsK5aM3E8DpLZOYZhXo_hkiw1LaJ/view?usp=sharing",
+            "video_vertical": false
           }
         },
         {
           "nombre": "Uvita",
           "restaurantes": ["Club Marino Ballena"],
-          "historia": "Uvita destaca por su gastronomía costera y turismo natural.",
-          "experiencias": ["Experiencia culinaria frente al océano"],
+          "historia": "La Leda Restaurant en el Club Marino Ballena de Uvita ofrece una experiencia gastronómica frente al Parque Nacional Marino Ballena, famoso por su icónica cola de ballena de arena que emerge durante la marea baja y el espectacular avistamiento de ballenas jorobadas que visitan estas aguas dos veces al año. La carta celebra los productos del mar del Golfo de Coronado: pulpo al olivo, langostinos a la mantequilla, ceviche de mariscos mixtos y el cazado del día, todo preparado con pescado traído directamente de los pescadores artesanales locales.",
+          "experiencias": [
+            "Avistamiento de ballenas jorobadas (julio-octubre y diciembre-marzo)",
+            "Buceo y snorkel en el Parque Nacional Marino Ballena",
+            "Caminata a la cola de ballena durante la marea baja al atardecer",
+            "Kayak de mar entre los arrecifes coralinos del parque",
+            "Degustación de mariscos frescos del Golfo de Coronado",
+            "Pesca deportiva y artesanal con pescadores locales",
+            "Tour en bote por los islotes y manglares de la bahía"
+          ],
           "media": {
-            "imagenes": [],
-            "audio": "",
-            "video": ""
+            "imagenes": [
+              "./assets/images/8LaLeda/img1laleda.webp",
+              "./assets/images/8LaLeda/img2laleda.webp",
+              "./assets/images/8LaLeda/img3laleda.webp",
+              "./assets/images/8LaLeda/img4laleda.webp",
+              "./assets/images/8LaLeda/img5laleda.webp",
+              "./assets/images/8LaLeda/img6laleda.webp",
+              "./assets/images/8LaLeda/img7laleda.webp",
+              "./assets/images/8LaLeda/img8laleda.webp",
+              "./assets/images/8LaLeda/img9laleda.webp",
+              "./assets/images/8LaLeda/img10laleda.webp"
+            ],
+            "audio": "./assets/audios/audioCaldera.m4a",
+            "video": "https://drive.google.com/file/d/1oQ0HypJgHkvfnK1tCPxkyzkM7IrQPP62/view?usp=sharing",
+            "video_vertical": false
           }
         }
       ]

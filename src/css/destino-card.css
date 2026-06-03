@@ -32,10 +32,18 @@
   font-family: var(--font-main), Arial, sans-serif;
 }
 
-.card-nombre.pacifico-norte { color: var(--red); }
-.card-nombre.caribe         { color: var(--green); }
-.card-nombre.valle-central  { color: var(--blue); }
-.card-nombre.pacifico-sur   { color: var(--dark-beige); }
+.card-nombre.pacifico-norte {
+  color: var(--red);
+}
+.card-nombre.caribe {
+  color: var(--green);
+}
+.card-nombre.valle-central {
+  color: var(--blue);
+}
+.card-nombre.pacifico-sur {
+  color: var(--dark-beige);
+}
 
 .card-historia {
   font-size: 0.95rem;
@@ -93,10 +101,18 @@
   font-weight: 600;
 }
 
-.meta-region.pacifico-norte { color: var(--red); }
-.meta-region.caribe         { color: var(--green); }
-.meta-region.valle-central  { color: var(--blue); }
-.meta-region.pacifico-sur   { color: var(--dark-beige); }
+.meta-region.pacifico-norte {
+  color: var(--red);
+}
+.meta-region.caribe {
+  color: var(--green);
+}
+.meta-region.valle-central {
+  color: var(--blue);
+}
+.meta-region.pacifico-sur {
+  color: var(--dark-beige);
+}
 
 /* ── Responsivo ── */
 @media (max-width: 768px) {
