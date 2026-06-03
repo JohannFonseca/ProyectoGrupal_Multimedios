@@ -22,3 +22,19 @@ export function applySVGStyles(element, fillColor, isIdle = false) {
         element.style.stroke = "";
     }
 }
+
+export function applySVGHoverStyles(element, fillColor) {
+    if (!element) return;
+
+    element.style.removeProperty('fill');
+    element.removeAttribute("fill");
+    element.removeAttribute("class");
+
+    
+    element.style.fill = fillColor;
+    element.style.fillOpacity = "0.55";
+    element.style.stroke = "";
+    element.style.translate = '';
+    element.style.scale = '';
+    element.style.filter = '';
+}

@@ -6,10 +6,11 @@
 .map-container {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .map-container svg {
-  width: min(94vw, 600px);
+  width: min(94vw, 1000px);
   height: auto;
 }
 
@@ -23,4 +24,17 @@
   .map-container svg {
     width: min(94vw, 250px);
   }
+}
+
+.hover-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  pointer-events: none;
+  transform: translateY(-4px);
+  white-space: nowrap;
+  z-index: 10;
 }
