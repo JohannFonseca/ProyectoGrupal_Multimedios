@@ -129,7 +129,15 @@ class AppHeader extends HTMLElement {
   }
 
   #bindEvents() {
-    const { menuBtn, regionsBtn, regionItems, logoBtn, btnInicio, btnSobreNosotros, btnContacto } = this.#elements;
+    const {
+      menuBtn,
+      regionsBtn,
+      regionItems,
+      logoBtn,
+      btnInicio,
+      btnSobreNosotros,
+      btnContacto,
+    } = this.#elements;
 
     menuBtn.addEventListener("click", (e) => this.#handleMenuToggle(e));
     regionsBtn.addEventListener("click", (e) => this.#handleDropdownToggle(e));
@@ -149,15 +157,20 @@ class AppHeader extends HTMLElement {
           detail: { page },
           bubbles: true,
           composed: true,
-        })
+        }),
       );
       this.isOpen = false;
     };
 
     if (logoBtn) logoBtn.addEventListener("click", () => dispatchNav("inicio"));
-    if (btnInicio) btnInicio.addEventListener("click", () => dispatchNav("inicio"));
-    if (btnSobreNosotros) btnSobreNosotros.addEventListener("click", () => dispatchNav("sobre-nosotros"));
-    if (btnContacto) btnContacto.addEventListener("click", () => dispatchNav("contacto"));
+    if (btnInicio)
+      btnInicio.addEventListener("click", () => dispatchNav("inicio"));
+    if (btnSobreNosotros)
+      btnSobreNosotros.addEventListener("click", () =>
+        dispatchNav("sobre-nosotros"),
+      );
+    if (btnContacto)
+      btnContacto.addEventListener("click", () => dispatchNav("contacto"));
   }
 
   #handleMenuToggle(e) {
@@ -180,7 +193,7 @@ class AppHeader extends HTMLElement {
         detail: { page: "inicio" },
         bubbles: true,
         composed: true,
-      })
+      }),
     );
 
     this.#dispatchRegionSelected(region);

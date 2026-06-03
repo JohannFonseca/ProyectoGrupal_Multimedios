@@ -1,4 +1,7 @@
 import "./components/AppHeader.js";
+import "./components/GaleriaImagenes.js";
+import "./components/AudioGuia.js";
+import "./components/VideoDestino.js";
 import "./components/DestinoList.js";
 import "./components/SobreNosotros.js";
 import "./components/Contacto.js";
@@ -6,18 +9,37 @@ import { initRegionController } from "./modules/regionController.js";
 
 initRegionController();
 
-// Controlador de Navegación entre vistas
+// Cargar imágenes de todos los destinos en el carrusel de inicio
+async function initCarruselInicio() {
+  try {
+    const resp = await fetch("./data/destinos.json");
+    const datos = await resp.json();
+    const todas = datos.regiones.flatMap((r) =>
+      r.destinos.flatMap((d) => d.media?.imagenes ?? []),
+    );
+    const mezcladas = todas.sort(() => Math.random() - 0.5);
+    const carrusel = document.getElementById("carrusel-inicio");
+    if (carrusel) carrusel.setAttribute("imagenes", JSON.stringify(mezcladas));
+  } catch (err) {
+    console.error("Error cargando carrusel de inicio:", err);
+  }
+}
+
+initCarruselInicio();
+
+// ─── Controlador de Navegación entre vistas ───────────────────────────────────
 document.addEventListener("navigate", (e) => {
   const page = e.detail.page;
-  console.log("Navegación: Cambiando a vista →", page);
 
+  const heroInicio = document.getElementById("hero-inicio");
   const mapa = document.querySelector("mapa-regiones");
   const destinos = document.querySelector("destino-list");
-  const detalleContenedor = document.getElementById("contenedor-destino-detalle");
+  const detalleContenedor = document.getElementById(
+    "contenedor-destino-detalle",
+  );
   let sobreNosotros = document.querySelector("sobre-nosotros");
   let contactoSeccion = document.querySelector("contacto-seccion");
 
-  // Crear dinámicamente los componentes si no existen en el DOM
   if (!sobreNosotros) {
     sobreNosotros = document.createElement("sobre-nosotros");
     sobreNosotros.style.display = "none";
@@ -29,27 +51,27 @@ document.addEventListener("navigate", (e) => {
     document.body.appendChild(contactoSeccion);
   }
 
-  if (page === "sobre-nosotros") {
+  const ocultarTodo = () => {
+    if (heroInicio) heroInicio.style.display = "none";
     if (mapa) mapa.style.display = "none";
     if (destinos) destinos.style.display = "none";
     if (detalleContenedor) detalleContenedor.style.display = "none";
-    if (contactoSeccion) contactoSeccion.style.display = "none";
-    sobreNosotros.style.display = "block";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (page === "inicio") {
+    sobreNosotros.style.display = "none";
+    contactoSeccion.style.display = "none";
+  };
+
+  ocultarTodo();
+
+  if (page === "inicio") {
+    if (heroInicio) heroInicio.style.display = "block";
     if (mapa) mapa.style.display = "block";
     if (destinos) destinos.style.display = "block";
     if (detalleContenedor) detalleContenedor.style.display = "block";
-    if (sobreNosotros) sobreNosotros.style.display = "none";
-    if (contactoSeccion) contactoSeccion.style.display = "none";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else if (page === "sobre-nosotros") {
+    sobreNosotros.style.display = "block";
   } else if (page === "contacto") {
-    if (mapa) mapa.style.display = "none";
-    if (destinos) destinos.style.display = "none";
-    if (detalleContenedor) detalleContenedor.style.display = "none";
-    if (sobreNosotros) sobreNosotros.style.display = "none";
     contactoSeccion.style.display = "block";
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
-});
 
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});

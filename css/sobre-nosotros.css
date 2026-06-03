@@ -1,15 +1,78 @@
 :host {
   display: block;
-  width: min(92vw, 1200px);
-  margin: 0 auto;
-  padding: 40px 0 80px;
+  width: 100%;
+  padding: 0 0 80px;
   font-family: var(--font-main), Arial, sans-serif;
   color: #222;
 }
 
-.intro-section {
+/* ─── Lámina de bienvenida sobre el carrusel ─── */
+.hero-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
   text-align: center;
-  margin-bottom: 50px;
+  padding: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(111, 78, 55, 0.45) 0%,
+    rgba(43, 30, 20, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-logo {
+  width: clamp(90px, 11vw, 150px);
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+  animation: heroFloat 3.2s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+.hero-title {
+  margin: 0;
+  color: #fff8e7;
+  font-family: var(--font-main), serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+  animation: heroFadeUp 1s ease both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-section {
+  max-width: min(92vw, 1200px);
+  margin: 40px auto 50px;
+  text-align: center;
 }
 
 .section-title {
@@ -44,6 +107,8 @@
 }
 
 .grid-container {
+  max-width: min(92vw, 1200px);
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -54,15 +119,15 @@
 .card {
   flex: 1 1 285px;
   max-width: 340px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 18px;
+  background: var(--beige);
+  border: 1.5px solid var(--dark-beige);
+  border-radius: 10px;
   padding: 30px 24px;
   text-align: center;
-  box-shadow: 0 8px 24px var(--shadow);
-  transition: 
+  box-shadow:
+    0 6px 18px var(--shadow),
+    inset 0 0 0 1px rgba(111, 78, 55, 0.06);
+  transition:
     transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     border-color 0.4s ease;
@@ -80,14 +145,14 @@
   left: 0;
   width: 100%;
   height: 6px;
-  background: var(--blue);
-  opacity: 0.8;
+  background: var(--dark-beige);
+  opacity: 1;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 36px rgba(0, 74, 173, 0.2);
-  border-color: rgba(0, 74, 173, 0.5);
+  box-shadow: 0 14px 30px var(--shadow);
+  border-color: #4a3322;
 }
 
 .card:hover .avatar {
@@ -142,8 +207,8 @@
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--blue);
-  background: rgba(0, 74, 173, 0.08);
+  color: var(--dark-beige);
+  background: rgba(111, 78, 55, 0.1);
   padding: 4px 14px;
   border-radius: 20px;
   text-transform: uppercase;
@@ -181,7 +246,7 @@
 }
 
 .social-icon:hover {
-  background: var(--blue);
+  background: var(--dark-beige);
   color: white;
   transform: translateY(-2px);
 }

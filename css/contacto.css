@@ -1,15 +1,78 @@
 :host {
   display: block;
-  width: min(92vw, 1200px);
-  margin: 0 auto;
-  padding: 40px 0 80px;
+  width: 100%;
+  padding: 0 0 80px;
   font-family: var(--font-main), Arial, sans-serif;
   color: #222;
 }
 
-.intro-section {
+/* ─── Lámina de bienvenida sobre el carrusel ─── */
+.hero-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
   text-align: center;
-  margin-bottom: 45px;
+  padding: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(111, 78, 55, 0.45) 0%,
+    rgba(43, 30, 20, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-logo {
+  width: clamp(90px, 11vw, 150px);
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+  animation: heroFloat 3.2s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+.hero-title {
+  margin: 0;
+  color: #fff8e7;
+  font-family: var(--font-main), serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+  animation: heroFadeUp 1s ease both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-section {
+  max-width: min(92vw, 1200px);
+  margin: 40px auto 45px;
+  text-align: center;
 }
 
 .section-title {
@@ -43,17 +106,8 @@
 }
 
 .contact-layout {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 40px;
-  align-items: start;
-}
-
-@media (max-width: 991px) {
-  .contact-layout {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
+  max-width: min(92vw, 1200px);
+  margin: 0 auto;
 }
 
 /* Directory Section */
@@ -65,10 +119,10 @@
 
 .directory-title {
   font-size: 1.5rem;
-  color: #111;
+  color: var(--dark-beige);
   margin: 0 0 10px;
   padding-bottom: 8px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid rgba(111, 78, 55, 0.35);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -81,61 +135,41 @@
 }
 
 .dir-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
+  background: var(--beige);
+  border: 1.5px solid var(--dark-beige);
+  border-radius: 10px;
   padding: 24px;
-  box-shadow: 0 4px 18px var(--shadow);
+  box-shadow:
+    0 4px 14px var(--shadow),
+    inset 0 0 0 1px rgba(111, 78, 55, 0.06);
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: 
-    transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+  transition:
+    transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-    border-color 0.3s ease,
-    background-color 0.3s ease;
+    border-color 0.3s ease;
   overflow: hidden;
 }
 
-/* Left borders based on region colors */
+/* Cinta lateral con el color de cada región */
 .dir-card.pacifico-norte {
-  border-left: 6px solid var(--red);
+  border-left: 7px solid var(--red);
 }
 .dir-card.caribe {
-  border-left: 6px solid var(--green);
+  border-left: 7px solid var(--green);
 }
 .dir-card.valle-central {
-  border-left: 6px solid var(--blue);
+  border-left: 7px solid var(--blue);
 }
 .dir-card.pacifico-central {
-  border-left: 6px solid var(--dark-beige);
+  border-left: 7px solid var(--dark-beige);
 }
 
-.dir-card.pacifico-norte:hover {
+.dir-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(240, 37, 37, 0.15);
-  border-color: rgba(240, 37, 37, 0.4);
-  background-color: rgba(240, 37, 37, 0.02);
-}
-.dir-card.caribe:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 131, 13, 0.15);
-  border-color: rgba(0, 131, 13, 0.4);
-  background-color: rgba(0, 131, 13, 0.02);
-}
-.dir-card.valle-central:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(0, 74, 173, 0.15);
-  border-color: rgba(0, 74, 173, 0.4);
-  background-color: rgba(0, 74, 173, 0.02);
-}
-.dir-card.pacifico-central:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(111, 78, 55, 0.15);
-  border-color: rgba(111, 78, 55, 0.4);
-  background-color: rgba(111, 78, 55, 0.02);
+  box-shadow: 0 12px 26px var(--shadow);
+  border-color: #4a3322;
 }
 
 .dir-header {
@@ -244,10 +278,18 @@
   transition: color 0.2s ease;
 }
 
-.dir-card.pacifico-norte .tel-link:hover { color: var(--red); }
-.dir-card.caribe .tel-link:hover { color: var(--green); }
-.dir-card.valle-central .tel-link:hover { color: var(--blue); }
-.dir-card.pacifico-central .tel-link:hover { color: var(--dark-beige); }
+.dir-card.pacifico-norte .tel-link:hover {
+  color: var(--red);
+}
+.dir-card.caribe .tel-link:hover {
+  color: var(--green);
+}
+.dir-card.valle-central .tel-link:hover {
+  color: var(--blue);
+}
+.dir-card.pacifico-central .tel-link:hover {
+  color: var(--dark-beige);
+}
 
 .dir-action {
   margin-top: auto;
@@ -266,7 +308,9 @@
   font-weight: 700;
   font-size: 0.88rem;
   border-radius: 10px;
-  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+    box-shadow 0.3s ease;
   border: none;
   cursor: pointer;
 }
@@ -357,7 +401,9 @@
   font-family: inherit;
   font-size: 0.92rem;
   color: #222;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .form-control:focus {
@@ -382,7 +428,10 @@ textarea.form-control {
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  transition:
+    background 0.3s,
+    transform 0.2s,
+    box-shadow 0.3s;
   box-shadow: 0 4px 10px rgba(0, 74, 173, 0.2);
 }
 
@@ -434,6 +483,12 @@ textarea.form-control {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

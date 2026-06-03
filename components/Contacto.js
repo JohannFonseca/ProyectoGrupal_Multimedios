@@ -1,80 +1,104 @@
+import "./GaleriaImagenes.js";
+
 class ContactoSeccion extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    
-    // Directorio de destinos con sus números y ubicaciones
-    this._directorio = [
+
+    this._directorio = [  
       {
         nombre: "Mercado Municipal de Liberia",
         region: "pacifico-norte",
         regionLabel: "Pacífico Norte",
         telefono: "+506 2666-0101",
-        ubicacion: "Av. 2, Calle 4, frente al Parque Central, Liberia, Guanacaste."
+        ubicacion:
+          "Av. 2, Calle 4, frente al Parque Central, Liberia, Guanacaste.",
       },
       {
         nombre: "La Tortillería Nicoya",
         region: "pacifico-norte",
         regionLabel: "Pacífico Norte",
         telefono: "+506 2685-4040",
-        ubicacion: "100 metros Este de la Iglesia Colonial de Nicoya, Guanacaste."
+        ubicacion:
+          "100 metros Este de la Iglesia Colonial de Nicoya, Guanacaste.",
       },
       {
         nombre: "Tamara Restaurant",
         region: "caribe",
         regionLabel: "Caribe",
         telefono: "+506 2750-0111",
-        ubicacion: "Calle Principal, frente a la playa, Puerto Viejo, Talamanca, Limón."
+        ubicacion:
+          "Calle Principal, frente a la playa, Puerto Viejo, Talamanca, Limón.",
       },
       {
         nombre: "Delritta Patty",
         region: "caribe",
         regionLabel: "Caribe",
         telefono: "+506 2755-0220",
-        ubicacion: "Costado Oeste del Parque Nacional de Cahuita, Limón."
+        ubicacion: "Costado Oeste del Parque Nacional de Cahuita, Limón.",
       },
       {
         nombre: "Britt Coffee Tour",
         region: "valle-central",
         regionLabel: "Valle Central",
         telefono: "+506 2277-1600",
-        ubicacion: "Paso Llano, Barva de Heredia (Camino al Volcán Barva)."
+        ubicacion: "Paso Llano, Barva de Heredia (Camino al Volcán Barva).",
       },
       {
         nombre: "Restaurante Mi Tierra",
         region: "valle-central",
         regionLabel: "Valle Central",
         telefono: "+506 2551-0303",
-        ubicacion: "Costado Sur de las Ruinas de Cartago, Cartago centro."
+        ubicacion: "Costado Sur de las Ruinas de Cartago, Cartago centro.",
       },
       {
         nombre: "El Avión",
         region: "pacifico-central",
         regionLabel: "Pacífico Central/Sur",
         telefono: "+506 2777-3377",
-        ubicacion: "Carretera Principal a Manuel Antonio, Km 4, Quepos, Puntarenas."
+        ubicacion:
+          "Carretera Principal a Manuel Antonio, Km 4, Quepos, Puntarenas.",
       },
       {
-        nombre: "Club Marino Ballena (La Leda)",
+        nombre: "La Leda",
         region: "pacifico-central",
         regionLabel: "Pacífico Central/Sur",
         telefono: "+506 2743-8080",
-        ubicacion: "Entrada principal a Playa Uvita, Bahía Ballena, Osa, Puntarenas."
-      }
+        ubicacion:
+          "Entrada principal a Playa Uvita, Bahía Ballena, Osa, Puntarenas.",
+      },
     ];
   }
 
   async connectedCallback() {
     await this._render();
-    this._bindEvents();
+  }
+
+  async _todasLasImagenes() {
+    try {
+      const resp = await fetch("./data/destinos.json");
+      const datos = await resp.json();
+      const imgs = datos.regiones.flatMap((r) =>
+        r.destinos.flatMap((d) => d.media?.imagenes ?? []),
+      );
+      return imgs.sort(() => Math.random() - 0.5).slice(0, 24);
+    } catch {
+      return [];
+    }
   }
 
   async _render() {
     try {
-      const css = await fetch("./css/contacto.css").then((r) => r.text());
+      const [css, imagenes] = await Promise.all([
+        fetch("./css/contacto.css").then((r) => r.text()),
+        this._todasLasImagenes(),
+      ]);
+      const imagenesJSON = JSON.stringify(imagenes).replace(/'/g, "&#39;");
 
       // Construir las tarjetas del directorio dinámicamente
-      const directorioHTML = this._directorio.map(dest => `
+      const directorioHTML = this._directorio
+        .map(
+          (dest) => `
         <article class="dir-card ${dest.region}">
           <div class="dir-header">
             <h4 class="dir-place">${dest.nombre}</h4>
@@ -90,7 +114,7 @@ class ContactoSeccion extends HTMLElement {
             <div>
               <span class="dir-label">Teléfono</span> 
               <br/>
-              <a href="tel:${dest.telefono.replace(/\s+/g, '')}" class="tel-link">${dest.telefono}</a>
+              <a href="tel:${dest.telefono.replace(/\s+/g, "")}" class="tel-link">${dest.telefono}</a>
             </div>
           </div>
 
@@ -109,7 +133,7 @@ class ContactoSeccion extends HTMLElement {
           </div>
 
           <div class="dir-action">
-            <a href="tel:${dest.telefono.replace(/\s+/g, '')}" class="btn-call">
+            <a href="tel:${dest.telefono.replace(/\s+/g, "")}" class="btn-call">
               <svg width="14" height="14" viewBox="0 0 24 24">
                 <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.04 15.04 0 01-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02A11.36 11.36 0 018.5 4c0-.56-.44-1-1-1H4c-.56 0-1 .44-1 1 0 9.39 7.61 17 17 17 .56 0 1-.44 1-1v-3.5c0-.56-.44-1-1-1z"/>
               </svg>
@@ -117,20 +141,40 @@ class ContactoSeccion extends HTMLElement {
             </a>
           </div>
         </article>
-      `).join('');
+      `,
+        )
+        .join("");
 
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
-        
+
+        <div class="hero-carousel">
+          <galeria-imagenes
+            imagenes='${imagenesJSON}'
+            auto
+            intervalo="4500"
+            style="--gi-aspect: 16 / 4">
+          </galeria-imagenes>
+
+          <div class="hero-overlay">
+            <img
+              class="hero-logo"
+              src="./assets/images/LogoRutaDelSabor.png"
+              alt="Logo Ruta del Sabor"
+            />
+            <h1 class="hero-title">Contacto</h1>
+          </div>
+        </div>
+
         <section class="intro-section">
           <h2 class="section-title">Contacto y Directorio</h2>
           <p class="intro-text">
-            ¿Tienes alguna consulta o deseas contactar directamente a los destinos gastronómicos de la <strong>Ruta del Sabor</strong>? Aquí tienes el directorio telefónico y ubicaciones oficiales de cada destino, además de nuestro formulario de contacto general.
+            ¿Tienes alguna consulta o deseas contactar directamente a los destinos gastronómicos de la <strong>Ruta del Sabor</strong>? Aquí tienes el directorio telefónico y ubicaciones oficiales de cada destino.
           </p>
         </section>
 
         <div class="contact-layout">
-          <!-- Columna Izquierda: Directorio -->
+          <!-- Directorio -->
           <section class="directory-container">
             <h3 class="directory-title">
               <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -143,76 +187,12 @@ class ContactoSeccion extends HTMLElement {
               ${directorioHTML}
             </div>
           </section>
-
-          <!-- Columna Derecha: Formulario -->
-          <section class="form-container">
-            <h3 class="form-title">Escríbenos</h3>
-            
-            <form id="contactForm">
-              <div class="form-group">
-                <label class="form-label" for="nombre">Nombre Completo</label>
-                <input class="form-control" type="text" id="nombre" placeholder="Tu nombre..." required />
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="email">Correo Electrónico</label>
-                <input class="form-control" type="email" id="email" placeholder="correo@ejemplo.com" required />
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="asunto">Asunto</label>
-                <select class="form-control" id="asunto" required>
-                  <option value="" disabled selected>Seleccione un motivo...</option>
-                  <option value="consulta">Consulta General</option>
-                  <option value="sugerencia">Sugerir un Destino</option>
-                  <option value="bug">Reportar un problema en la Web</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="mensaje">Mensaje</label>
-                <textarea class="form-control" id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
-              </div>
-
-              <button class="btn-submit" type="submit" id="btnSubmit">Enviar Mensaje</button>
-            </form>
-
-            <div class="success-message" id="successBox">
-              <div class="success-icon">✓</div>
-              <p class="success-text">¡Mensaje Enviado!</p>
-              <p class="success-subtext">
-                Gracias por contactarnos. Nuestro equipo (o el restaurante de interés) responderá a tu solicitud a la brevedad.
-              </p>
-            </div>
-          </section>
         </div>
       `;
     } catch (err) {
       console.error("Error al renderizar sección de Contacto:", err);
       this.shadowRoot.innerHTML = `<p>Error al cargar la sección de contacto</p>`;
     }
-  }
-
-  _bindEvents() {
-    const form = this.shadowRoot.getElementById("contactForm");
-    const successBox = this.shadowRoot.getElementById("successBox");
-    const btnSubmit = this.shadowRoot.getElementById("btnSubmit");
-
-    if (!form || !successBox || !btnSubmit) return;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      // Efecto interactivo de carga simulada
-      btnSubmit.disabled = true;
-      btnSubmit.textContent = "Enviando...";
-
-      setTimeout(() => {
-        form.style.display = "none";
-        successBox.style.display = "flex";
-      }, 1200);
-    });
   }
 }
 
