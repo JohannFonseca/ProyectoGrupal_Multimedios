@@ -79,7 +79,7 @@ class ContactoSeccion extends HTMLElement {
       const resp = await fetch("./data/destinos.json");
       const datos = await resp.json();
       const imgs = datos.regiones.flatMap((r) =>
-        r.destinos.flatMap((d) => d.media?.imagenes ?? []),
+        r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? []),
       );
       return imgs.sort(() => Math.random() - 0.5).slice(0, 24);
     } catch {

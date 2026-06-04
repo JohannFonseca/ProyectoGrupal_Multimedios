@@ -83,11 +83,12 @@ class DestinoDetalle extends HTMLElement {
 
       const { region, destino } = resultado;
       const cls = this._claseRegion(region.nombre);
-      const imagenes = destino.media?.imagenes ?? [];
-      const video = destino.media?.video ?? "";
-      const audio = destino.media?.audio ?? "";
-      const vertical = destino.media?.video_vertical ?? false;
-      const portada = imagenes[0] ?? "";
+      const galeria = destino.galeria ?? destino.media?.imagenes ?? [];
+      const video = destino.video ?? destino.media?.video ?? "";
+      const audio = destino.audio ?? destino.media?.audio ?? "";
+      const descripcion = destino.descripcion ?? destino.historia ?? "";
+      const actividades = destino.actividades ?? destino.experiencias ?? [];
+      const portada = destino.imagen_portada ?? galeria[0] ?? "";
 
       const imagenHTML = portada
         ? `<img class="detalle-img" src="${portada}" alt="Imagen de ${destino.nombre}" loading="lazy" />`
@@ -99,7 +100,7 @@ class DestinoDetalle extends HTMLElement {
              </svg>
            </div>`;
 
-      const imagenesJSON = JSON.stringify(imagenes).replace(/'/g, "&#39;");
+      const imagenesJSON = JSON.stringify(galeria).replace(/'/g, "&#39;");
 
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
@@ -117,7 +118,7 @@ class DestinoDetalle extends HTMLElement {
 
             <div class="detalle-texto">
               <h3>Descripción</h3>
-              <p>${destino.historia}</p>
+              <p>${descripcion}</p>
             </div>
 
             <div class="detalle-video-wrap">
@@ -131,7 +132,7 @@ class DestinoDetalle extends HTMLElement {
           <section class="detalle-grid">
             <div class="detalle-bloque">
               <h3>Actividades</h3>
-              ${this._listaHTML(destino.experiencias)}
+              ${this._listaHTML(actividades)}
             </div>
 
             <div class="detalle-bloque galeria-bloque">

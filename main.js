@@ -15,7 +15,7 @@ async function initCarruselInicio() {
     const resp = await fetch("./data/destinos.json");
     const datos = await resp.json();
     const todas = datos.regiones.flatMap((r) =>
-      r.destinos.flatMap((d) => d.media?.imagenes ?? []),
+      r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? []),
     );
     const mezcladas = todas.sort(() => Math.random() - 0.5);
     const carrusel = document.getElementById("carrusel-inicio");

@@ -14,6 +14,7 @@ const SELECTORS = {
 const CLASSES = {
   OPEN: "open",
   SHOW: "show",
+  ACTIVE: "active",
 };
 
 const EVENTS = {
@@ -21,6 +22,11 @@ const EVENTS = {
 };
 
 class AppHeader extends HTMLElement {
+  // Atributo observado: resalta la región activa en el menú "Regiones".
+  static get observedAttributes() {
+    return ["active-region"];
+  }
+
   #state = {
     isOpen: false,
     showRegions: false,
@@ -38,6 +44,35 @@ class AppHeader extends HTMLElement {
     this.render();
     this.#cacheElements();
     this.#bindEvents();
+    this.#highlightActiveRegion();
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    if (name === "active-region" && oldVal !== newVal) {
+      this.#highlightActiveRegion();
+    }
+  }
+
+  get activeRegion() {
+    return this.getAttribute("active-region");
+  }
+
+  set activeRegion(value) {
+    if (value == null || value === "") {
+      this.removeAttribute("active-region");
+    } else {
+      this.setAttribute("active-region", value);
+    }
+  }
+
+  // Marca como activa la opción de región que coincide con active-region.
+  #highlightActiveRegion() {
+    const region = this.getAttribute("active-region");
+    const items = this.shadowRoot?.querySelectorAll(SELECTORS.REGION_ITEM);
+    if (!items) return;
+    items.forEach((item) => {
+      item.classList.toggle(CLASSES.ACTIVE, item.dataset.region === region);
+    });
   }
 
   get isOpen() {

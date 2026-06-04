@@ -32,6 +32,7 @@ export function initRegionController() {
                 _selectedRegion = null;
                 console.log("Controlador: Región deseleccionada");
                 mapaRegiones.region = null;
+                appHeader.removeAttribute("active-region");
 
                 document.dispatchEvent(
                     new CustomEvent("region-selected", {
@@ -46,6 +47,7 @@ export function initRegionController() {
             _selectedRegion = regionKey;
             console.log("Controlador: Región seleccionada ->", regionKey);
             mapaRegiones.region = regionKey;
+            appHeader.setAttribute("active-region", regionKey);
 
             document.dispatchEvent(
                 new CustomEvent("region-selected", {

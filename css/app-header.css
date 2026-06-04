@@ -87,6 +87,13 @@ a:hover {
   background: #f0f0f0;
 }
 
+/* Región activa (atributo active-region) */
+.dropdown-menu div.active {
+  background: var(--dark-beige);
+  color: #fff8e7 !important;
+  font-weight: 700;
+}
+
 .hamburger-menu {
   display: none;
   flex-direction: column;
