@@ -15,7 +15,7 @@ class SobreNosotros extends HTMLElement {
       const resp = await fetch("./data/destinos.json");
       const datos = await resp.json();
       const imgs = datos.regiones.flatMap((r) =>
-        r.destinos.flatMap((d) => d.media?.imagenes ?? []),
+        r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? []),
       );
       return imgs.sort(() => Math.random() - 0.5).slice(0, 24);
     } catch {
@@ -62,9 +62,8 @@ class SobreNosotros extends HTMLElement {
           <article class="card">
             <div class="avatar dariel">DB</div>
             <h3 class="member-name">Dariel Benavides Tapia</h3>
-            <span class="member-role">Desarrollo Frontend &amp; Integración SVG</span>
+            <span class="member-role">Desarrollador de componentes de navegación</span>
             <p class="member-desc">
-              JSON con 3+ destinos, Rediseño del mapa, Tarea Propuesta Temática con Sofía, Definición de Regiones y Destinos con Sofía, Guion de Navegación con Eddy.
             </p>
             <div class="social-links">
               <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Dariel">
@@ -79,9 +78,8 @@ class SobreNosotros extends HTMLElement {
           <article class="card">
             <div class="avatar eddy">EG</div>
             <h3 class="member-name">Eddy Josué González Quirós</h3>
-            <span class="member-role">Interactividad &amp; Animaciones</span>
+            <span class="member-role">Desarrollador de componentes de destino</span>
             <p class="member-desc">
-              Wireframes (Planimetría) con Daniel, Guion de Navegación con Dariel, Diagrama de Componentes y Descripción de Custom Events entre componentes con Johann, Destino-detalle.
             </p>
             <div class="social-links">
               <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Eddy">
@@ -96,9 +94,8 @@ class SobreNosotros extends HTMLElement {
           <article class="card">
             <div class="avatar sofia">SS</div>
             <h3 class="member-name">Sofia Salazar Mata</h3>
-            <span class="member-role">Diseño UI/UX &amp; Estilos</span>
+            <span class="member-role">Diseño UI/UX & Productor Multimedia</span>
             <p class="member-desc">
-              Propuesta Temática con Dariel, Definición de Regiones y Destinos con Dariel, Storyboards con Daniel, Decisiones de diseño, Creación de audio para cada destino, Video-destino y Galería de imágenes.
             </p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/sofia-salazar-mata-0063771b7?utm_source=share_via&utm_content=profile&utm_medium=member_ios" class="social-icon" target="_blank" aria-label="LinkedIn de Sofia">
@@ -113,9 +110,8 @@ class SobreNosotros extends HTMLElement {
           <article class="card">
             <div class="avatar jose">JS</div>
             <h3 class="member-name">José Daniel Solís Cordoncillo</h3>
-            <span class="member-role">Lógica de Datos &amp; Destinos</span>
+            <span class="member-role">Lider & Desarrollador de Componentes</span>
             <p class="member-desc">
-              Wireframes (Planimetría) con Eddy, Storyboards con Sofía, Destino-card.
             </p>
             <div class="social-links">
               <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de José Daniel">
@@ -130,9 +126,8 @@ class SobreNosotros extends HTMLElement {
           <article class="card">
             <div class="avatar johan">JF</div>
             <h3 class="member-name">Johann Fonseca Espinoza</h3>
-            <span class="member-role">Componentes &amp; Estructura de Datos</span>
+            <span class="member-role">Desarrollador de Componentes & Estructura de Datos</span>
             <p class="member-desc">
-              Archivo destinos.json (Estructura de Datos), Estructura de Archivos (Diagrama de Componentes y Descripción de Custom Events entre componentes con Eddy), Repositorio en Git.
             </p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/johann-fonseca-0a89a4323/" class="social-icon" target="_blank" aria-label="LinkedIn de Johann">

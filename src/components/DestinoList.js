@@ -89,7 +89,7 @@ class DestinoList extends HTMLElement {
       bloque.className = "region-block";
 
       const todasImagenes = region.destinos.flatMap(
-        (d) => d.media?.imagenes ?? [],
+        (d) => d.galeria ?? d.media?.imagenes ?? [],
       );
       const carrusel = document.createElement("galeria-imagenes");
       carrusel.setAttribute("imagenes", JSON.stringify(todasImagenes));
@@ -118,8 +118,11 @@ class DestinoList extends HTMLElement {
         card.setAttribute("destino-id", destino.nombre);
         card.setAttribute("nombre", destino.nombre);
         card.setAttribute("region", region.nombre);
-        card.setAttribute("historia", destino.historia);
-        card.setAttribute("imagen", destino.media?.imagenes?.[0] ?? "");
+        card.setAttribute("historia", destino.descripcion ?? destino.historia ?? "");
+        card.setAttribute(
+          "imagen",
+          destino.imagen_portada ?? destino.galeria?.[0] ?? "",
+        );
         contenido.appendChild(card);
       });
 
