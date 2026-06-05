@@ -34,7 +34,7 @@
             "./assets/images/1MercadoLiberia/img11libe.webp"
           ],
           "audio": "./assets/audios/audioLberia.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1RtFP2ZxlbB6ifsnHOMsv6EgyVCCOlqXY/view?usp=drive_link",
           "lat": 10.6346,
           "lng": -85.4406
         },
@@ -67,7 +67,7 @@
             "./assets/images/2LaTortilleria/img10tortilleria.webp"
           ],
           "audio": "./assets/audios/audioNicoya.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1ZG0EZxr7DQ_qMcXnDW3LKAH_BLLJEU_J/view?usp=drive_link",
           "lat": 10.1483,
           "lng": -85.452
         }
@@ -106,7 +106,7 @@
             "./assets/images/3TamaraRestaurant/img10tamara.webp"
           ],
           "audio": "./assets/audios/audioPuertoViejo.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1rFyLEIyhjzzpvo0KBe1baH6PUC060-G_/view?usp=drive_link",
           "lat": 9.6566,
           "lng": -82.7544
         },
@@ -139,7 +139,7 @@
             "./assets/images/4DelritaPatty/img10cahuita.webp"
           ],
           "audio": "./assets/audios/audioCahuita.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1bWx_oLWKIxaFF51VyA0YRz90EwC3ybLM/view?usp=drive_link",
           "lat": 9.7345,
           "lng": -82.8413
         }
@@ -178,7 +178,7 @@
             "./assets/images/5BrittCoffeeTour/img10britt.webp"
           ],
           "audio": "./assets/audios/audioHeredia.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1juIipPQRvu17ByA4Kf-UxHa7YjDR8z1_/view?usp=drive_link",
           "lat": 10.02,
           "lng": -84.12
         },
@@ -211,7 +211,7 @@
             "./assets/images/6MiTierra/img10mitierra.webp"
           ],
           "audio": "./assets/audios/audioCartago.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1yflLMknhajZb0WqSTG2MKVcNfBERyHp9/view?usp=drive_link",
           "lat": 9.8644,
           "lng": -83.9194
         }
@@ -250,7 +250,7 @@
             "./assets/images/7ElAvion/imgelavion10.webp"
           ],
           "audio": "./assets/audios/audioPuntarenas.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1AcL_vsK5aM3E8DpLZOYZhXo_hkiw1LaJ/view?usp=drive_link",
           "lat": 9.4035,
           "lng": -84.1568
         },
@@ -283,7 +283,7 @@
             "./assets/images/8LaLeda/img10laleda.webp"
           ],
           "audio": "./assets/audios/audioCaldera.m4a",
-          "video": "",
+          "video": "https://drive.google.com/file/d/1oQ0HypJgHkvfnK1tCPxkyzkM7IrQPP62/view?usp=drive_link",
           "lat": 9.167,
           "lng": -83.736
         }
