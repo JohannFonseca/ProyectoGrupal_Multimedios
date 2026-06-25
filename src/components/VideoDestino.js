@@ -53,7 +53,7 @@ class VideoDestino extends HTMLElement {
           position: relative;
           width: 100%;
           max-width: 100%;
-          height: 270px;
+          aspect-ratio: 16 / 9;
           background: #111;
           border-radius: 8px;
           overflow: hidden;
@@ -90,6 +90,12 @@ class VideoDestino extends HTMLElement {
         .vd-txt {
           font-size: .82rem; color: #aaa;
           font-family: sans-serif; text-align: center;
+        }
+
+        @media (max-width: 768px) {
+          .vd-wrap {
+            max-height: 220px;
+          }
         }
       </style>
 

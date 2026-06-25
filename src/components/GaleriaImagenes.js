@@ -201,6 +201,17 @@ class GaleriaImagenes extends HTMLElement {
         }
         .gi-lb-close:hover { background: rgba(255, 255, 255, 0.28); }
         .gi-lb-close:focus-visible { outline: 2px solid #fff; }
+
+        @media (max-width: 768px) {
+          .gi-dots {
+            display: none;
+          }
+
+          .gi-btn {
+            width: 38px;
+            height: 38px;
+          }
+        }
       </style>
 
       <div class="gi-wrap" role="region" aria-label="Carrusel de imágenes">

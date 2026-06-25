@@ -10,6 +10,13 @@ await fetch(new URL("../css/mapa-regiones.css", import.meta.url))
   .then((r) => r.text())
   .then((css) => sheet.replaceSync(css));
 
+const REGION_LABELS = {
+  "pacifico-norte": "Pacífico Norte",
+  caribe: "Caribe",
+  "valle-central": "Valle Central",
+  "pacifico-central": "Pacífico Central y Sur",
+};
+
 class MapaRegiones extends HTMLElement {
   #currentRegion = null;
   #hoverRegion = null;
@@ -52,30 +59,33 @@ class MapaRegiones extends HTMLElement {
       const el = this.shadowRoot.getElementById(id);
       if (!el) return;
 
-      const enter = (ev) => {
+      el.setAttribute("role", "button");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-label", `Seleccionar región ${REGION_LABELS[id]}`);
+      el.setAttribute("aria-pressed", "false");
+
+      const dispatchHover = (region) => {
         this.dispatchEvent(
           new CustomEvent("region-hover", {
-            detail: { region: id },
+            detail: { region },
             bubbles: true,
             composed: true,
           }),
         );
+      };
+
+      const enter = (ev) => {
+        dispatchHover(id);
         if (tooltip) this.#showTooltipAt(ev, tooltip);
       };
 
       const leave = () => {
-        this.dispatchEvent(
-          new CustomEvent("region-hover", {
-            detail: { region: null },
-            bubbles: true,
-            composed: true,
-          }),
-        );
+        dispatchHover(null);
         if (tooltip) tooltip.style.display = "none";
       };
 
       const select = (ev) => {
-        ev.stopPropagation();
+        ev?.stopPropagation();
         this.dispatchEvent(
           new CustomEvent("region-selected", {
             detail: { region: id },
@@ -85,18 +95,19 @@ class MapaRegiones extends HTMLElement {
         );
       };
 
+      const handleKeydown = (ev) => {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          select(ev);
+        }
+      };
+
       el.addEventListener("pointerenter", enter);
       el.addEventListener("pointerleave", leave);
       el.addEventListener("pointerdown", select);
-
-      const paths = el.querySelectorAll("path");
-      if (paths.length > 0) {
-        paths.forEach((p) => {
-          p.addEventListener("pointerenter", enter);
-          p.addEventListener("pointerleave", leave);
-          p.addEventListener("pointerdown", select);
-        });
-      }
+      el.addEventListener("focus", () => dispatchHover(id));
+      el.addEventListener("blur", () => dispatchHover(null));
+      el.addEventListener("keydown", handleKeydown);
     });
   }
 
@@ -176,6 +187,10 @@ class MapaRegiones extends HTMLElement {
       const regionElement = this.shadowRoot.getElementById(id);
       if (!regionElement) return;
 
+      regionElement.setAttribute(
+        "aria-pressed",
+        String(id === this.#currentRegion),
+      );
       regionElement.style.translate = "";
       regionElement.style.scale = "";
       regionElement.style.filter = "";

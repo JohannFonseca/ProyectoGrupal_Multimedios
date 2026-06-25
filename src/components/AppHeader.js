@@ -71,7 +71,9 @@ class AppHeader extends HTMLElement {
     const items = this.shadowRoot?.querySelectorAll(SELECTORS.REGION_ITEM);
     if (!items) return;
     items.forEach((item) => {
-      item.classList.toggle(CLASSES.ACTIVE, item.dataset.region === region);
+      const isActive = item.dataset.region === region;
+      item.classList.toggle(CLASSES.ACTIVE, isActive);
+      item.setAttribute("aria-pressed", String(isActive));
     });
   }
 
@@ -101,6 +103,11 @@ class AppHeader extends HTMLElement {
 
     nav.classList.toggle(CLASSES.OPEN, this.#state.isOpen);
     menuBtn.classList.toggle(CLASSES.OPEN, this.#state.isOpen);
+    menuBtn.setAttribute("aria-expanded", String(this.#state.isOpen));
+    menuBtn.setAttribute(
+      "aria-label",
+      this.#state.isOpen ? "Cerrar menú principal" : "Abrir menú principal",
+    );
 
     if (!this.#state.isOpen) {
       this.showRegions = false;
@@ -108,10 +115,11 @@ class AppHeader extends HTMLElement {
   }
 
   #updateDropdownUI() {
-    const { dropdownMenu } = this.#elements;
-    if (!dropdownMenu) return;
+    const { dropdownMenu, regionsBtn } = this.#elements;
+    if (!dropdownMenu || !regionsBtn) return;
 
     dropdownMenu.classList.toggle(CLASSES.SHOW, this.#state.showRegions);
+    regionsBtn.setAttribute("aria-expanded", String(this.#state.showRegions));
   }
 
   render() {
@@ -121,29 +129,42 @@ class AppHeader extends HTMLElement {
   #getTemplate() {
     return `
       <header>
-        <div class="logo" id="logoBtn" style="cursor: pointer;">
+        <button class="logo" id="logoBtn" type="button" aria-label="Ir al inicio">
           <img src="./assets/images/LogoRutaDelSabor.png" alt="logo ruta del sabor" />
-        </div>
+        </button>
 
-        <div class="hamburger-menu" id="menuBtn">
-          <div class="hamburger-menu-line"></div>
-          <div class="hamburger-menu-line"></div>
-          <div class="hamburger-menu-line"></div>
-        </div>
+        <button
+          class="hamburger-menu"
+          id="menuBtn"
+          type="button"
+          aria-label="Abrir menú principal"
+          aria-controls="nav"
+          aria-expanded="false">
+          <span class="hamburger-menu-line"></span>
+          <span class="hamburger-menu-line"></span>
+          <span class="hamburger-menu-line"></span>
+        </button>
 
-        <nav id="nav">
-          <a id="btnInicio">Inicio</a>
+        <nav id="nav" aria-label="Navegación principal">
+          <button class="nav-button" id="btnInicio" type="button">Inicio</button>
           <div class="dropdown">
-            <a id="regionsBtn">Regiones</a>
-            <div class="dropdown-menu">
-              <div data-region="pacifico-norte">Pacífico Norte</div>
-              <div data-region="caribe">Caribe</div>
-              <div data-region="valle-central">Valle Central</div>
-              <div data-region="pacifico-central">Pacífico Central/Sur</div>
+            <button
+              class="nav-button"
+              id="regionsBtn"
+              type="button"
+              aria-controls="regionMenu"
+              aria-expanded="false">
+              Regiones
+            </button>
+            <div class="dropdown-menu" id="regionMenu">
+              <button class="region-option" type="button" data-region="pacifico-norte" aria-pressed="false">Pacífico Norte</button>
+              <button class="region-option" type="button" data-region="caribe" aria-pressed="false">Caribe</button>
+              <button class="region-option" type="button" data-region="valle-central" aria-pressed="false">Valle Central</button>
+              <button class="region-option" type="button" data-region="pacifico-central" aria-pressed="false">Pacífico Central/Sur</button>
             </div>
           </div>
-          <a id="btnSobreNosotros">Sobre Nosotros</a>
-          <a id="btnContacto">Contacto</a>
+          <button class="nav-button" id="btnSobreNosotros" type="button">Sobre Nosotros</button>
+          <button class="nav-button" id="btnContacto" type="button">Contacto</button>
         </nav>
       </header>
     `;

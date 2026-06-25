@@ -14,6 +14,21 @@
   height: auto;
 }
 
+.map-container svg [role="button"] {
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.map-container svg [role="button"]:focus {
+  outline: none !important;
+}
+
+.map-container svg [role="button"]:focus-visible path {
+  stroke: #004aad !important;
+  stroke-width: 0.8 !important;
+}
+
 @media (max-width: 1024px) {
   .map-container svg {
     width: min(94vw, 550px);

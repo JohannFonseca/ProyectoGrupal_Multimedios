@@ -130,3 +130,21 @@
   padding: 20px 0;
   font-size: 0.9rem;
 }
+
+@media (max-width: 768px) {
+  .about-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-label {
+    flex: none;
+    font-size: 1rem;
+  }
+
+  .about-texto {
+    width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+}

@@ -1,3 +1,8 @@
+const sheet = new CSSStyleSheet();
+await fetch(new URL("../css/destino-card.css", import.meta.url))
+  .then((respuesta) => respuesta.text())
+  .then((css) => sheet.replaceSync(css));
+
 class DestinoCard extends HTMLElement {
   static get observedAttributes() {
     return ["destino-id", "nombre", "imagen", "region", "historia"];
@@ -9,11 +14,12 @@ class DestinoCard extends HTMLElement {
   }
 
   connectedCallback() {
+    this.shadowRoot.adoptedStyleSheets = [sheet];
     this._render();
   }
 
   attributeChangedCallback(_name, oldVal, newVal) {
-    if (oldVal !== newVal) this._render();
+    if (this.isConnected && oldVal !== newVal) this._render();
   }
 
   _claseRegion(region) {
@@ -26,9 +32,7 @@ class DestinoCard extends HTMLElement {
     return mapa[region] ?? "valle-central";
   }
 
-  async _render() {
-    const css = await fetch("./css/destino-card.css").then((r) => r.text());
-
+  _render() {
     const id = this.getAttribute("destino-id") ?? "";
     const nombre = this.getAttribute("nombre") ?? "Destino";
     const imagen = this.getAttribute("imagen") ?? "";
@@ -47,8 +51,6 @@ class DestinoCard extends HTMLElement {
          </div>`;
 
     this.shadowRoot.innerHTML = `
-      <style>${css}</style>
-
       <article class="card" role="button" tabindex="0"
                aria-label="Ver detalles de ${nombre}">
 

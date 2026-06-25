@@ -1,132 +1,110 @@
 # Ruta del Sabor
 
-Guía Turística Multimedia de Costa Rica
+Guía turística multimedia enfocada en destinos gastronómicos de Costa Rica.
 
-Proyecto Final – IF7102 Multimedios
-Universidad de Costa Rica
-
----
-
-## Descripción
-
-Aplicación web interactiva orientada al turismo gastronómico de Costa Rica. Permite explorar regiones del país y visualizar destinos mediante contenido multimedia y navegación basada en Web Components.
-
-El sistema está construido utilizando tecnologías nativas del navegador, sin uso de frameworks externos.
-
----
+Este proyecto fue desarrollado para el curso IF7102 Multimedios de la Universidad de Costa Rica. La aplicación permite seleccionar una región del país, consultar sus destinos y acceder a información como descripciones, actividades, fotografías, audio y video.
 
 ## Tecnologías utilizadas
 
 - HTML5
 - CSS3
 - JavaScript ES6+
-- Web Components (Custom Elements y Shadow DOM)
+- Web Components
+- Custom Elements
+- Shadow DOM
 - ES Modules
+- Archivos JSON para los datos de los destinos
 
----
+La interfaz fue construida con tecnologías nativas del navegador, sin frameworks externos.
 
-## Estructura del proyecto
+## Contenido
 
-```plaintext
+La guía incluye cuatro regiones turísticas con dos destinos cada una:
+
+- Pacífico Norte: Liberia y Nicoya
+- Caribe: Puerto Viejo y Cahuita
+- Valle Central: Heredia y Cartago
+- Pacífico Central y Sur: Manuel Antonio y Uvita
+
+Los datos se encuentran en `src/data/destinos.json` y se cargan dinámicamente mediante `fetch()`.
+
+## Componentes principales
+
+- `<app-header>`: navegación principal y menú de regiones.
+- `<mapa-regiones>`: mapa interactivo para seleccionar una región.
+- `<destino-list>`: carga y muestra los destinos de la región seleccionada.
+- `<destino-card>`: presenta el resumen de cada destino.
+- `<destino-detalle>`: muestra la información completa del destino elegido.
+- `<galeria-imagenes>`: carrusel de imágenes con navegación y vista ampliada.
+- `<audio-guia>`: reproductor de audio con controles personalizados.
+- `<video-destino>`: muestra el video asociado al destino.
+- `<sobre-nosotros>`: información sobre el equipo.
+- `<contacto-seccion>`: directorio de los destinos gastronómicos.
+
+Cada componente se encuentra en su propio archivo dentro de `src/components/`.
+
+## Comunicación entre componentes
+
+La aplicación utiliza eventos personalizados para conectar los componentes sin acoplarlos directamente:
+
+- `navigate`: cambia entre las vistas principales.
+- `region-selected`: comunica la región seleccionada desde el encabezado o el mapa.
+- `region-hover`: sincroniza el resaltado de las regiones.
+- `destino-selected`: envía el ID del destino seleccionado.
+
+Cuando se selecciona una tarjeta, `<destino-list>` busca el destino por su ID y entrega el objeto completo a `<destino-detalle>` mediante una propiedad.
+
+## Estructura general
+
+```text
 src/
-│
 ├── assets/
+│   ├── audios/
 │   └── images/
-│       └── LogoRutaDelSabor.png
-│
 ├── components/
-│   └── AppHeader.js
-│
+│   ├── AppHeader.js
+│   ├── AudioGuia.js
+│   ├── Contacto.js
+│   ├── DestinoCard.js
+│   ├── DestinoDetalle.js
+│   ├── DestinoList.js
+│   ├── GaleriaImagenes.js
+│   ├── MapaRegiones.js
+│   ├── SobreNosotros.js
+│   └── VideoDestino.js
 ├── css/
-│   ├── app-header.css
-│   ├── global.css
-│   └── variables.css
-│
+├── data/
+│   ├── destinos.json
+│   └── regiones.js
+├── modules/
+│   └── regionController.js
 ├── index.html
-├── main.js
-│
-├── .gitignore
-├── README.md
-├── package.json
-└── pnpm-lock.yaml
+└── main.js
 ```
 
----
+## Ejecución local
 
-## Componente implementado
+Se necesita Node.js y pnpm.
 
-### AppHeader (Web Component)
-
-- Barra de navegación principal
-- Implementado como Custom Element
-- Utiliza Shadow DOM para encapsulación de estilos
-- Permite interacción mediante eventos personalizados
-- Representa el primer componente funcional del sistema
-
----
-
-## Ejecución del proyecto
-
-Este proyecto utiliza ES Modules, por lo que debe ejecutarse en un servidor local.
-
-### Opción 1: Live Server (Visual Studio Code)
-
-1. Instalar la extensión "Live Server"
-2. Abrir la carpeta del proyecto
-3. Ejecutar `index.html` con Live Server
-
----
-
-### Opción 2: Node.js (http-server)
-
-Instalar el servidor:
+Primero se instalan las dependencias:
 
 ```bash
-npm install -g http-server
+pnpm install
 ```
 
-Ejecutar en la carpeta del proyecto:
+Luego se inicia el servidor local:
 
 ```bash
-http-server ./src
+pnpm dev
 ```
 
-Abrir en el navegador:
+La aplicación estará disponible en:
 
-```plaintext
-http://localhost:8080
+```text
+http://localhost:1234
 ```
 
----
-
-### Opción 3: Python
-
-```bash
-python -m http.server
-```
-
-Abrir en el navegador:
-
-```plaintext
-http://localhost:8000/src
-```
-
----
-
-## Nota técnica
-
-No es posible ejecutar correctamente el proyecto abriendo el archivo `index.html` directamente en el navegador debido a restricciones de seguridad relacionadas con ES Modules (CORS).
-
----
-
-## Estado del proyecto
-
-- Estructura base definida
-- Primer Web Component funcional implementado (`AppHeader`)
-- Estilos globales configurados
-- Organización modular del código establecida
-
----
+No se recomienda abrir `src/index.html` directamente, ya que los ES Modules y las solicitudes realizadas con `fetch()` necesitan un servidor local.
 
 ## Autores
 

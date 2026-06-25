@@ -8,21 +8,36 @@ class DestinoList extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this._datos = null;
     this._regionActiva = null;
+    this._handleRegionSelected = (e) => {
+      this._regionActiva = e.detail.region;
+      this._pintarDestinos();
+    };
+    this._handleDestinoSelected = (e) => {
+      e.stopPropagation();
+      this._pintarDetalle(e.detail.id);
+    };
   }
 
   async connectedCallback() {
+    document.addEventListener("region-selected", this._handleRegionSelected);
+    this.shadowRoot.addEventListener(
+      "destino-selected",
+      this._handleDestinoSelected,
+    );
+
     await this._renderEstructura();
     await this._cargarDatos();
+  }
 
-    document.addEventListener("region-selected", (e) => {
-      this._regionActiva = e.detail.region;
-      this._pintarDestinos();
-    });
-
-    this.shadowRoot.addEventListener("destino-selected", (e) => {
-      e.stopPropagation();
-      this._pintarDetalle(e.detail.id);
-    });
+  disconnectedCallback() {
+    document.removeEventListener(
+      "region-selected",
+      this._handleRegionSelected,
+    );
+    this.shadowRoot.removeEventListener(
+      "destino-selected",
+      this._handleDestinoSelected,
+    );
   }
 
   async _renderEstructura() {
@@ -61,11 +76,20 @@ class DestinoList extends HTMLElement {
 
     if (!bloque || !contenido) return;
 
+    const destino = this._datos?.regiones
+      .flatMap((region) => region.destinos)
+      .find((item) => item.id === destinoId);
+
+    if (!destino) {
+      console.error(`No se encontró el destino con ID "${destinoId}".`);
+      return;
+    }
+
     if (titulo) titulo.remove();
     contenido.innerHTML = "";
 
     const detalle = document.createElement("destino-detalle");
-    detalle.setAttribute("destino-id", destinoId);
+    detalle.destino = destino;
     contenido.appendChild(detalle);
 
     bloque.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -115,7 +139,7 @@ class DestinoList extends HTMLElement {
 
       region.destinos.forEach((destino) => {
         const card = document.createElement("destino-card");
-        card.setAttribute("destino-id", destino.nombre);
+        card.setAttribute("destino-id", destino.id);
         card.setAttribute("nombre", destino.nombre);
         card.setAttribute("region", region.nombre);
         card.setAttribute("historia", destino.descripcion ?? destino.historia ?? "");

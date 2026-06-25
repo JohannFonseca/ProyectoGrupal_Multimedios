@@ -48,6 +48,10 @@
 }
 
 .hero-title {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: calc(100% - 32px);
+  min-width: 0;
   margin: 0;
   color: #fff8e7;
   font-family: var(--font-main), serif;
@@ -56,6 +60,14 @@
   letter-spacing: 0.04em;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
   animation: heroFadeUp 1s ease both;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(1.2rem, 5.5vw, 1.6rem);
+    line-height: 1.2;
+  }
 }
 
 @keyframes heroFadeUp {

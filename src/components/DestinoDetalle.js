@@ -3,41 +3,23 @@ import "./AudioGuia.js";
 import "./VideoDestino.js";
 
 class DestinoDetalle extends HTMLElement {
-  static get observedAttributes() {
-    return ["destino-id"];
-  }
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this._destino = null;
   }
 
   connectedCallback() {
     this._render();
   }
 
-  attributeChangedCallback(_name, oldVal, newVal) {
-    if (oldVal !== newVal) this._render();
+  set destino(valor) {
+    this._destino = valor;
+    if (this.isConnected) this._render();
   }
 
-  _claseRegion(region) {
-    const mapa = {
-      "Pacífico Norte": "pacifico-norte",
-      Caribe: "caribe",
-      "Valle Central": "valle-central",
-      "Pacífico Central y Sur": "pacifico-sur",
-    };
-    return mapa[region] ?? "valle-central";
-  }
-
-  _buscarDestino(regiones, destinoId) {
-    for (const region of regiones) {
-      const destino = region.destinos.find(
-        (item) => item.nombre.toLowerCase() === destinoId.toLowerCase(),
-      );
-      if (destino) return { region, destino };
-    }
-    return null;
+  get destino() {
+    return this._destino;
   }
 
   _listaHTML(items) {
@@ -52,9 +34,9 @@ class DestinoDetalle extends HTMLElement {
 
   async _render() {
     const css = await fetch("./css/destino-detalle.css").then((r) => r.text());
-    const destinoId = this.getAttribute("destino-id") ?? "";
+    const destino = this._destino;
 
-    if (!destinoId) {
+    if (!destino) {
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
         <section class="detalle-mensaje">
@@ -66,23 +48,6 @@ class DestinoDetalle extends HTMLElement {
     }
 
     try {
-      const respuesta = await fetch("./data/destinos.json");
-      const datos = await respuesta.json();
-      const resultado = this._buscarDestino(datos.regiones, destinoId);
-
-      if (!resultado) {
-        this.shadowRoot.innerHTML = `
-          <style>${css}</style>
-          <section class="detalle-mensaje">
-            <h2>Destino no encontrado</h2>
-            <p>No se encontró información para "${destinoId}".</p>
-          </section>
-        `;
-        return;
-      }
-
-      const { region, destino } = resultado;
-      const cls = this._claseRegion(region.nombre);
       const galeria = destino.galeria ?? destino.media?.imagenes ?? [];
       const video = destino.video ?? destino.media?.video ?? "";
       const audio = destino.audio ?? destino.media?.audio ?? "";
@@ -112,7 +77,7 @@ class DestinoDetalle extends HTMLElement {
               <div class="detalle-media">${imagenHTML}</div>
               <div>
                 <p class="detalle-nombre">${destino.nombre}</p>
-                <p class="detalle-region-texto">${region.nombre}</p>
+                <p class="detalle-region-texto">${destino.region}</p>
               </div>
             </div>
 
@@ -163,7 +128,7 @@ class DestinoDetalle extends HTMLElement {
         <style>${css2}</style>
         <section class="detalle-mensaje error">
           <h2>Error al cargar destino</h2>
-          <p>No se pudo cargar la información desde el archivo JSON.</p>
+          <p>No se pudo mostrar la información del destino.</p>
         </section>
       `;
     }
