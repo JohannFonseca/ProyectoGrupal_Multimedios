@@ -41,10 +41,13 @@ class AudioGuia extends HTMLElement {
 
         .ag-wrap {
           display: flex; flex-direction: column; gap: 10px;
-          padding: 14px 16px;
-          background: #f5f0ea;
-          border-radius: 10px;
-          border: 1px solid #e0d4c0;
+          padding: var(--audio-padding, 14px 16px);
+          background: var(--audio-background, #f5f0ea);
+          border-radius: var(--audio-radius, 10px);
+          border: var(
+            --audio-border,
+            1px solid var(--audio-accent-soft, #e0d4c0)
+          );
         }
 
         .ag-label {
@@ -61,13 +64,18 @@ class AudioGuia extends HTMLElement {
         .ag-btn {
           flex-shrink: 0; width: 40px; height: 40px;
           border-radius: 50%; border: none; cursor: pointer;
-          background: #8B6914; color: #fff;
+          background: var(--audio-accent, #8B6914); color: #fff;
           display: flex; align-items: center; justify-content: center;
           font-size: 1.05rem; transition: background .2s;
         }
-        .ag-btn:hover:not(:disabled) { background: #6e5210; }
+        .ag-btn:hover:not(:disabled) {
+          filter: brightness(0.86);
+        }
         .ag-btn:disabled { background: #bbb; cursor: not-allowed; }
-        .ag-btn:focus-visible { outline: 2px solid #6e5210; outline-offset: 2px; }
+        .ag-btn:focus-visible {
+          outline: 2px solid var(--audio-accent, #6e5210);
+          outline-offset: 2px;
+        }
 
         .ag-right {
           flex: 1; display: flex; flex-direction: column; gap: 6px;
@@ -83,7 +91,7 @@ class AudioGuia extends HTMLElement {
           border-radius: 2px;
           background: linear-gradient(
             to right,
-            #8B6914 var(--pct, 0%),
+            var(--audio-accent, #8B6914) var(--pct, 0%),
             #d5c9b5 var(--pct, 0%)
           );
           cursor: pointer;
@@ -97,7 +105,7 @@ class AudioGuia extends HTMLElement {
           width: 14px;
           height: 14px;
           border-radius: 50%;
-          background: #8B6914;
+          background: var(--audio-accent, #8B6914);
           cursor: pointer;
           box-shadow: 0 1px 4px rgba(0,0,0,0.3);
           transition: transform .15s;
@@ -111,7 +119,7 @@ class AudioGuia extends HTMLElement {
           width: 14px;
           height: 14px;
           border-radius: 50%;
-          background: #8B6914;
+          background: var(--audio-accent, #8B6914);
           cursor: pointer;
           border: none;
           box-shadow: 0 1px 4px rgba(0,0,0,0.3);
@@ -126,11 +134,11 @@ class AudioGuia extends HTMLElement {
         input[type="range"]::-moz-range-progress {
           height: 4px;
           border-radius: 2px;
-          background: #8B6914;
+          background: var(--audio-accent, #8B6914);
         }
 
         input[type="range"]:focus-visible {
-          outline: 2px solid #8B6914;
+          outline: 2px solid var(--audio-accent, #8B6914);
           outline-offset: 3px;
         }
 

@@ -1,6 +1,6 @@
 class GaleriaImagenes extends HTMLElement {
   static get observedAttributes() {
-    return ["imagenes", "auto", "intervalo"];
+    return ["imagenes", "auto", "intervalo", "compacto"];
   }
 
   constructor() {
@@ -52,7 +52,17 @@ class GaleriaImagenes extends HTMLElement {
       }, 200);
     }
     if (counter) counter.textContent = `${this._indice + 1} / ${this._imgs.length}`;
-    dots.forEach((d, i) => d.classList.toggle("active", i === this._indice));
+    const activeDot = this.hasAttribute("compacto")
+      ? Math.min(
+          dots.length - 1,
+          Math.floor((this._indice * dots.length) / this._imgs.length),
+        )
+      : this._indice;
+    dots.forEach((dot, i) => {
+      const isActive = i === activeDot;
+      dot.classList.toggle("active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
   }
 
   _reiniciarTimer(ms) {
@@ -87,8 +97,17 @@ class GaleriaImagenes extends HTMLElement {
 
     const multiple  = this._imgs.length > 1;
     const autoPlay  = this.hasAttribute("auto");
+    const compacto  = this.hasAttribute("compacto");
     const intervalo = parseInt(this.getAttribute("intervalo") ?? "4500", 10);
     const primera   = this._imgs[0] ?? "";
+    const cantidadPuntos = compacto
+      ? Math.min(5, this._imgs.length)
+      : this._imgs.length;
+    const indicesPuntos = Array.from({ length: cantidadPuntos }, (_, i) =>
+      cantidadPuntos === 1
+        ? 0
+        : Math.round((i * (this._imgs.length - 1)) / (cantidadPuntos - 1)),
+    );
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -99,6 +118,7 @@ class GaleriaImagenes extends HTMLElement {
           width: 100%;
           aspect-ratio: var(--gi-aspect, 16 / 6);
           min-height: 160px;
+          border-radius: var(--gi-radius, 22px);
           overflow: hidden;
           background: #d9cfc5;
         }
@@ -106,6 +126,7 @@ class GaleriaImagenes extends HTMLElement {
         .gi-img {
           width: 100%; height: 100%;
           object-fit: cover; display: block;
+          border-radius: inherit;
           transition: opacity 0.32s ease;
           cursor: zoom-in;
         }
@@ -115,6 +136,7 @@ class GaleriaImagenes extends HTMLElement {
           display: flex; align-items: center; justify-content: center;
           background: #e8dfd4; color: #aaa;
           font-size: 0.88rem; font-family: sans-serif;
+          border-radius: inherit;
         }
 
         .gi-btn {
@@ -130,6 +152,15 @@ class GaleriaImagenes extends HTMLElement {
         .gi-btn:focus-visible { outline: 2px solid #8B6914; }
         .gi-btn.prev { left: 12px; }
         .gi-btn.next { right: 12px; }
+
+        :host([compacto]) .gi-btn {
+          background: rgba(20, 12, 8, 0.68);
+          color: #fff8e7;
+          border: 1px solid rgba(255, 248, 231, 0.42);
+        }
+        :host([compacto]) .gi-btn:hover {
+          background: rgba(20, 12, 8, 0.88);
+        }
 
         .gi-counter {
           position: absolute; bottom: 10px; right: 12px;
@@ -227,9 +258,10 @@ class GaleriaImagenes extends HTMLElement {
 
       ${multiple ? `
         <div class="gi-dots" role="tablist" aria-label="Indicadores del carrusel">
-          ${this._imgs.map((_, i) =>
+          ${indicesPuntos.map((indice, i) =>
             `<button class="dot${i === 0 ? " active" : ""}" role="tab"
-              aria-label="Ir a imagen ${i + 1}"
+              data-index="${indice}"
+              aria-label="Ir a imagen ${indice + 1}"
               aria-selected="${i === 0}"></button>`
           ).join("")}
         </div>
@@ -269,9 +301,9 @@ class GaleriaImagenes extends HTMLElement {
       this._ir(1);
       if (autoPlay) this._reiniciarTimer(intervalo);
     });
-    this.shadowRoot.querySelectorAll(".dot").forEach((dot, i) => {
+    this.shadowRoot.querySelectorAll(".dot").forEach((dot) => {
       dot.addEventListener("click", () => {
-        this._indice = i;
+        this._indice = Number(dot.dataset.index);
         this._sync();
         if (autoPlay) this._reiniciarTimer(intervalo);
       });
