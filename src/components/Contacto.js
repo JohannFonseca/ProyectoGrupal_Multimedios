@@ -153,7 +153,7 @@ class ContactoSeccion extends HTMLElement {
             imagenes='${imagenesJSON}'
             auto
             intervalo="4500"
-            style="--gi-aspect: 16 / 4">
+            style="--gi-aspect: 16 / 3.4">
           </galeria-imagenes>
 
           <div class="hero-overlay">
@@ -167,7 +167,7 @@ class ContactoSeccion extends HTMLElement {
         </div>
 
         <section class="intro-section">
-          <h2 class="section-title">Contacto y Directorio</h2>
+          <p class="intro-eyebrow">Directorio gastronómico</p>
           <p class="intro-text">
             ¿Tienes alguna consulta o deseas contactar directamente a los destinos gastronómicos de la <strong>Ruta del Sabor</strong>? Aquí tienes el directorio telefónico y ubicaciones oficiales de cada destino.
           </p>
@@ -176,12 +176,15 @@ class ContactoSeccion extends HTMLElement {
         <div class="contact-layout">
           <!-- Directorio -->
           <section class="directory-container">
-            <h3 class="directory-title">
+            <div class="directory-heading">
+              <h2 class="directory-title">
               <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
               </svg>
-              Directorio Gastronómico
-            </h3>
+                Lugares incluidos
+              </h2>
+              <span class="directory-count">${this._directorio.length} contactos</span>
+            </div>
             
             <div class="directory-grid">
               ${directorioHTML}

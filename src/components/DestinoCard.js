@@ -51,13 +51,17 @@ class DestinoCard extends HTMLElement {
          </div>`;
 
     this.shadowRoot.innerHTML = `
-      <article class="card" role="button" tabindex="0"
+      <article class="card ${cls}" role="button" tabindex="0"
                aria-label="Ver detalles de ${nombre}">
 
         <!-- Texto a la izquierda -->
         <div class="card-body">
           <h3 class="card-nombre ${cls}">${nombre}</h3>
           <p class="card-historia">${historia}</p>
+          <div class="card-cta" aria-hidden="true">
+            <span>Ver detalles</span>
+            <span>→</span>
+          </div>
         </div>
 
         <!-- Imagen a la derecha con etiquetas debajo -->

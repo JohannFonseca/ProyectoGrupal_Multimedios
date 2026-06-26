@@ -30,6 +30,7 @@ class AppHeader extends HTMLElement {
   #state = {
     isOpen: false,
     showRegions: false,
+    activePage: "inicio",
   };
 
   #elements = {};
@@ -45,11 +46,16 @@ class AppHeader extends HTMLElement {
     this.#cacheElements();
     this.#bindEvents();
     this.#highlightActiveRegion();
+    this.#updateActiveNav();
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === "active-region" && oldVal !== newVal) {
       this.#highlightActiveRegion();
+      if (newVal) {
+        this.#state.activePage = "regiones";
+        this.#updateActiveNav();
+      }
     }
   }
 
@@ -120,6 +126,21 @@ class AppHeader extends HTMLElement {
 
     dropdownMenu.classList.toggle(CLASSES.SHOW, this.#state.showRegions);
     regionsBtn.setAttribute("aria-expanded", String(this.#state.showRegions));
+  }
+
+  #updateActiveNav() {
+    const { btnInicio, regionsBtn, btnSobreNosotros, btnContacto } =
+      this.#elements;
+    const buttons = {
+      inicio: btnInicio,
+      regiones: regionsBtn,
+      "sobre-nosotros": btnSobreNosotros,
+      contacto: btnContacto,
+    };
+
+    Object.entries(buttons).forEach(([page, button]) => {
+      button?.classList.toggle("active", page === this.#state.activePage);
+    });
   }
 
   render() {
@@ -208,6 +229,8 @@ class AppHeader extends HTMLElement {
     });
 
     const dispatchNav = (page) => {
+      this.#state.activePage = page;
+      this.#updateActiveNav();
       this.dispatchEvent(
         new CustomEvent("navigate", {
           detail: { page },
@@ -243,6 +266,8 @@ class AppHeader extends HTMLElement {
     e.stopPropagation();
 
     const region = e.target.dataset.region;
+    this.#state.activePage = "regiones";
+    this.#updateActiveNav();
 
     this.dispatchEvent(
       new CustomEvent("navigate", {

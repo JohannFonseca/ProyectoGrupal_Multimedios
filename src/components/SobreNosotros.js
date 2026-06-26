@@ -37,7 +37,7 @@ class SobreNosotros extends HTMLElement {
             imagenes='${imagenesJSON}'
             auto
             intervalo="4500"
-            style="--gi-aspect: 16 / 4">
+            style="--gi-aspect: 16 / 3.4">
           </galeria-imagenes>
 
           <div class="hero-overlay">
@@ -51,7 +51,7 @@ class SobreNosotros extends HTMLElement {
         </div>
 
         <section class="intro-section">
-          <h2 class="section-title">Sobre Nosotros</h2>
+          <p class="intro-eyebrow">Equipo del proyecto</p>
           <p class="intro-text">
             Somos un grupo de estudiantes de la Universidad de Costa Rica, cursando la materia de <strong>Multimedios</strong> en el primer semestre de nuestro cuarto año. Este proyecto, titulado <strong>La Ruta del Sabor</strong>, tiene como objetivo explorar la gastronomía local, los destinos más representativos y la riqueza cultural de las distintas regiones de Costa Rica a través de una experiencia interactiva y moderna.
           </p>
@@ -64,6 +64,7 @@ class SobreNosotros extends HTMLElement {
             <h3 class="member-name">Dariel Benavides Tapia</h3>
             <span class="member-role">Desarrollador de componentes de navegación</span>
             <p class="member-desc">
+              Construcción de la navegación principal, menú de regiones y flujo de eventos de selección.
             </p>
             <div class="social-links">
               <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Dariel">
@@ -80,6 +81,7 @@ class SobreNosotros extends HTMLElement {
             <h3 class="member-name">Eddy Josué González Quirós</h3>
             <span class="member-role">Desarrollador de componentes de destino</span>
             <p class="member-desc">
+              Desarrollo de tarjetas, vistas de detalle y presentación visual de la información de cada destino.
             </p>
             <div class="social-links">
               <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de Eddy">
@@ -96,6 +98,7 @@ class SobreNosotros extends HTMLElement {
             <h3 class="member-name">Sofia Salazar Mata</h3>
             <span class="member-role">Diseño UI/UX & Productor Multimedia</span>
             <p class="member-desc">
+              Diseño de experiencia, selección visual y preparación de recursos multimedia para la guía.
             </p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/sofia-salazar-mata-0063771b7?utm_source=share_via&utm_content=profile&utm_medium=member_ios" class="social-icon" target="_blank" aria-label="LinkedIn de Sofia">
@@ -112,6 +115,7 @@ class SobreNosotros extends HTMLElement {
             <h3 class="member-name">José Daniel Solís Cordoncillo</h3>
             <span class="member-role">Lider & Desarrollador de Componentes</span>
             <p class="member-desc">
+              Coordinación de arquitectura, integración de componentes y revisión del comportamiento general.
             </p>
             <div class="social-links">
               <a href="https://linkedin.com" class="social-icon" target="_blank" aria-label="LinkedIn de José Daniel">
@@ -128,6 +132,7 @@ class SobreNosotros extends HTMLElement {
             <h3 class="member-name">Johann Fonseca Espinoza</h3>
             <span class="member-role">Desarrollador de Componentes & Estructura de Datos</span>
             <p class="member-desc">
+              Organización del JSON de destinos, soporte de datos y componentes reutilizables de la aplicación.
             </p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/johann-fonseca-0a89a4323/" class="social-icon" target="_blank" aria-label="LinkedIn de Johann">

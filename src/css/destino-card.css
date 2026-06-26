@@ -1,58 +1,114 @@
+
 :host {
   display: block;
   font-family: var(--font-main), Arial, sans-serif;
 }
 
-/* ── Tarjeta ── */
 .card {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 40px;
-  padding: 28px 0;
-  border-bottom: 1px solid #ddd;
+  align-items: stretch;
+  gap: 32px;
+  padding: 28px;
+  margin: 22px 0;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  border-left: 6px solid rgba(111, 78, 55, 0.16);
+  border-radius: 26px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  background: rgba(255, 250, 239, 0.92);
+  box-shadow: 0 18px 36px rgba(29, 13, 5, 0.08);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
 }
 
 .card:hover {
-  background: rgba(111, 78, 55, 0.04);
+  transform: translateY(-2px);
+  border-color: rgba(126, 31, 22, 0.18);
+  box-shadow: 0 22px 44px rgba(29, 13, 5, 0.1);
+  background: rgba(255, 253, 248, 0.96);
 }
 
-/* ── Columna izquierda: texto ── */
 .card-body {
-  flex: 1;
+  flex: 1.1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 78, 55, 0.18);
+  background: rgba(255, 255, 255, 0.9);
+  color: #5e4234;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  width: fit-content;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover .card-cta {
+  transform: translateX(3px);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 18px rgba(35, 18, 12, 0.08);
 }
 
 .card-nombre {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0 0 12px;
+  font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+  font-weight: 800;
+  margin: 0;
   font-family: var(--font-main), Arial, sans-serif;
+  line-height: 1.1;
 }
 
 .card-nombre.pacifico-norte {
   color: var(--red);
 }
+
 .card-nombre.caribe {
   color: var(--green);
 }
+
 .card-nombre.valle-central {
   color: var(--blue);
 }
+
 .card-nombre.pacifico-sur {
   color: var(--dark-beige);
 }
 
+.card.pacifico-norte {
+  border-left-color: var(--red);
+}
+
+.card.caribe {
+  border-left-color: var(--green);
+}
+
+.card.valle-central {
+  border-left-color: var(--blue);
+}
+
+.card.pacifico-sur {
+  border-left-color: var(--dark-beige);
+}
+
 .card-historia {
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 0.97rem;
+  color: #3a2a22;
   line-height: 1.75;
   margin: 0;
 }
 
-/* ── Columna derecha: imagen ── */
 .card-media {
   flex: 0 0 320px;
   display: flex;
@@ -62,19 +118,28 @@
 
 .card-img {
   width: 320px;
-  height: 210px;
+  height: 220px;
   object-fit: cover;
-  border: 1px solid #bbb;
+  border: none;
+  border-radius: 22px;
   display: block;
+  box-shadow: 0 18px 30px rgba(35, 18, 12, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Placeholder tipo wireframe */
+.card:hover .card-img {
+  transform: scale(1.02);
+  box-shadow: 0 22px 36px rgba(35, 18, 12, 0.14);
+}
+
 .card-placeholder {
   width: 320px;
-  height: 210px;
-  border: 1px solid #bbb;
-  background: #e8dfd4;
+  height: 220px;
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  border-radius: 22px;
+  background: rgba(232, 223, 212, 0.92);
   overflow: hidden;
+  box-shadow: 0 14px 28px rgba(35, 18, 12, 0.09);
 }
 
 .card-placeholder svg {
@@ -83,46 +148,52 @@
   display: block;
 }
 
-/* Etiquetas debajo de la imagen */
 .card-meta {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
   width: 320px;
-  padding-top: 6px;
+  gap: 12px;
+  padding-top: 12px;
 }
 
 .meta-destino {
-  font-size: 0.75rem;
-  color: #555;
+  font-size: 0.78rem;
+  color: #6b5a4e;
 }
 
 .meta-region {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .meta-region.pacifico-norte {
   color: var(--red);
 }
+
 .meta-region.caribe {
   color: var(--green);
 }
+
 .meta-region.valle-central {
   color: var(--blue);
 }
+
 .meta-region.pacifico-sur {
   color: var(--dark-beige);
 }
 
-/* ── Responsivo ── */
 @media (max-width: 768px) {
   .card {
     flex-direction: column;
     gap: 20px;
+    padding: 20px;
+    margin: 20px 0;
   }
 
   .card-media {
     width: 100%;
+    flex: none;
   }
 
   .card-img,
@@ -133,5 +204,13 @@
 
   .card-meta {
     width: 100%;
+  }
+
+  .card-nombre {
+    font-size: 1.25rem;
+  }
+
+  .card-historia {
+    font-size: 0.93rem;
   }
 }

@@ -1,9 +1,9 @@
 :root {
   --blue: #004aad;
-  --beige: #fff8e7;
+  --beige: #f3e5d3;
   --green: #00830d;
-  --shadow: #b172534d;
+  --shadow: rgba(80, 55, 42, 0.22);
   --red: #f02525;
-  --dark-beige: #6f4e37;
-  --font-main: "Tenor Sans", sans-serif;
+  --dark-beige: #563b2a;
+  --font-main: "Segoe UI", Arial, sans-serif;
 }

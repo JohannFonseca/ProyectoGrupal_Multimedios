@@ -22,6 +22,32 @@ class DestinoDetalle extends HTMLElement {
     return this._destino;
   }
 
+  _temaRegion(region) {
+    const temas = {
+      "Pacífico Norte": {
+        color: "#c94135",
+        suave: "rgba(201, 65, 53, 0.16)",
+      },
+      Caribe: {
+        color: "#198754",
+        suave: "rgba(25, 135, 84, 0.16)",
+      },
+      "Valle Central": {
+        color: "#215fa6",
+        suave: "rgba(33, 95, 166, 0.15)",
+      },
+      "Pacífico Central y Sur": {
+        color: "#7b5438",
+        suave: "rgba(123, 84, 56, 0.16)",
+      },
+    };
+
+    return temas[region] ?? {
+      color: "#6f4e37",
+      suave: "rgba(111, 78, 55, 0.16)",
+    };
+  }
+
   _listaHTML(items) {
     if (!items || items.length === 0)
       return `<p class="texto-vacio">No hay información disponible.</p>`;
@@ -54,6 +80,8 @@ class DestinoDetalle extends HTMLElement {
       const descripcion = destino.descripcion ?? destino.historia ?? "";
       const actividades = destino.actividades ?? destino.experiencias ?? [];
       const portada = destino.imagen_portada ?? galeria[0] ?? "";
+      const restaurante = destino.restaurantes?.join(" · ") ?? "";
+      const tema = this._temaRegion(destino.region);
 
       const imagenHTML = portada
         ? `<img class="detalle-img" src="${portada}" alt="Imagen de ${destino.nombre}" loading="lazy" />`
@@ -70,38 +98,49 @@ class DestinoDetalle extends HTMLElement {
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
 
-        <article class="detalle">
-          <section class="detalle-info">
+        <article
+          class="detalle"
+          style="--detalle-accent: ${tema.color}; --detalle-accent-soft: ${tema.suave};">
+          <section class="detalle-header">
+            <div class="detalle-media">${imagenHTML}</div>
+
             <div class="detalle-identidad">
-              <h3>Destino detalle</h3>
-              <div class="detalle-media">${imagenHTML}</div>
-              <div>
-                <p class="detalle-nombre">${destino.nombre}</p>
-                <p class="detalle-region-texto">${destino.region}</p>
-              </div>
-            </div>
-
-            <div class="detalle-texto">
-              <h3>Descripción</h3>
-              <p>${descripcion}</p>
-            </div>
-
-            <div class="detalle-video-wrap">
-              <h3>Video</h3>
-              <video-destino
-                src="${video}">
-              </video-destino>
+              <p class="detalle-region-texto">${destino.region}</p>
+              <h2 class="detalle-nombre">${destino.nombre}</h2>
+              ${
+                restaurante
+                  ? `<p class="detalle-subtitulo">${restaurante}</p>`
+                  : ""
+              }
             </div>
           </section>
 
+          <section class="detalle-texto">
+            <h3><span aria-hidden="true">✦</span> Descripción</h3>
+            <p>${descripcion}</p>
+          </section>
+
           <section class="detalle-grid">
-            <div class="detalle-bloque">
-              <h3>Actividades</h3>
-              ${this._listaHTML(actividades)}
+            <div class="detalle-multimedia">
+              <div class="detalle-video-wrap">
+                <h3><span aria-hidden="true">▶</span> Video del destino</h3>
+                <video-destino
+                  src="${video}"
+                  poster="${portada}">
+                </video-destino>
+              </div>
+
+              <div class="detalle-bloque audio-wrap">
+                <h3><span aria-hidden="true">♪</span> Audio guía</h3>
+                <audio-guia
+                  src="${audio}"
+                  label="Audio guía — ${destino.nombre}">
+                </audio-guia>
+              </div>
             </div>
 
             <div class="detalle-bloque galeria-bloque">
-              <h3>Galería de imágenes</h3>
+              <h3><span aria-hidden="true">▣</span> Galería de imágenes</h3>
               <galeria-imagenes
                 imagenes='${imagenesJSON}'
                 auto
@@ -110,12 +149,9 @@ class DestinoDetalle extends HTMLElement {
               </galeria-imagenes>
             </div>
 
-            <div class="detalle-bloque audio-wrap">
-              <h3>Audio guía</h3>
-              <audio-guia
-                src="${audio}"
-                label="Audio guía — ${destino.nombre}">
-              </audio-guia>
+            <div class="detalle-bloque actividades">
+              <h3><span aria-hidden="true">⌖</span> Actividades</h3>
+              ${this._listaHTML(actividades)}
             </div>
           </section>
         </article>
