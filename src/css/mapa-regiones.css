@@ -53,3 +53,67 @@
   white-space: nowrap;
   z-index: 10;
 }
+
+/* === Nombres de las regiones sobre el mapa ===
+   Las etiquetas viven en el grupo #region-labels, dibujado al final del SVG,
+   por lo que quedan SIEMPRE en la capa frontal (encima de todas las regiones)
+   y nunca las tapan los cantones de zonas vecinas. */
+
+/* Color vivo de cada región (se usa al resaltar su etiqueta). */
+#label-pacifico-norte {
+  --label-color: #f02525;
+}
+#label-caribe {
+  --label-color: #00830d;
+}
+#label-valle-central {
+  --label-color: #004aad;
+}
+#label-pacifico-central {
+  --label-color: #6f4e37;
+}
+
+.map-container svg .region-label {
+  fill: #333333;
+  fill-opacity: 0.5;
+  stroke: #ffffff;
+  stroke-width: 0.8;
+  paint-order: stroke;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition:
+    fill 0.35s ease,
+    fill-opacity 0.35s ease,
+    translate 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    scale 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host([data-hover-region="pacifico-norte"]) #label-pacifico-norte,
+:host([data-active-region="pacifico-norte"]) #label-pacifico-norte,
+:host([data-hover-region="caribe"]) #label-caribe,
+:host([data-active-region="caribe"]) #label-caribe,
+:host([data-hover-region="valle-central"]) #label-valle-central,
+:host([data-active-region="valle-central"]) #label-valle-central,
+:host([data-hover-region="pacifico-central"]) #label-pacifico-central,
+:host([data-active-region="pacifico-central"]) #label-pacifico-central {
+  fill: var(--label-color);
+  fill-opacity: 1;
+}
+
+:host([data-active-region="pacifico-norte"]) #label-pacifico-norte {
+  translate: 30px 50px;
+  scale: 1.16;
+}
+:host([data-active-region="caribe"]) #label-caribe {
+  translate: -30px 20px;
+  scale: 1.16;
+}
+:host([data-active-region="valle-central"]) #label-valle-central {
+  translate: -7px 50px;
+  scale: 1.16;
+}
+:host([data-active-region="pacifico-central"]) #label-pacifico-central {
+  translate: -30px 34px;
+  scale: 1.16;
+}

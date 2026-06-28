@@ -32,6 +32,7 @@ export function initRegionController() {
                 _selectedRegion = null;
                 console.log("Controlador: Región deseleccionada");
                 mapaRegiones.region = null;
+                mapaRegiones.removeAttribute("data-active-region");
                 appHeader.removeAttribute("active-region");
 
                 document.dispatchEvent(
@@ -47,6 +48,7 @@ export function initRegionController() {
             _selectedRegion = regionKey;
             console.log("Controlador: Región seleccionada ->", regionKey);
             mapaRegiones.region = regionKey;
+            mapaRegiones.setAttribute("data-active-region", regionKey);
             appHeader.setAttribute("active-region", regionKey);
 
             document.dispatchEvent(
@@ -100,8 +102,10 @@ export function initRegionController() {
 
         if (regionKey) {
             mapaRegiones.hoverRegion = regionKey;
+            mapaRegiones.setAttribute("data-hover-region", regionKey);
         } else {
             mapaRegiones.hoverRegion = null;
+            mapaRegiones.removeAttribute("data-hover-region");
         }
     });
 }
