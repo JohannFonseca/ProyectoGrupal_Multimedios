@@ -1,7 +1,15 @@
 import "../components/AppHeader.js";
 import "../components/MapaRegiones.js";
 
+/**
+ * Controlador de Regiones (Mediador)
+ * ---------------------------------
+ * Este módulo actúa como coordinador principal de eventos entre el header de la aplicación
+ * (app-header), el mapa interactivo (mapa-regiones) y la lista de destinos (destino-list).
+ * Implementa un patrón de desacoplamiento donde los componentes se comunican mediante Custom Events.
+ */
 export function initRegionController() {
+    // Buscar los componentes principales en el DOM
     const appHeader = document.querySelector("app-header");
     const mapaRegiones = document.querySelector("mapa-regiones");
 
@@ -10,15 +18,21 @@ export function initRegionController() {
         return;
     }
 
+    // Guarda el estado de la región seleccionada actualmente
     let _selectedRegion = null;
 
+    /**
+     * Escucha el evento personalizado 'region-selected' que disparan el mapa u otros enlaces.
+     * Se usa capture phase (true) para interceptar el evento de manera prioritaria.
+     */
     document.addEventListener(
         "region-selected",
         (e) => {
+            // Evita bucles infinitos si el evento fue relanzado por este mismo controlador
             if (e.detail && e.detail._fromController) return;
 
             try {
-                e.stopImmediatePropagation();
+                e.stopImmediatePropagation(); // Detiene la propagación inmediata para controlar el flujo
             } catch (err) {
                 console.warn(
                     "No se pudo detener la propagación del evento 'region-selected'",
@@ -28,6 +42,7 @@ export function initRegionController() {
 
             const regionKey = e.detail.region;
 
+            // CASO 1: Si se hace click en la región que ya está seleccionada, se deselecciona todo
             if (_selectedRegion === regionKey) {
                 _selectedRegion = null;
                 console.log("Controlador: Región deseleccionada");
@@ -35,6 +50,7 @@ export function initRegionController() {
                 mapaRegiones.removeAttribute("data-active-region");
                 appHeader.removeAttribute("active-region");
 
+                // Notifica a toda la app que ya no hay ninguna región seleccionada
                 document.dispatchEvent(
                     new CustomEvent("region-selected", {
                         detail: { region: null, _fromController: true },
@@ -45,12 +61,16 @@ export function initRegionController() {
                 return;
             }
 
+            // CASO 2: Se selecciona una nueva región
             _selectedRegion = regionKey;
             console.log("Controlador: Región seleccionada ->", regionKey);
             mapaRegiones.region = regionKey;
+            
+            // Sincroniza atributos en el HTML para que el CSS aplique los estilos correspondientes
             mapaRegiones.setAttribute("data-active-region", regionKey);
             appHeader.setAttribute("active-region", regionKey);
 
+            // Relanza el evento a toda la aplicación marcando que proviene del controlador
             document.dispatchEvent(
                 new CustomEvent("region-selected", {
                     detail: { region: regionKey, _fromController: true },
@@ -59,14 +79,19 @@ export function initRegionController() {
                 }),
             );
 
-            // Hacer un pequeño scroll hacia abajo para mostrar `destino-list` (con duración controlada)
+            // ANIMACIÓN: Hace scroll automático hacia abajo para mostrar la sección 'destino-list'
             try {
+                /**
+                 * Función auxiliar de scroll suave usando interpolación matemática (Cosine Ease-In-Out)
+                 * y requestAnimationFrame para un rendimiento óptimo de 60fps sin tirones.
+                 */
                 const smoothScrollTo = (targetY, duration = 1200) => {
                     const startY = window.scrollY || window.pageYOffset;
                     const diff = targetY - startY;
                     if (diff === 0) return;
 
                     let start;
+                    // Función de suavizado coseno
                     const easeInOut = (t) => 0.5 - Math.cos(Math.PI * t) / 2;
 
                     const step = (timestamp) => {
@@ -84,19 +109,23 @@ export function initRegionController() {
                 const destinoEl = document.querySelector('destino-list');
                 if (destinoEl) {
                     const rect = destinoEl.getBoundingClientRect();
-                    const top = window.scrollY + rect.top - 72; // dejar espacio para header
+                    // Deja un espacio libre de 72px arriba para que la barra de navegación no tape el contenido
+                    const top = window.scrollY + rect.top - 72;
                     smoothScrollTo(top, 1200);
                 } else {
-                    // fallback: pequeño scroll hacia abajo
+                    // Si no encuentra la sección, hace un scroll relativo de respaldo
                     smoothScrollTo(window.scrollY + 160, 1200);
                 }
             } catch (err) {
-                // ignore scrolling errors
+                // Silencia errores del scroll para evitar romper la experiencia de usuario
             }
         },
         true,
     );
 
+    /**
+     * Escucha el evento personalizado 'region-hover' para cambiar los estados de hover en el mapa
+     */
     document.addEventListener("region-hover", (e) => {
         const regionKey = e.detail?.region ?? null;
 

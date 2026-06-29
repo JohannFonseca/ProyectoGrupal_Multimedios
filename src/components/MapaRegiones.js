@@ -45,6 +45,7 @@ const FACTS = [
 ];
 
 class MapaRegiones extends HTMLElement {
+  // Campos privados de la clase (ES2022) para gestionar estado interno
   #currentRegion = null;
   #factIndex = 0;
   #factTimer = null;
@@ -54,15 +55,21 @@ class MapaRegiones extends HTMLElement {
 
   constructor() {
     super();
+    // Crea el Shadow DOM para encapsular estilos e interactividad
     this.attachShadow({ mode: "open" });
   }
 
   async connectedCallback() {
+    // Adopta el stylesheet de mapa-regiones.css
     this.shadowRoot.adoptedStyleSheets = [sheet];
 
+    // Carga de forma asíncrona el archivo de mapa vectorial SVG
     await this.#loadSVG();
 
+    // Renderiza la estructura básica del componente
     this.render();
+    
+    // Configura listeners de eventos, temporizadores y estilos específicos
     this.#createRegionStyles();
     this.#attachFactListeners();
     this.#attachHoverListeners();
@@ -74,6 +81,7 @@ class MapaRegiones extends HTMLElement {
   }
 
   disconnectedCallback() {
+    // Limpieza: detiene el intervalo de rotación de datos curiosos para evitar fugas de memoria
     window.clearInterval(this.#factTimer);
   }
 
@@ -90,21 +98,24 @@ class MapaRegiones extends HTMLElement {
   #attachHoverListeners() {
     const tooltip = this.shadowRoot.querySelector(".hover-tooltip");
 
+    // Recorre la configuración de regiones y enlaza eventos en el SVG inyectado
     Object.keys(REGIONS_CONFIG).forEach((id) => {
       const el = this.shadowRoot.getElementById(id);
       if (!el) return;
 
+      // Accesibilidad (A11y): Convierte elementos SVG en botones legibles por lectores de pantalla
       el.setAttribute("role", "button");
       el.setAttribute("tabindex", "0");
       el.setAttribute("aria-label", `Seleccionar región ${REGION_LABELS[id]}`);
       el.setAttribute("aria-pressed", "false");
 
+      // Función auxiliar para emitir el evento personalizado de hover
       const dispatchHover = (region) => {
         this.dispatchEvent(
           new CustomEvent("region-hover", {
             detail: { region },
             bubbles: true,
-            composed: true,
+            composed: true, // compused: true permite que el evento atraviese el Shadow DOM
           }),
         );
       };
@@ -121,6 +132,7 @@ class MapaRegiones extends HTMLElement {
 
       const select = (ev) => this.#selectRegion(id, ev);
 
+      // Accesibilidad por teclado (Soporte para Enter y Espacio)
       const handleKeydown = (ev) => {
         if (ev.key === "Enter" || ev.key === " ") {
           ev.preventDefault();
@@ -128,6 +140,7 @@ class MapaRegiones extends HTMLElement {
         }
       };
 
+      // Registro de eventos pointer y focus
       el.addEventListener("pointerenter", enter);
       el.addEventListener("pointerleave", leave);
       el.addEventListener("pointerdown", select);
@@ -198,6 +211,8 @@ class MapaRegiones extends HTMLElement {
   #selectRegion(region, ev) {
     if (!region) return;
     ev?.stopPropagation();
+    
+    // Dispara el evento region-selected hacia afuera del componente
     this.dispatchEvent(
       new CustomEvent("region-selected", {
         detail: { region },
@@ -207,6 +222,7 @@ class MapaRegiones extends HTMLElement {
     );
   }
 
+  // Posiciona dinámicamente el cuadro de diálogo flotante (tooltip) de hover
   #showTooltipAt(ev, tooltip) {
     try {
       const hostRect = this.getBoundingClientRect();
@@ -381,6 +397,7 @@ class MapaRegiones extends HTMLElement {
   }
 
   #updateMapUI() {
+    // Restablece todas las regiones a su estado inicial neutro
     Object.keys(REGIONS_CONFIG).forEach((id) => {
       const regionElement = this.shadowRoot.getElementById(id);
       if (!regionElement) return;
@@ -407,6 +424,7 @@ class MapaRegiones extends HTMLElement {
       }
     });
 
+    // Aplica los estilos de HOVER a la región bajo el cursor
     if (this.#hoverRegion && this.#hoverRegion !== this.#currentRegion) {
       const hoverEl = this.shadowRoot.getElementById(this.#hoverRegion);
       if (hoverEl) {
@@ -422,6 +440,7 @@ class MapaRegiones extends HTMLElement {
 
     if (!this.#currentRegion) return;
 
+    // Destaca visualmente la región que se encuentra SELECCIONADA
     const selectedElement = this.shadowRoot.getElementById(this.#currentRegion);
     if (!selectedElement) {
       console.warn("Región no encontrada en el SVG:", this.#currentRegion);
@@ -440,6 +459,8 @@ class MapaRegiones extends HTMLElement {
 
     console.log(`Región "${this.#currentRegion}" resaltada con color ${color}`);
 
+    // ANIMACIÓN PREMIUM: Desplaza ('explota') la región seleccionada del resto del mapa
+    // para generar énfasis 3D y profundidad. Cada una tiene desplazamientos adaptados.
     if (this.#currentRegion === "pacifico-central") {
       paths.forEach((path) => {
         path.style.translate = "-35px 40px";
