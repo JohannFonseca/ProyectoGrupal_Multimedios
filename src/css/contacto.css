@@ -212,10 +212,10 @@
   border-left: 6px solid var(--green);
 }
 .dir-card.valle-central {
-  border-left: 6px solid var(--blue);
+  border-left: 6px solid #5e7f3a;
 }
 .dir-card.pacifico-central {
-  border-left: 6px solid var(--dark-beige);
+  border-left: 6px solid #1687a7;
 }
 
 .dir-card:hover {
@@ -259,12 +259,12 @@
   color: var(--green);
 }
 .dir-region-badge.valle-central {
-  background: rgba(0, 74, 173, 0.08);
-  color: var(--blue);
+  background: rgba(94, 127, 58, 0.1);
+  color: #5e7f3a;
 }
 .dir-region-badge.pacifico-central {
-  background: rgba(111, 78, 55, 0.08);
-  color: var(--dark-beige);
+  background: rgba(22, 135, 167, 0.1);
+  color: #1687a7;
 }
 
 .dir-info-row {
@@ -301,12 +301,12 @@
   color: var(--green);
 }
 .valle-central .dir-icon-wrapper {
-  background: rgba(0, 74, 173, 0.07);
-  color: var(--blue);
+  background: rgba(94, 127, 58, 0.09);
+  color: #5e7f3a;
 }
 .pacifico-central .dir-icon-wrapper {
-  background: rgba(111, 78, 55, 0.07);
-  color: var(--dark-beige);
+  background: rgba(22, 135, 167, 0.09);
+  color: #1687a7;
 }
 
 .dir-icon {
@@ -337,10 +337,10 @@
   color: var(--green);
 }
 .dir-card.valle-central .tel-link:hover {
-  color: var(--blue);
+  color: #5e7f3a;
 }
 .dir-card.pacifico-central .tel-link:hover {
-  color: var(--dark-beige);
+  color: #1687a7;
 }
 
 .dir-action {
@@ -393,19 +393,19 @@
 }
 
 .dir-card.valle-central .btn-call {
-  background: linear-gradient(135deg, #004aad, #00c6ff);
-  box-shadow: 0 4px 10px rgba(0, 74, 173, 0.25);
+  background: linear-gradient(135deg, #5e7f3a, #9ab45d);
+  box-shadow: 0 4px 10px rgba(94, 127, 58, 0.25);
 }
 .dir-card.valle-central .btn-call:hover {
-  box-shadow: 0 6px 14px rgba(0, 74, 173, 0.35);
+  box-shadow: 0 6px 14px rgba(94, 127, 58, 0.35);
 }
 
 .dir-card.pacifico-central .btn-call {
-  background: linear-gradient(135deg, #6f4e37, #b17253);
-  box-shadow: 0 4px 10px rgba(111, 78, 55, 0.25);
+  background: linear-gradient(135deg, #1687a7, #35c0d4);
+  box-shadow: 0 4px 10px rgba(22, 135, 167, 0.25);
 }
 .dir-card.pacifico-central .btn-call:hover {
-  box-shadow: 0 6px 14px rgba(111, 78, 55, 0.35);
+  box-shadow: 0 6px 14px rgba(22, 135, 167, 0.35);
 }
 
 .btn-call svg {

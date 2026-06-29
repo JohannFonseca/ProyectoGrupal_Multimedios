@@ -52,7 +52,7 @@ class AudioGuia extends HTMLElement {
 
         .ag-label {
           font-size: .8rem; font-weight: 700; letter-spacing: .05em;
-          text-transform: uppercase; color: #5a4720;
+          text-transform: uppercase; color: var(--audio-label-color, #5a4720);
           font-family: var(--font-main, sans-serif);
           margin: 0;
         }
@@ -143,7 +143,7 @@ class AudioGuia extends HTMLElement {
         }
 
         .ag-tiempo {
-          font-size: .68rem; color: #888; text-align: right;
+          font-size: .68rem; color: var(--audio-time-color, #888); text-align: right;
           font-family: monospace;
         }
 

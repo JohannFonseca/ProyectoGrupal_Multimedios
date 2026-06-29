@@ -98,10 +98,10 @@ nav {
   color: var(--green);
 }
 .dropdown-menu .region-option:nth-child(3) {
-  color: var(--blue);
+  color: #5e7f3a;
 }
 .dropdown-menu .region-option:nth-child(4) {
-  color: var(--dark-beige);
+  color: #1687a7;
 }
 
 .dropdown-menu .region-option:hover {
@@ -161,7 +161,7 @@ nav {
     height: fit-content;
     top: 60px;
     right: 0;
-background: rgba(77, 52, 40, 0.98);
+    background: rgba(77, 52, 40, 0.98);
     box-shadow: 0 12px 24px rgba(37, 24, 16, 0.18);
     width: 220px;
     padding: 14px;
@@ -176,6 +176,19 @@ background: rgba(77, 52, 40, 0.98);
 
   nav .nav-button {
     padding: 5px 0;
+  }
+
+  .dropdown-menu {
+    min-width: 240px;
+    left: auto;
+    right: -8px;
+  }
+
+  .dropdown-menu .region-option {
+    padding: 12px 14px;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.4;
   }
 
   .hamburger-menu {
