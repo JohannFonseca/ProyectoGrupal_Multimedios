@@ -1,10 +1,18 @@
 import "./GaleriaImagenes.js";
 
+/**
+ * Componente Web para la sección de Contacto y Directorio Gastronómico
+ * -------------------------------------------------------------------
+ * Define el elemento personalizado <contacto-seccion> que renderiza el directorio
+ * de locales gastronómicos con sus teléfonos y ubicaciones físicas.
+ */
 class ContactoSeccion extends HTMLElement {
   constructor() {
     super();
+    // Encapsula estilos y HTML en el Shadow DOM
     this.attachShadow({ mode: "open" });
 
+    // Directorio local estático de locales afiliados divididos por región
     this._directorio = [  
       {
         nombre: "Mercado Municipal de Liberia",
@@ -70,25 +78,39 @@ class ContactoSeccion extends HTMLElement {
     ];
   }
 
+  // Método del ciclo de vida del Web Component que se ejecuta cuando el elemento se inserta en el DOM
   async connectedCallback() {
     await this._render();
   }
 
+  /**
+   * Obtiene todas las imágenes de los destinos del archivo JSON
+   * para generar una galería aleatoria al principio de la página.
+   */
   async _todasLasImagenes() {
     try {
+      // Petición HTTP asíncrona para obtener los destinos
       const resp = await fetch("./data/destinos.json");
       const datos = await resp.json();
+      
+      // Mapea y aplana las imágenes de galería o multimedia de todos los destinos
       const imgs = datos.regiones.flatMap((r) =>
-        r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? []),
+        r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? [])
       );
+      
+      // Mezcla aleatoriamente las imágenes encontradas y toma solo 24 de ellas
       return imgs.sort(() => Math.random() - 0.5).slice(0, 24);
     } catch {
-      return [];
+      return []; // Retorna un arreglo vacío en caso de que falle la petición
     }
   }
 
+  /**
+   * Renderiza el contenido del Shadow DOM
+   */
   async _render() {
     try {
+      // Carga en paralelo la hoja de estilos CSS de contacto y las imágenes aleatorias
       const [css, imagenes] = await Promise.all([
         fetch("./css/contacto.css").then((r) => r.text()),
         this._todasLasImagenes(),

@@ -1,3 +1,10 @@
+/* 
+   ESTILOS DE LA PÁGINA DE CONTACTO Y DIRECTORIO
+   =============================================
+   Define la presentación del banner superior, la cuadrícula responsiva del directorio
+   y los colores temáticos de cada región turística de Costa Rica.
+*/
+
 :host {
   display: block;
   width: 100%;

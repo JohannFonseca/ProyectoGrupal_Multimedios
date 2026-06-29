@@ -1,3 +1,11 @@
+/* 
+   ESTILOS DEL MAPA INTERACTIVO DE REGIONES
+   ========================================
+   Este archivo define los estilos de visualización del mapa SVG y la cuadrícula interactiva.
+   Utiliza CSS moderno como variables de región, funciones de escala fluidas (min, clamp) 
+   y flexbox/grid para adaptarse a cualquier tamaño de pantalla.
+*/
+
 :host {
   display: block;
   width: 100%;
@@ -7,15 +15,18 @@
   box-sizing: border-box;
 }
 
+/* Contenedor principal de la sección del mapa */
 .map-stage {
   position: relative;
-  width: min(96vw, 1320px);
+  width: min(96vw, 1320px); /* Ajuste el ancho según el viewport o un tope máximo de 1320px */
   margin: 0 auto;
+  /* padding fluido que crece según el tamaño de pantalla */
   padding: clamp(18px, 3vw, 34px) 18px 34px;
   color: #fff8e7;
-  isolation: isolate;
+  isolation: isolate; /* Crea un contexto de apilamiento para evitar problemas con filtros CSS */
 }
 
+/* Cabecera del mapa (Títulos y subtítulos) */
 .map-heading {
   position: relative;
   z-index: 1;

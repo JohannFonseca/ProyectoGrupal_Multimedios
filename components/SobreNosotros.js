@@ -1,37 +1,60 @@
 import "./GaleriaImagenes.js";
 
+/**
+ * Componente Web "Sobre Nosotros"
+ * ------------------------------
+ * Define el elemento <sobre-nosotros> que presenta al equipo de estudiantes
+ * de la UCR encargados de la creación de la "Ruta del Sabor".
+ */
 class SobreNosotros extends HTMLElement {
   constructor() {
     super();
+    // Inicia el Shadow DOM para encapsulación
     this.attachShadow({ mode: "open" });
   }
 
+  // Se ejecuta al añadir el componente a la página
   async connectedCallback() {
     await this._render();
   }
 
+  /**
+   * Carga dinámicamente y mezcla fotos aleatorias de destinos.json 
+   * para colocarlas en el carrusel de la cabecera.
+   */
   async _todasLasImagenes() {
     try {
+      // Petición HTTP asíncrona para leer el archivo de destinos en formato JSON
       const resp = await fetch("./data/destinos.json");
       const datos = await resp.json();
+      
+      // Aplana el arreglo de destinos para extraer todas las rutas de imágenes disponibles
       const imgs = datos.regiones.flatMap((r) =>
-        r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? []),
+        r.destinos.flatMap((d) => d.galeria ?? d.media?.imagenes ?? [])
       );
+      
+      // Baraja el arreglo de fotos al azar y toma las primeras 24
       return imgs.sort(() => Math.random() - 0.5).slice(0, 24);
     } catch {
-      return [];
+      return []; // Respaldo en caso de error
     }
   }
 
+  /**
+   * Renderiza el contenido HTML y CSS de la sección
+   */
   async _render() {
     try {
+      // Obtiene en paralelo el archivo CSS de estilos y la lista de fotos mezcladas
       const css = await fetch("./css/sobre-nosotros.css").then((r) => r.text());
       const imagenes = await this._todasLasImagenes();
       const imagenesJSON = JSON.stringify(imagenes).replace(/'/g, "&#39;");
 
+      // Inyecta el marcado estructurado en el Shadow DOM
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
 
+        <!-- Carrusel de fotos aleatorias superior -->
         <div class="hero-carousel">
           <galeria-imagenes
             imagenes='${imagenesJSON}'
@@ -50,6 +73,7 @@ class SobreNosotros extends HTMLElement {
           </div>
         </div>
 
+        <!-- Introducción de la sección académica -->
         <section class="intro-section">
           <p class="intro-eyebrow">Equipo del proyecto</p>
           <p class="intro-text">
@@ -57,6 +81,7 @@ class SobreNosotros extends HTMLElement {
           </p>
         </section>
 
+        <!-- Tarjetas de presentación de los estudiantes -->
         <section class="grid-container">
           <!-- Dariel Benavides Tapia -->
           <article class="card">
