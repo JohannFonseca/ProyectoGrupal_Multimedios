@@ -1,3 +1,4 @@
+// Reproductor de audio personalizado para las guías de voz y audios informativos de cada destino.
 class AudioGuia extends HTMLElement {
   static get observedAttributes() {
     return ["src", "label"];

@@ -1,3 +1,4 @@
+// Reproductor de video personalizado: admite videos nativos y URLs incrustadas/directas desde Google Drive.
 class VideoDestino extends HTMLElement {
   static get observedAttributes() {
     return ["src", "poster", "vertical"];

@@ -7,11 +7,13 @@
 }
 
 /* ─── Lámina de bienvenida sobre el carrusel ─── */
+/* Contenedor del carrusel de imágenes de cabecera */
 .hero-carousel {
   position: relative;
   overflow: hidden;
 }
 
+/* Capa de color oscura translúcida sobre el carrusel */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -30,6 +32,7 @@
   pointer-events: none;
 }
 
+/* Logotipo flotante oficial del banner superior */
 .hero-logo {
   width: clamp(90px, 11vw, 150px);
   height: auto;
@@ -37,6 +40,7 @@
   animation: heroFloat 3.2s ease-in-out infinite;
 }
 
+/* Animación de flotado vertical para el logo */
 @keyframes heroFloat {
   0%,
   100% {
@@ -47,6 +51,7 @@
   }
 }
 
+/* Título oficial de la sección en el banner ("Sobre Nosotros") */
 .hero-title {
   box-sizing: border-box;
   width: calc(100% - 32px);
@@ -70,6 +75,7 @@
   }
 }
 
+/* Animación de entrada con desvanecimiento del título */
 @keyframes heroFadeUp {
   from {
     opacity: 0;
@@ -81,12 +87,14 @@
   }
 }
 
+/* Sección introductoria de texto debajo del banner */
 .intro-section {
   max-width: min(92vw, 1200px);
   margin: 34px auto 36px;
   text-align: center;
 }
 
+/* Subtítulo decorativo superior sobre el título principal */
 .intro-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -107,6 +115,7 @@
   background: rgba(245, 207, 138, 0.42);
 }
 
+/* Título decorativo de sección con línea inferior */
 .section-title {
   font-size: 2rem;
   font-weight: 700;
@@ -130,6 +139,7 @@
   border-radius: 2px;
 }
 
+/* Párrafo explicativo del grupo de estudiantes y la materia */
 .intro-text {
   max-width: 760px;
   margin: 0 auto;
@@ -138,6 +148,7 @@
   color: rgba(255, 244, 228, 0.9);
 }
 
+/* Contenedor flexible para alinear las tarjetas de estudiantes */
 .grid-container {
   max-width: min(92vw, 1200px);
   margin: 0 auto;
@@ -148,6 +159,7 @@
   align-items: stretch;
 }
 
+/* Tarjeta individual de presentación de cada estudiante */
 .card {
   flex: 1 1 285px;
   max-width: 330px;
@@ -192,6 +204,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Avatar redondo que contiene las iniciales del estudiante */
 .avatar {
   width: 82px;
   height: 82px;
@@ -207,26 +220,32 @@
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
 }
 
+/* Fondo degradado naranja/rojo para el avatar de Dariel */
 .avatar.dariel {
   background: linear-gradient(135deg, #FF5E62, #FF9966);
 }
 
+/* Fondo degradado esmeralda/verde para el avatar de Eddy */
 .avatar.eddy {
   background: linear-gradient(135deg, #11998e, #38ef7d);
 }
 
+/* Fondo degradado morado/rosa para el avatar de Sofia */
 .avatar.sofia {
   background: linear-gradient(135deg, #7F00FF, #E100FF);
 }
 
+/* Fondo degradado celeste/azul para el avatar de José */
 .avatar.jose {
   background: linear-gradient(135deg, #00C6FF, #0072FF);
 }
 
+/* Fondo degradado naranja/fuego para el avatar de Johann */
 .avatar.johan {
   background: linear-gradient(135deg, #f12711, #f5af19);
 }
 
+/* Nombre del estudiante en la tarjeta */
 .member-name {
   font-size: 1.22rem;
   font-weight: 700;
@@ -235,6 +254,7 @@
   font-family: var(--font-main), Arial, sans-serif;
 }
 
+/* Insignia o rol asignado al integrante en el proyecto */
 .member-role {
   display: inline-block;
   font-size: 0.68rem;
@@ -248,6 +268,7 @@
   margin-bottom: 16px;
 }
 
+/* Descripción de responsabilidades en la tarjeta */
 .member-desc {
   font-size: 0.92rem;
   line-height: 1.62;
@@ -256,12 +277,14 @@
   flex-grow: 1;
 }
 
+/* Contenedor inferior para los enlaces de redes sociales */
 .social-links {
   display: flex;
   gap: 14px;
   margin-top: auto;
 }
 
+/* Icono interactivo redondo para enlace social (ej. LinkedIn) */
 .social-icon {
   width: 36px;
   height: 36px;

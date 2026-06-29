@@ -21,6 +21,7 @@ const EVENTS = {
   REGION_SELECTED: "region-selected",
 };
 
+// Cabecera principal de la aplicación: administra la barra de navegación, menús responsivos y selección de regiones.
 class AppHeader extends HTMLElement {
   // Atributo observado: resalta la región activa en el menú "Regiones".
   static get observedAttributes() {

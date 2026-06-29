@@ -25,6 +25,7 @@ destinoCardTemplate.innerHTML = `
   </article>
 `;
 
+// Tarjeta interactiva resumida de un destino: muestra nombre, imagen, región y atajo para ver detalles.
 class DestinoCard extends HTMLElement {
   static get observedAttributes() {
     return ["destino-id", "nombre", "imagen", "region", "historia"];

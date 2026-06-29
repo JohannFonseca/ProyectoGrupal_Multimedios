@@ -2,6 +2,7 @@ import "./DestinoCard.js";
 import "./DestinoDetalle.js";
 import "./GaleriaImagenes.js";
 
+// Lista contenedora de destinos: carga los datos del JSON y filtra/pinta las tarjetas según la región activa.
 class DestinoList extends HTMLElement {
   constructor() {
     super();

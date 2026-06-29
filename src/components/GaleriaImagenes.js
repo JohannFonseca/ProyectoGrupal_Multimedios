@@ -1,3 +1,4 @@
+// Galería de imágenes interactiva: carrusel autoejecutable con botones de navegación y visor modal a pantalla completa (Lightbox).
 class GaleriaImagenes extends HTMLElement {
   static get observedAttributes() {
     return ["imagenes", "auto", "intervalo", "compacto"];

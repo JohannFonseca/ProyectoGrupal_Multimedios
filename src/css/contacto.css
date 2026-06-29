@@ -5,6 +5,7 @@
    y los colores temáticos de cada región turística de Costa Rica.
 */
 
+/* Host del componente: define relleno, fuente y colores de texto por defecto */
 :host {
   display: block;
   width: 100%;
@@ -13,12 +14,13 @@
   color: #f6e8d5;
 }
 
-/* ─── Lámina de bienvenida sobre el carrusel ─── */
+/* Contenedor del carrusel de imágenes del banner superior */
 .hero-carousel {
   position: relative;
   overflow: hidden;
 }
 
+/* Capa de superposición con color traslúcido sobre el carrusel */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -37,6 +39,7 @@
   pointer-events: none;
 }
 
+/* Imagen del logotipo oficial flotante del banner */
 .hero-logo {
   width: clamp(90px, 11vw, 150px);
   height: auto;
@@ -44,6 +47,7 @@
   animation: heroFloat 3.2s ease-in-out infinite;
 }
 
+/* Animación de flotado vertical para el logotipo del banner */
 @keyframes heroFloat {
   0%,
   100% {
@@ -54,6 +58,7 @@
   }
 }
 
+/* Título principal de la sección en el banner ("Contacto") */
 .hero-title {
   box-sizing: border-box;
   width: calc(100% - 32px);
@@ -77,6 +82,7 @@
   }
 }
 
+/* Animación de entrada con desvanecimiento y desplazamiento del título */
 @keyframes heroFadeUp {
   from {
     opacity: 0;
@@ -88,12 +94,14 @@
   }
 }
 
+/* Sección introductoria de texto debajo del banner */
 .intro-section {
   max-width: min(92vw, 1200px);
   margin: 34px auto 34px;
   text-align: center;
 }
 
+/* Etiqueta superior decorativa sobre el título ("Directorio gastronómico") */
 .intro-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -114,6 +122,7 @@
   background: rgba(245, 207, 138, 0.42);
 }
 
+/* Título de sección con una línea decorativa inferior */
 .section-title {
   font-size: 2rem;
   font-weight: 700;
@@ -136,6 +145,7 @@
   border-radius: 2px;
 }
 
+/* Párrafo explicativo principal de la introducción */
 .intro-text {
   max-width: 760px;
   margin: 0 auto;
@@ -144,18 +154,20 @@
   color: rgba(255, 244, 228, 0.9);
 }
 
+/* Envoltura general que contiene todo el diseño del directorio */
 .contact-layout {
   max-width: min(92vw, 1200px);
   margin: 0 auto;
 }
 
-/* Directory Section */
+/* Caja contenedora de la lista del directorio telefónico */
 .directory-container {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
+/* Encabezado del contenedor de directorio (título y contador) */
 .directory-heading {
   display: flex;
   align-items: center;
@@ -165,6 +177,7 @@
   border-bottom: 1px solid rgba(255, 248, 231, 0.14);
 }
 
+/* Título con icono de la sección del directorio */
 .directory-title {
   font-size: 1.35rem;
   color: #f6e8d5;
@@ -174,6 +187,7 @@
   gap: 10px;
 }
 
+/* Burbuja con el contador total de afiliados del directorio */
 .directory-count {
   flex-shrink: 0;
   color: #f5cf8a;
@@ -187,12 +201,14 @@
   text-transform: uppercase;
 }
 
+/* Rejilla adaptiva para mostrar las tarjetas de contacto */
 .directory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
   gap: 18px;
 }
 
+/* Tarjeta individual de información de un contacto del directorio */
 .dir-card {
   background: var(--beige);
   border: 1.5px solid var(--dark-beige);
@@ -211,16 +227,19 @@
   overflow: hidden;
 }
 
-/* Cinta lateral con el color de cada región */
+/* Borde izquierdo rojo para tarjetas del Pacífico Norte */
 .dir-card.pacifico-norte {
   border-left: 6px solid var(--red);
 }
+/* Borde izquierdo verde para tarjetas de la región Caribe */
 .dir-card.caribe {
   border-left: 6px solid var(--green);
 }
+/* Borde izquierdo verde olivo para tarjetas del Valle Central */
 .dir-card.valle-central {
   border-left: 6px solid #5e7f3a;
 }
+/* Borde izquierdo azul para tarjetas del Pacífico Central/Sur */
 .dir-card.pacifico-central {
   border-left: 6px solid #1687a7;
 }
@@ -419,7 +438,7 @@
   fill: white;
 }
 
-/* Contact Form Section */
+/* Contenedor translúcido (Glassmorphism) para el formulario de contacto */
 .form-container {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(12px);
@@ -430,6 +449,7 @@
   box-shadow: 0 8px 30px var(--shadow);
 }
 
+/* Título de cabecera de la sección de formulario */
 .form-title {
   font-size: 1.5rem;
   color: var(--blue);
@@ -439,6 +459,7 @@
   padding-bottom: 8px;
 }
 
+/* Caja de agrupación vertical para label y campo de texto */
 .form-group {
   margin-bottom: 20px;
   display: flex;
@@ -446,12 +467,14 @@
   gap: 6px;
 }
 
+/* Etiqueta indicadora sobre el campo de texto */
 .form-label {
   font-size: 0.85rem;
   font-weight: 700;
   color: #444;
 }
 
+/* Campo de entrada de texto común (inputs/textareas) con bordes suaves */
 .form-control {
   padding: 12px 14px;
   border: 1px solid #ccc;
@@ -472,11 +495,13 @@
   background: white;
 }
 
+/* Restricción de redimensionado y tamaño mínimo para el textarea */
 textarea.form-control {
   resize: vertical;
   min-height: 120px;
 }
 
+/* Botón principal de envío del formulario de contacto */
 .btn-submit {
   width: 100%;
   padding: 12px;
@@ -504,7 +529,7 @@ textarea.form-control {
   transform: translateY(0);
 }
 
-/* Success Message Box */
+/* Caja de mensaje de éxito (inicialmente oculta con display: none) */
 .success-message {
   display: none;
   flex-direction: column;
@@ -514,6 +539,7 @@ textarea.form-control {
   animation: fadeIn 0.4s ease;
 }
 
+/* Círculo contenedor verde del icono de check de éxito */
 .success-icon {
   width: 54px;
   height: 54px;
@@ -528,6 +554,7 @@ textarea.form-control {
   font-weight: bold;
 }
 
+/* Título principal del mensaje de confirmación de envío */
 .success-text {
   font-size: 1.15rem;
   font-weight: 700;
@@ -535,12 +562,14 @@ textarea.form-control {
   margin: 0 0 8px;
 }
 
+/* Subtexto detallado para el mensaje de éxito */
 .success-subtext {
   font-size: 0.9rem;
   color: #555;
   line-height: 1.5;
 }
 
+/* Animación de entrada por desvanecimiento para el mensaje de éxito */
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -6,6 +6,7 @@ const cssDestinoDetalle = fetch("./css/destino-detalle.css")
   .then((r) => (r.ok ? r.text() : ""))
   .catch(() => "");
 
+// Vista de detalle completo de un destino: incluye galería de fotos, historia, audio guía y video.
 class DestinoDetalle extends HTMLElement {
   constructor() {
     super();
