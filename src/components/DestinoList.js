@@ -71,7 +71,7 @@ class DestinoList extends HTMLElement {
 
   _pintarDetalle(destinoId) {
     const bloque = this.shadowRoot.querySelector(".region-block");
-    const titulo = bloque?.querySelector(".section-title");
+    const titulo = bloque?.querySelector(".section-heading");
     const contenido = bloque?.querySelector(".contenido-region");
 
     if (!bloque || !contenido) return;
@@ -86,6 +86,8 @@ class DestinoList extends HTMLElement {
     }
 
     if (titulo) titulo.remove();
+    bloque.classList.add("detalle-mode");
+    contenido.classList.add("detalle-activo");
     contenido.innerHTML = "";
 
     const detalle = document.createElement("destino-detalle");
@@ -119,20 +121,36 @@ class DestinoList extends HTMLElement {
       carrusel.setAttribute("imagenes", JSON.stringify(todasImagenes));
       carrusel.setAttribute("auto", "");
       carrusel.setAttribute("intervalo", "4000");
-      bloque.appendChild(carrusel);
+
+      const regionHero = document.createElement("section");
+      regionHero.className = "region-hero";
+      regionHero.appendChild(carrusel);
+
+      const regionOverlay = document.createElement("div");
+      regionOverlay.className = "region-hero-overlay";
+      regionOverlay.innerHTML = `
+        <p class="region-eyebrow">Región seleccionada</p>
+        <h2 class="region-title">${region.nombre}</h2>
+        <p class="region-kicker">Sabores, historias y experiencias locales</p>
+      `;
+      regionHero.appendChild(regionOverlay);
+      bloque.appendChild(regionHero);
 
       const aboutRow = document.createElement("div");
       aboutRow.className = "about-row";
       aboutRow.innerHTML = `
-        <p class="about-label">Acerca de</p>
+        <p class="about-label">Acerca de la región</p>
         <p class="about-texto">${region.descripcion}</p>
       `;
       bloque.appendChild(aboutRow);
 
-      const titulo = document.createElement("h2");
-      titulo.className = "section-title";
-      titulo.textContent = "Destinos a conocer";
-      bloque.appendChild(titulo);
+      const tituloWrap = document.createElement("div");
+      tituloWrap.className = "section-heading";
+      tituloWrap.innerHTML = `
+        <p class="section-eyebrow">Explora la ruta</p>
+        <h2 class="section-title">Destinos a conocer</h2>
+      `;
+      bloque.appendChild(tituloWrap);
 
       const contenido = document.createElement("div");
       contenido.className = "contenido-region";

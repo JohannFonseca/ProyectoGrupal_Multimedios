@@ -1,8 +1,8 @@
 export const REGIONS_CONFIG = {
-    "pacifico-norte": { color: "#F02525" },
-    "caribe": { color: "#00830D" },
-    "valle-central": { color: "#004AAD" },
-    "pacifico-central": { color: "#6F4E37" }
+    "pacifico-norte": { color: "#D9573B" },
+    "caribe": { color: "#138A63" },
+    "valle-central": { color: "#5E7F3A" },
+    "pacifico-central": { color: "#1687A7" }
 };
 
 export function applySVGStyles(element, fillColor, isIdle = false) {

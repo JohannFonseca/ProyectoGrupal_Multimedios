@@ -239,8 +239,52 @@ class GaleriaImagenes extends HTMLElement {
           }
 
           .gi-btn {
+            width: 34px;
+            height: 34px;
+            font-size: 1.25rem;
+            background: rgba(255, 255, 255, 0.62);
+          }
+
+          .gi-btn.prev { left: 8px; }
+          .gi-btn.next { right: 8px; }
+
+          .gi-counter {
+            right: 10px;
+            bottom: 8px;
+            font-size: 0.66rem;
+            padding: 2px 8px;
+          }
+
+          :host(#carrusel-inicio) .gi-btn {
+            top: 50%;
+            bottom: auto;
+            transform: translateY(-50%);
             width: 38px;
             height: 38px;
+            background: rgba(255, 248, 231, 0.78);
+          }
+
+          :host(#carrusel-inicio) .gi-counter {
+            right: 12px;
+            bottom: 14px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          :host(#carrusel-inicio) .gi-btn {
+            width: 34px;
+            height: 34px;
+            font-size: 1.12rem;
+            background: rgba(255, 248, 231, 0.7);
+          }
+
+          :host(#carrusel-inicio) .gi-btn.prev { left: 12px; }
+          :host(#carrusel-inicio) .gi-btn.next { right: 12px; }
+
+          :host(#carrusel-inicio) .gi-counter {
+            right: 10px;
+            bottom: 10px;
+            font-size: 0.6rem;
           }
         }
       </style>

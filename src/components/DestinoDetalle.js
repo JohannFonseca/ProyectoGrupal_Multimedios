@@ -2,6 +2,10 @@ import "./GaleriaImagenes.js";
 import "./AudioGuia.js";
 import "./VideoDestino.js";
 
+const cssDestinoDetalle = fetch("./css/destino-detalle.css")
+  .then((r) => (r.ok ? r.text() : ""))
+  .catch(() => "");
+
 class DestinoDetalle extends HTMLElement {
   constructor() {
     super();
@@ -25,26 +29,26 @@ class DestinoDetalle extends HTMLElement {
   _temaRegion(region) {
     const temas = {
       "Pacífico Norte": {
-        color: "#c94135",
-        suave: "rgba(201, 65, 53, 0.16)",
+        color: "#d9573b",
+        suave: "rgba(217, 87, 59, 0.16)",
       },
       Caribe: {
-        color: "#198754",
-        suave: "rgba(25, 135, 84, 0.16)",
+        color: "#138a63",
+        suave: "rgba(19, 138, 99, 0.16)",
       },
       "Valle Central": {
-        color: "#215fa6",
-        suave: "rgba(33, 95, 166, 0.15)",
+        color: "#5e7f3a",
+        suave: "rgba(94, 127, 58, 0.16)",
       },
       "Pacífico Central y Sur": {
-        color: "#7b5438",
-        suave: "rgba(123, 84, 56, 0.16)",
+        color: "#1687a7",
+        suave: "rgba(22, 135, 167, 0.16)",
       },
     };
 
     return temas[region] ?? {
-      color: "#6f4e37",
-      suave: "rgba(111, 78, 55, 0.16)",
+      color: "#1687a7",
+      suave: "rgba(22, 135, 167, 0.16)",
     };
   }
 
@@ -59,7 +63,7 @@ class DestinoDetalle extends HTMLElement {
   }
 
   async _render() {
-    const css = await fetch("./css/destino-detalle.css").then((r) => r.text());
+    const css = await cssDestinoDetalle;
     const destino = this._destino;
 
     if (!destino) {
@@ -157,11 +161,8 @@ class DestinoDetalle extends HTMLElement {
         </article>
       `;
     } catch {
-      const css2 = await fetch("./css/destino-detalle.css")
-        .then((r) => r.text())
-        .catch(() => "");
       this.shadowRoot.innerHTML = `
-        <style>${css2}</style>
+        <style>${css}</style>
         <section class="detalle-mensaje error">
           <h2>Error al cargar destino</h2>
           <p>No se pudo mostrar la información del destino.</p>
