@@ -38,8 +38,6 @@ class VideoDestino extends HTMLElement {
     const hasSrc = src.trim() !== "";
     const isDrive = hasSrc && this._esDrive(src);
 
-    const ratio = "16 / 9";
-
     this.shadowRoot.innerHTML = `
       <style>
         :host { display: block; width: 100%; }
@@ -53,9 +51,9 @@ class VideoDestino extends HTMLElement {
           position: relative;
           width: 100%;
           max-width: 100%;
-          height: 270px;
+          aspect-ratio: 16 / 9;
           background: #111;
-          border-radius: 8px;
+          border-radius: var(--vd-radius, 8px);
           overflow: hidden;
         }
 
@@ -77,7 +75,7 @@ class VideoDestino extends HTMLElement {
           display: flex; flex-direction: column;
           align-items: center; justify-content: center; gap: 12px;
           background: #f5f0ea;
-          border-radius: 8px;
+          border-radius: var(--vd-radius, 8px);
         }
 
         .vd-icon {
@@ -90,6 +88,12 @@ class VideoDestino extends HTMLElement {
         .vd-txt {
           font-size: .82rem; color: #aaa;
           font-family: sans-serif; text-align: center;
+        }
+
+        @media (max-width: 768px) {
+          .vd-wrap {
+            max-height: 220px;
+          }
         }
       </style>
 

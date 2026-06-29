@@ -32,11 +32,13 @@ document.addEventListener("navigate", (e) => {
   const page = e.detail.page;
 
   const heroInicio = document.getElementById("hero-inicio");
+  const sectionDivider = document.querySelector(".section-divider");
   const mapa = document.querySelector("mapa-regiones");
   const destinos = document.querySelector("destino-list");
   const detalleContenedor = document.getElementById(
     "contenedor-destino-detalle",
   );
+  const footer = document.querySelector(".page-footer");
   let sobreNosotros = document.querySelector("sobre-nosotros");
   let contactoSeccion = document.querySelector("contacto-seccion");
 
@@ -53,9 +55,11 @@ document.addEventListener("navigate", (e) => {
 
   const ocultarTodo = () => {
     if (heroInicio) heroInicio.style.display = "none";
+    if (sectionDivider) sectionDivider.style.display = "none";
     if (mapa) mapa.style.display = "none";
     if (destinos) destinos.style.display = "none";
     if (detalleContenedor) detalleContenedor.style.display = "none";
+    if (footer) footer.style.display = "none";
     sobreNosotros.style.display = "none";
     contactoSeccion.style.display = "none";
   };
@@ -64,9 +68,11 @@ document.addEventListener("navigate", (e) => {
 
   if (page === "inicio") {
     if (heroInicio) heroInicio.style.display = "block";
+    if (sectionDivider) sectionDivider.style.display = "flex";
     if (mapa) mapa.style.display = "block";
     if (destinos) destinos.style.display = "block";
     if (detalleContenedor) detalleContenedor.style.display = "block";
+    if (footer) footer.style.display = "block";
   } else if (page === "sobre-nosotros") {
     sobreNosotros.style.display = "block";
   } else if (page === "contacto") {

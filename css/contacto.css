@@ -3,7 +3,7 @@
   width: 100%;
   padding: 0 0 80px;
   font-family: var(--font-main), Arial, sans-serif;
-  color: #222;
+  color: #f6e8d5;
 }
 
 /* ─── Lámina de bienvenida sobre el carrusel ─── */
@@ -48,6 +48,10 @@
 }
 
 .hero-title {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: calc(100% - 32px);
+  min-width: 0;
   margin: 0;
   color: #fff8e7;
   font-family: var(--font-main), serif;
@@ -56,6 +60,14 @@
   letter-spacing: 0.04em;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
   animation: heroFadeUp 1s ease both;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(1.2rem, 5.5vw, 1.6rem);
+    line-height: 1.2;
+  }
 }
 
 @keyframes heroFadeUp {
@@ -71,14 +83,34 @@
 
 .intro-section {
   max-width: min(92vw, 1200px);
-  margin: 40px auto 45px;
+  margin: 34px auto 34px;
   text-align: center;
 }
 
+.intro-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  color: #f5cf8a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.intro-eyebrow::before,
+.intro-eyebrow::after {
+  content: "";
+  width: 54px;
+  height: 1px;
+  background: rgba(245, 207, 138, 0.42);
+}
+
 .section-title {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--blue);
+  color: #f5cf8a;
   margin: 0 0 16px;
   position: relative;
   display: inline-block;
@@ -93,16 +125,16 @@
   transform: translateX(-50%);
   width: 80px;
   height: 3px;
-  background: var(--dark-beige);
+  background: rgba(245, 207, 138, 0.42);
   border-radius: 2px;
 }
 
 .intro-text {
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #444;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(255, 244, 228, 0.9);
 }
 
 .contact-layout {
@@ -114,31 +146,51 @@
 .directory-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+}
+
+.directory-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 248, 231, 0.14);
 }
 
 .directory-title {
-  font-size: 1.5rem;
-  color: var(--dark-beige);
-  margin: 0 0 10px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid rgba(111, 78, 55, 0.35);
+  font-size: 1.35rem;
+  color: #f6e8d5;
+  margin: 0;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+.directory-count {
+  flex-shrink: 0;
+  color: #f5cf8a;
+  background: rgba(245, 207, 138, 0.12);
+  border: 1px solid rgba(245, 207, 138, 0.18);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 18px;
 }
 
 .dir-card {
   background: var(--beige);
   border: 1.5px solid var(--dark-beige);
-  border-radius: 10px;
-  padding: 24px;
+  border-radius: 8px;
+  padding: 22px 22px 20px;
   box-shadow:
     0 4px 14px var(--shadow),
     inset 0 0 0 1px rgba(111, 78, 55, 0.06);
@@ -154,16 +206,16 @@
 
 /* Cinta lateral con el color de cada región */
 .dir-card.pacifico-norte {
-  border-left: 7px solid var(--red);
+  border-left: 6px solid var(--red);
 }
 .dir-card.caribe {
-  border-left: 7px solid var(--green);
+  border-left: 6px solid var(--green);
 }
 .dir-card.valle-central {
-  border-left: 7px solid var(--blue);
+  border-left: 6px solid #5e7f3a;
 }
 .dir-card.pacifico-central {
-  border-left: 7px solid var(--dark-beige);
+  border-left: 6px solid #1687a7;
 }
 
 .dir-card:hover {
@@ -176,12 +228,12 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   gap: 10px;
 }
 
 .dir-place {
-  font-size: 1.2rem;
+  font-size: 1.14rem;
   font-weight: 700;
   color: #111;
   margin: 0;
@@ -207,27 +259,27 @@
   color: var(--green);
 }
 .dir-region-badge.valle-central {
-  background: rgba(0, 74, 173, 0.08);
-  color: var(--blue);
+  background: rgba(94, 127, 58, 0.1);
+  color: #5e7f3a;
 }
 .dir-region-badge.pacifico-central {
-  background: rgba(111, 78, 55, 0.08);
-  color: var(--dark-beige);
+  background: rgba(22, 135, 167, 0.1);
+  color: #1687a7;
 }
 
 .dir-info-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-  font-size: 0.92rem;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
   line-height: 1.45;
   color: #333;
 }
 
 .dir-icon-wrapper {
-  width: 34px;
-  height: 34px;
+  width: 31px;
+  height: 31px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -249,12 +301,12 @@
   color: var(--green);
 }
 .valle-central .dir-icon-wrapper {
-  background: rgba(0, 74, 173, 0.07);
-  color: var(--blue);
+  background: rgba(94, 127, 58, 0.09);
+  color: #5e7f3a;
 }
 .pacifico-central .dir-icon-wrapper {
-  background: rgba(111, 78, 55, 0.07);
-  color: var(--dark-beige);
+  background: rgba(22, 135, 167, 0.09);
+  color: #1687a7;
 }
 
 .dir-icon {
@@ -285,15 +337,15 @@
   color: var(--green);
 }
 .dir-card.valle-central .tel-link:hover {
-  color: var(--blue);
+  color: #5e7f3a;
 }
 .dir-card.pacifico-central .tel-link:hover {
-  color: var(--dark-beige);
+  color: #1687a7;
 }
 
 .dir-action {
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 14px;
 }
 
 .btn-call {
@@ -302,12 +354,12 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 10px 14px;
+  padding: 9px 14px;
   color: white;
   text-decoration: none;
   font-weight: 700;
   font-size: 0.88rem;
-  border-radius: 10px;
+  border-radius: 8px;
   transition:
     transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
     box-shadow 0.3s ease;
@@ -341,19 +393,19 @@
 }
 
 .dir-card.valle-central .btn-call {
-  background: linear-gradient(135deg, #004aad, #00c6ff);
-  box-shadow: 0 4px 10px rgba(0, 74, 173, 0.25);
+  background: linear-gradient(135deg, #5e7f3a, #9ab45d);
+  box-shadow: 0 4px 10px rgba(94, 127, 58, 0.25);
 }
 .dir-card.valle-central .btn-call:hover {
-  box-shadow: 0 6px 14px rgba(0, 74, 173, 0.35);
+  box-shadow: 0 6px 14px rgba(94, 127, 58, 0.35);
 }
 
 .dir-card.pacifico-central .btn-call {
-  background: linear-gradient(135deg, #6f4e37, #b17253);
-  box-shadow: 0 4px 10px rgba(111, 78, 55, 0.25);
+  background: linear-gradient(135deg, #1687a7, #35c0d4);
+  box-shadow: 0 4px 10px rgba(22, 135, 167, 0.25);
 }
 .dir-card.pacifico-central .btn-call:hover {
-  box-shadow: 0 6px 14px rgba(111, 78, 55, 0.35);
+  box-shadow: 0 6px 14px rgba(22, 135, 167, 0.35);
 }
 
 .btn-call svg {

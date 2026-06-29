@@ -2,42 +2,54 @@ import "./GaleriaImagenes.js";
 import "./AudioGuia.js";
 import "./VideoDestino.js";
 
-class DestinoDetalle extends HTMLElement {
-  static get observedAttributes() {
-    return ["destino-id"];
-  }
+const cssDestinoDetalle = fetch("./css/destino-detalle.css")
+  .then((r) => (r.ok ? r.text() : ""))
+  .catch(() => "");
 
+class DestinoDetalle extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this._destino = null;
   }
 
   connectedCallback() {
     this._render();
   }
 
-  attributeChangedCallback(_name, oldVal, newVal) {
-    if (oldVal !== newVal) this._render();
+  set destino(valor) {
+    this._destino = valor;
+    if (this.isConnected) this._render();
   }
 
-  _claseRegion(region) {
-    const mapa = {
-      "Pacífico Norte": "pacifico-norte",
-      Caribe: "caribe",
-      "Valle Central": "valle-central",
-      "Pacífico Central y Sur": "pacifico-sur",
+  get destino() {
+    return this._destino;
+  }
+
+  _temaRegion(region) {
+    const temas = {
+      "Pacífico Norte": {
+        color: "#d9573b",
+        suave: "rgba(217, 87, 59, 0.16)",
+      },
+      Caribe: {
+        color: "#138a63",
+        suave: "rgba(19, 138, 99, 0.16)",
+      },
+      "Valle Central": {
+        color: "#5e7f3a",
+        suave: "rgba(94, 127, 58, 0.16)",
+      },
+      "Pacífico Central y Sur": {
+        color: "#1687a7",
+        suave: "rgba(22, 135, 167, 0.16)",
+      },
     };
-    return mapa[region] ?? "valle-central";
-  }
 
-  _buscarDestino(regiones, destinoId) {
-    for (const region of regiones) {
-      const destino = region.destinos.find(
-        (item) => item.nombre.toLowerCase() === destinoId.toLowerCase(),
-      );
-      if (destino) return { region, destino };
-    }
-    return null;
+    return temas[region] ?? {
+      color: "#1687a7",
+      suave: "rgba(22, 135, 167, 0.16)",
+    };
   }
 
   _listaHTML(items) {
@@ -51,10 +63,10 @@ class DestinoDetalle extends HTMLElement {
   }
 
   async _render() {
-    const css = await fetch("./css/destino-detalle.css").then((r) => r.text());
-    const destinoId = this.getAttribute("destino-id") ?? "";
+    const css = await cssDestinoDetalle;
+    const destino = this._destino;
 
-    if (!destinoId) {
+    if (!destino) {
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
         <section class="detalle-mensaje">
@@ -66,29 +78,14 @@ class DestinoDetalle extends HTMLElement {
     }
 
     try {
-      const respuesta = await fetch("./data/destinos.json");
-      const datos = await respuesta.json();
-      const resultado = this._buscarDestino(datos.regiones, destinoId);
-
-      if (!resultado) {
-        this.shadowRoot.innerHTML = `
-          <style>${css}</style>
-          <section class="detalle-mensaje">
-            <h2>Destino no encontrado</h2>
-            <p>No se encontró información para "${destinoId}".</p>
-          </section>
-        `;
-        return;
-      }
-
-      const { region, destino } = resultado;
-      const cls = this._claseRegion(region.nombre);
       const galeria = destino.galeria ?? destino.media?.imagenes ?? [];
       const video = destino.video ?? destino.media?.video ?? "";
       const audio = destino.audio ?? destino.media?.audio ?? "";
       const descripcion = destino.descripcion ?? destino.historia ?? "";
       const actividades = destino.actividades ?? destino.experiencias ?? [];
       const portada = destino.imagen_portada ?? galeria[0] ?? "";
+      const restaurante = destino.restaurantes?.join(" · ") ?? "";
+      const tema = this._temaRegion(destino.region);
 
       const imagenHTML = portada
         ? `<img class="detalle-img" src="${portada}" alt="Imagen de ${destino.nombre}" loading="lazy" />`
@@ -105,38 +102,49 @@ class DestinoDetalle extends HTMLElement {
       this.shadowRoot.innerHTML = `
         <style>${css}</style>
 
-        <article class="detalle">
-          <section class="detalle-info">
+        <article
+          class="detalle"
+          style="--detalle-accent: ${tema.color}; --detalle-accent-soft: ${tema.suave};">
+          <section class="detalle-header">
+            <div class="detalle-media">${imagenHTML}</div>
+
             <div class="detalle-identidad">
-              <h3>Destino detalle</h3>
-              <div class="detalle-media">${imagenHTML}</div>
-              <div>
-                <p class="detalle-nombre">${destino.nombre}</p>
-                <p class="detalle-region-texto">${region.nombre}</p>
-              </div>
-            </div>
-
-            <div class="detalle-texto">
-              <h3>Descripción</h3>
-              <p>${descripcion}</p>
-            </div>
-
-            <div class="detalle-video-wrap">
-              <h3>Video</h3>
-              <video-destino
-                src="${video}">
-              </video-destino>
+              <p class="detalle-region-texto">${destino.region}</p>
+              <h2 class="detalle-nombre">${destino.nombre}</h2>
+              ${
+                restaurante
+                  ? `<p class="detalle-subtitulo">${restaurante}</p>`
+                  : ""
+              }
             </div>
           </section>
 
+          <section class="detalle-texto">
+            <h3><span aria-hidden="true">✦</span> Descripción</h3>
+            <p>${descripcion}</p>
+          </section>
+
           <section class="detalle-grid">
-            <div class="detalle-bloque">
-              <h3>Actividades</h3>
-              ${this._listaHTML(actividades)}
+            <div class="detalle-multimedia">
+              <div class="detalle-video-wrap">
+                <h3><span aria-hidden="true">▶</span> Video del destino</h3>
+                <video-destino
+                  src="${video}"
+                  poster="${portada}">
+                </video-destino>
+              </div>
+
+              <div class="detalle-bloque audio-wrap">
+                <h3><span aria-hidden="true">♪</span> Audio guía</h3>
+                <audio-guia
+                  src="${audio}"
+                  label="Audio guía — ${destino.nombre}">
+                </audio-guia>
+              </div>
             </div>
 
             <div class="detalle-bloque galeria-bloque">
-              <h3>Galería de imágenes</h3>
+              <h3><span aria-hidden="true">▣</span> Galería de imágenes</h3>
               <galeria-imagenes
                 imagenes='${imagenesJSON}'
                 auto
@@ -145,25 +153,19 @@ class DestinoDetalle extends HTMLElement {
               </galeria-imagenes>
             </div>
 
-            <div class="detalle-bloque audio-wrap">
-              <h3>Audio guía</h3>
-              <audio-guia
-                src="${audio}"
-                label="Audio guía — ${destino.nombre}">
-              </audio-guia>
+            <div class="detalle-bloque actividades">
+              <h3><span aria-hidden="true">⌖</span> Actividades</h3>
+              ${this._listaHTML(actividades)}
             </div>
           </section>
         </article>
       `;
     } catch {
-      const css2 = await fetch("./css/destino-detalle.css")
-        .then((r) => r.text())
-        .catch(() => "");
       this.shadowRoot.innerHTML = `
-        <style>${css2}</style>
+        <style>${css}</style>
         <section class="detalle-mensaje error">
           <h2>Error al cargar destino</h2>
-          <p>No se pudo cargar la información desde el archivo JSON.</p>
+          <p>No se pudo mostrar la información del destino.</p>
         </section>
       `;
     }
